@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://user123:pokemon23@pokedex-zmhpl.mongodb.net/<dbname>?retryWrites=true&w=majority"
+}
