@@ -1,0 +1,101 @@
+.NavBar--Home {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #CDCDCD;
+    height: 50px;
+    display: flex;
+    align-items: center;;
+}
+
+.MenuIcon--Home {
+    padding: 3px;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    border: solid 2px #000000;
+}
+
+.MenuIcon--Home:hover {
+    cursor: pointer;
+    background-color: #cdcdcd;
+}
+
+.Icon--Home {
+    width: 25px;
+}
+
+.TypeList--Home {
+    background-color: #ffffff;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-x: hidden;
+    transition: all 0.5s;
+}
+
+.TypeList-Visible--Home {
+    visibility: visible;
+    width: 300px;
+}
+
+.TypeList-Hidden--Home {
+    visibility: hidden;
+    width: 0px;
+}
+
+.TopBar-TypeList--Home {
+    background-color: #EEEEEE;
+    text-align: right;
+    padding: 5px 3px;
+}
+
+.TopBar-TypeList--Home > img:hover {
+    cursor: pointer;
+}
+
+
+/* Pokemon info */
+.Pokemon--Home {
+    box-shadow: 0 2px 5px 0 rgba(175, 175, 175, 0.2), 0 5px 8px 0 rgba(175, 175, 175, 0.19);
+    border-radius: 5%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10%;
+}
+.Pokemon--Home:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.pokemonThumbnail--Home {
+    width: 100px;
+    padding: 15px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px 0 rgba(175, 175, 175, 0.2), 0 5px 8px 0 rgba(175, 175, 175, 0.19);
+}
+
+
+
+.Pokemon--Home > p {
+    margin: 0;
+}
+
+
+/* PokemonInfo.js */
+.StatBar--PokeInfo {
+    display: flex;
+}
+
+.Stats--PokeInfo {
+    width: 40px;
+	height: 15px;
+	transform: skew(-20deg);
+    background: #ffffff;
+    border: 1px solid #555555;
+    transition: width 0.5s;
+    margin: 2px;
+}
