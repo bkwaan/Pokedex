@@ -67,16 +67,36 @@ class Home extends Component {
 
     render() {
         let testingPokemonList = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 1; i < 119; i++) 
+        if (i <= 9){
             testingPokemonList.push(
                 <Col xs={6} sm={4} md={3} lg={2} >
-                    <div className="Pokemon--Home" onClick={() => this.OpenModal("104("+i+")")}>
-                        <img src="https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/thumbnails/104.png" className="pokemonThumbnail--Home" />
+                    <div className="Pokemon--Home" onClick={() => this.OpenModal("00" +i)}>
+                        <img src={"/images/00" + i + ".png"} className="pokemonThumbnail--Home" /> : 
+                        <p>Cubone</p>
+                    </div>
+                </Col>
+            )
+        } else if (i <= 99){
+            testingPokemonList.push(
+                <Col xs={6} sm={4} md={3} lg={2} >
+                    <div className="Pokemon--Home" onClick={() => this.OpenModal("0" + i)}>
+                        <img src={"/images/0" + i + ".png"} className="pokemonThumbnail--Home" /> 
+                        <p>Cubone</p>
+                    </div>
+                </Col>
+            )
+        } else {
+            testingPokemonList.push(
+                <Col xs={6} sm={4} md={3} lg={2} >
+                    <div className="Pokemon--Home" onClick={() => this.OpenModal(i)}>
+                        <img src={"/images/" + i + ".png"} className="pokemonThumbnail--Home" /> 
                         <p>Cubone</p>
                     </div>
                 </Col>
             )
         }
+
         return (
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(event) => this.HideTypeList(event)}>
