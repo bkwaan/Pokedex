@@ -65,6 +65,17 @@ class Home extends Component {
         this.setState({pokemonInfo}, ()=>console.log(this.state));
     }
 
+    TestRequest = () => {
+        console.log("TestRequest funciton called");
+        fetch('./api/pokemon/pokemon/', {
+            method: 'GET'
+        }).then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+
+    }
+
     render() {
         let testingPokemonList = [];
         for (let i = 0; i < 6; i++) {
@@ -119,6 +130,8 @@ class Home extends Component {
                 </div>
                 
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={()=>this.CloseModal()}/>
+                
+                <button onClick={()=>this.TestRequest()}> testing</button>
             </div>
         );
     }

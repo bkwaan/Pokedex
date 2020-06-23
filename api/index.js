@@ -5,7 +5,7 @@ const router = express.Router();
 
 const Pokemon = require("./Pokemon.js");
 
-router.use("/pokemon",Pokemon);
+router.use("/pokemon", Pokemon);
 
 
 module.exports = router;
