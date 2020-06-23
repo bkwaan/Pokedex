@@ -24,11 +24,14 @@ class PokemonInfo extends Component {
 
     render() {
         let StatBar = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 7; i++) {
             StatBar.push(
                 <div className="Stats--PokeInfo"></div>
             )
         }
+
+        
+
         return(
             <Modal size="lg" show={this.props.pokemonInfo.modalOpen} onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)} onHide={this.props.CloseModal}>
                 <Modal.Header closeButton>
@@ -39,6 +42,7 @@ class PokemonInfo extends Component {
                         attack:
                         {StatBar}
                     </div>
+                    <img src={"/images/" + this.state.pokeInfo.id + ".png"}/>
                 </Modal.Body>
             </Modal>    
         );
