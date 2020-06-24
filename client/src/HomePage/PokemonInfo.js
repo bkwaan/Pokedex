@@ -8,18 +8,28 @@ class PokemonInfo extends Component {
         this.state={
             pokeInfo: {
                 id: "",
-                name: ""
+                name: "",
+                base: {},
+                type: []
+
             }
         }
         
     }
 
-    GetPokeInfo = (pokeID)=> {
-        let info = {
-            id: pokeID,
-            name: "Cubone"
-        }
-        this.setState({pokeInfo: info});
+    GetPokeInfo = (id)=> {
+        fetch('http://localhost:5000/api/Pokemon/' + id, {
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            this.setState({pokeInfo: data});
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+        //this.setState({pokeInfo: info});
     }
 
     render() {
@@ -35,14 +45,21 @@ class PokemonInfo extends Component {
         return(
             <Modal size="lg" show={this.props.pokemonInfo.modalOpen} onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)} onHide={this.props.CloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>#{this.state.pokeInfo.id}</Modal.Title>
+                    <Modal.Title>#{this.props.pokemonInfo.pokeID}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="StatBar--PokeInfo">
                         attack:
                         {StatBar}
+
                     </div>
-                    <img src={"/images/" + this.state.pokeInfo.id + ".png"}/>
+                    <img src={"/images/" + this.props.pokemonInfo.pokeID + ".png"}/>
+                    <p>{this.state.pokeInfo.name.english}</p>
+                    <div >
+                        <p>HP: {this.state.pokeInfo.base.HP}</p>
+                        <p>Attack: {this.state.pokeInfo.base.Attack}</p>
+                        <p>Defense: {this.state.pokeInfo.base.Defense}</p>
+                    </div>
                 </Modal.Body>
             </Modal>    
         );
