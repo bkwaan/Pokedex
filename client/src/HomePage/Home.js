@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { header } from 'express-validator';
 
 
 class Home extends Component {
@@ -67,11 +68,13 @@ class Home extends Component {
 
     TestRequest = () => {
         console.log("TestRequest funciton called");
-        fetch('./api/pokemon/pokemon/', {
-            method: 'GET'
-        }).then((res) => res.json())
+        fetch('http://localhost:5000/api', {})
+        .then((res) => res.json())
         .then((data) => {
             console.log(data);
+        })
+        .catch((error) => {
+            console.log(error);
         });
 
     }
