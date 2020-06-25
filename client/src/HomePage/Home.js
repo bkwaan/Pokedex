@@ -2,26 +2,42 @@ import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { header } from 'express-validator';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            testing: [],
+            types: [],
+            pokemons: [],
             drawerOpen: false,
             pokemonInfo: {
                 modalOpen: false,
-                id: ""
+                id: "",
+                pokeID: ""
             }
         }
     }
 
     componentDidMount() {
-        const testing = ['Fire', 'Water', 'Grass', 'Eletric', 'Psychic', 'Steel', 'Normal',
+        const types = ['Fire', 'Water', 'Grass', 'Eletric', 'Psychic', 'Steel', 'Normal',
                             'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
                             'Rock', 'Dragon', 'Fighting', 'Bug'];
         
-        this.setState( {testing: testing});
+        this.setState( {types: types});
+
+        fetch('http://localhost:5000/api/Pokemon/', {
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            // console.log(data);
+            data.shift();
+            this.setState({ pokemons: data });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     ShowTypeList = () => {
@@ -51,31 +67,68 @@ class Home extends Component {
         }
     }
 
-    OpenModal = (pokeID) => {
+    OpenModal = (id, pokeID) => {
         const { pokemonInfo } = this.state;
-        pokemonInfo["id"] = pokeID;
+        pokemonInfo["id"] = id;
+        pokemonInfo["pokeID"] = pokeID;
         pokemonInfo["modalOpen"] = true;
-        this.setState({pokemonInfo}, ()=>console.log(this.state));
+        this.setState({ pokemonInfo }, () => console.log(this.state));
     }
 
     CloseModal = () => {
         const { pokemonInfo } = this.state;
         pokemonInfo["modalOpen"] = false;
-        this.setState({pokemonInfo}, ()=>console.log(this.state));
+        this.setState({ pokemonInfo }, () => console.log(this.state));
+    }
+
+    TestRequest = () => {
+        console.log("TestRequest funciton called");
+        fetch('http://localhost:5000/api/Pokemon/all', {
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
     }
 
     render() {
         let testingPokemonList = [];
-        for (let i = 0; i < 6; i++) {
-            testingPokemonList.push(
-                <Col xs={6} sm={4} md={3} lg={2} >
-                    <div className="Pokemon--Home" onClick={() => this.OpenModal("104("+i+")")}>
-                        <img src="https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/thumbnails/104.png" className="pokemonThumbnail--Home" />
-                        <p>Cubone</p>
-                    </div>
-                </Col>
-            )
-        }
+        // for (let i = 1; i < this.state.pokemons.length; i++) {
+        //     if (i <= 9) {
+        //         testingPokemonList.push(
+        //             <Col xs={6} sm={4} md={3} lg={2} >
+        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("00" + i)}>
+        //                     <img src={"/images/00" + i + ".png"} className="pokemonThumbnail--Home" /> :
+        //                 <p>Cubone</p>
+        //                 </div>
+        //             </Col>
+        //         )
+        //     } else if (i <= 99) {
+        //         testingPokemonList.push(
+        //             <Col xs={6} sm={4} md={3} lg={2} >
+        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("0" + i)}>
+        //                     <img src={"/images/0" + i + ".png"} className="pokemonThumbnail--Home" />
+        //                     <p>Cubone</p>
+        //                 </div>
+        //             </Col>
+        //         )
+        //     } else {
+        //         testingPokemonList.push(
+        //             <Col xs={6} sm={4} md={3} lg={2} >
+        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal(i)}>
+        //                     <img src={"/images/" + i + ".png"} className="pokemonThumbnail--Home" />
+        //                     <p>Cubone</p>
+        //                 </div>
+        //             </Col>
+        //         )
+        //     }
+        // }
+
         return (
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(event) => this.HideTypeList(event)}>
@@ -103,15 +156,35 @@ class Home extends Component {
                         </Row>
                         <Row>
                             {testingPokemonList}
+                            {this.state.pokemons.map((pokemon) => {
+                                let pokeID = ""
+                                if (pokemon.id < 10) {
+                                    pokeID = "00" + pokemon.id;
+                                } else if (pokemon.id < 100) {
+                                    pokeID = "0" + pokemon.id;
+                                } else {
+                                    pokeID = pokemon.id
+                                }
+                                return (
+                                    <Col xs={6} sm={4} md={3} lg={2} >
+                                        <div className="Pokemon--Home" onClick={() => this.OpenModal(pokemon.id, pokeID)}>
+                                            <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
+                                            <p>{pokemon.name.english}</p>
+                                        </div>
+                                    </Col>)
+                            })}
                         </Row>
                     </Container>
                 </div>
                 <div className="TypeList--Home TypeList-Hidden--Home" id="PokemonTypeList" >
                     <div className="TopBar-TypeList--Home">
+                        <div className="TypeTextContainer">
+                            <p className="TypeText">Types</p>
+                        </div>
                         <img src="./images/closeBtn.svg" className="Icon--Home" onClick={(event) => this.HideTypeList(event)} />
                     </div>
                     <div className="TypeListContainer">
-                        {this.state.testing.map((typeName) => (
+                        {this.state.types.map((typeName) => (
                             <div id="TypeContainer" className={typeName}>{typeName}</div>
                         ))}
                     </div>
@@ -121,8 +194,10 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
-                
-                <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={()=>this.CloseModal()}/>
+
+                <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
+
+                {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>
         );
     }
