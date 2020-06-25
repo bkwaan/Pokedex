@@ -5,5 +5,4 @@ const Pokemon = require("./Pokemon.js");
 
 router.use("/Pokemon", Pokemon);
 
-
 module.exports = router;
