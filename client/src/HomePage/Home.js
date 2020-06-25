@@ -3,7 +3,6 @@ import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button } from 'react-bootstrap'
 
-
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -18,11 +17,11 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        let array = [];
-        for (let i = 0; i < 5; i++) {
-            array.push("testing" + i);
-        }
-        this.setState({ testing: array });
+        const testing = ['Fire', 'Water', 'Grass', 'Eletric', 'Psychic', 'Steel', 'Normal',
+                            'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
+                            'Rock', 'Dragon', 'Fighting', 'Bug'];
+        
+        this.setState( {testing: testing});
     }
 
     ShowTypeList = () => {
@@ -111,11 +110,16 @@ class Home extends Component {
                     <div className="TopBar-TypeList--Home">
                         <img src="./images/closeBtn.svg" className="Icon--Home" onClick={(event) => this.HideTypeList(event)} />
                     </div>
-                    <ListGroup>
+                    <div className="TypeListContainer">
                         {this.state.testing.map((typeName) => (
-                            <ListGroup.Item action>{typeName}</ListGroup.Item>
+                            <div id="TypeContainer" className={typeName}>{typeName}</div>
                         ))}
-                    </ListGroup>
+                    </div>
+                    {/* <ListGroup>
+                        {this.state.testing.map((typeName) => (
+                            <div className={typeName}><ListGroup.Item action>{typeName}</ListGroup.Item></div>
+                        ))}
+                    </ListGroup> */}
                 </div>
                 
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={()=>this.CloseModal()}/>

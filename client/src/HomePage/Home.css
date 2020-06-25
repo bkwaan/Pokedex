@@ -38,7 +38,7 @@
 
 .TypeList-Visible--Home {
     visibility: visible;
-    width: 300px;
+    width: 150px;
 }
 
 .TypeList-Hidden--Home {
@@ -98,4 +98,13 @@
     border: 1px solid #555555;
     transition: width 0.5s;
     margin: 2px;
+}
+#TypeContainer {
+    border: solid;
+    border-width: 1px;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 1px;
 }
