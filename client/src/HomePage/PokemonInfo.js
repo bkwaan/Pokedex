@@ -39,7 +39,7 @@ class PokemonInfo extends Component {
     }
 
     return (
-      <div class="modal fade-scale">
+      <div className="modal fade-scale">
         <Modal
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
