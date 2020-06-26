@@ -39,7 +39,7 @@ router.get("/:id", (req, res) => {
 
 
 //Search Function
-router.get("/:name", (req, res) => {
+router.get("/name/:name", (req, res) => {
     let pokeName = req.params.name;
     Pokemons.find({ 'name.english': {$regex: new RegExp("^" + pokeName.toLowerCase(), "i")} })
     .then((data) => {
