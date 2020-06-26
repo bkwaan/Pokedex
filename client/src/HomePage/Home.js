@@ -179,7 +179,7 @@ class Home extends Component {
                 <div className="TypeList--Home TypeList-Hidden--Home" id="PokemonTypeList" >
                     <div className="TopBar-TypeList--Home">
                         <div className="TypeTextContainer">
-                            <p className="TypeText">Types</p>
+                            <p className="TypeText">TYPES</p>
                         </div>
                         <img src="./images/closeBtn.svg" className="Icon--Home" onClick={(event) => this.HideTypeList(event)} />
                     </div>

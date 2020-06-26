@@ -20,42 +20,6 @@
     background-color: #cdcdcd;
 }
 
-.Icon--Home {
-    width: 25px;
-}
-
-.TypeList--Home {
-    background-color: #ffffff;
-    height: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    position: fixed;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
-    overflow-x: hidden;
-    transition: all 0.5s;
-}
-
-.TypeList-Visible--Home {
-    visibility: visible;
-    width: 150px;
-}
-
-.TypeList-Hidden--Home {
-    visibility: hidden;
-    width: 0px;
-}
-
-.TopBar-TypeList--Home {
-    background-color: #EEEEEE;
-    text-align: right;
-    padding: 5px 3px;
-}
-
-.TopBar-TypeList--Home > img:hover {
-    cursor: pointer;
-}
-
 
 /* Pokemon info */
 .Pokemon--Home {
@@ -99,12 +63,124 @@
     transition: width 0.5s;
     margin: 2px;
 }
+
+/* Type List */
+.TypeList--Home {
+    background-color: #ffffff;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-x: hidden;
+    transition: all 0.5s;
+}
+
+.TypeList-Visible--Home {
+    visibility: visible;
+    width: 150px;
+}
+
+.TypeList-Hidden--Home {
+    visibility: hidden;
+    width: 0px;
+}
+
+.TopBar-TypeList--Home {
+    background-color: #EEEEEE;
+    padding: 5px 3px;
+    display: flex;
+    margin-bottom: 5px;
+}
+.Icon--Home {
+    width: 25px;
+    margin-left: auto;
+}
+.TypeText {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.TopBar-TypeList--Home > img:hover {
+    cursor: pointer;
+}
+
 #TypeContainer {
-    border: solid;
-    border-width: 1px;
+    border-radius: 25px;
     text-align: center;
-    width: 100%;
+    width: 70%;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: white;
+}
+#TypeContainer:hover {
+    cursor: pointer;
+    width: 90%;
     height: 50px;
     line-height: 50px;
-    margin-bottom: 1px;
+    transition: 0.2s;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.Fire {
+    background-color: rgba(225, 133, 68);
+}
+.Water {
+    background-color: rgba(112,144,233);
+} 
+.Grass {
+    background-color: rgba(139, 197, 96);
+}
+.Eletric {
+    background-color: rgba(242, 208, 84);
+}
+.Psychic{
+    background-color: rgba(230, 99, 136);
+}
+.Steel {
+    background-color: rgba(184, 184, 206);
+}
+.Normal{
+    background-color: rgba(168, 168, 125);
+}
+.Fairy{
+    background-color: rgba(236, 173, 195);
+}
+.Dark{
+    background-color: rgba(108, 89, 74);
+}
+.Flying{
+    background-color: rgba(164, 146, 234);
+}
+.Ghost{
+    background-color: rgba(108, 90, 148);
+}
+.Poison{
+    background-color: rgba(148, 72, 155);
+}
+.Ice{
+    background-color: rgba(166, 214, 215);
+}
+.Ground{
+    background-color: rgba(219, 192, 117);
+}
+.Rock{
+    background-color: rgba(180, 160, 75);
+}
+.Dragon{
+    background-color: rgba(105, 65, 239);
+}
+.Fighting{
+    background-color: rgba(177, 61, 49);
+}
+.Bug{
+    background-color: rgba(171, 183, 66);
 }
