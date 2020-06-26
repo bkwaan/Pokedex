@@ -48,7 +48,7 @@ class Home extends Component {
 
     }
 
-    HideTypeList = (event) => {
+    HideTypeList = () => {
         console.log("HideTypeList event triggered!!!");
         if (this.state.drawerOpen) {
             this.setState({ drawerOpen: false }, () => this.ToggleTypeList());
@@ -132,7 +132,7 @@ class Home extends Component {
 
         return (
             <div className="Container--Home" >
-                <div className="main--Home" onClick={(event) => this.HideTypeList(event)}>
+                <div className="main--Home" onClick={(  ) => this.HideTypeList()}>
                     <Row className="NavBar--Home">
                         <Col xs={6} sm={7} lg={8} xl={9} >
                             <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />

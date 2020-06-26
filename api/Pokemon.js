@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   //     }
   // }).project;
   // res.send({'fata' : 'hi'});
-  Pokemons.find({}, { _id: 0, id: 1, name: 1, type: 1 })
+  Pokemons.find({}, { _id: 0, id: 1, name: 1})
     .sort({ id: 1 })
     .then((data) => {
       //console.log(data);
@@ -52,5 +52,20 @@ router.get("/name/:name", (req, res) => {
       console.log(err);
     });
 });
+
+router.get("/typeFilter/:type", (req, res) => {
+    console.log(req.params.type);
+    Pokemons.find({type: req.params.type}, { _id: 0, id: 1, name: 1})
+    .sort({ id: 1 })
+    .then((data) => {
+        console.log(data);
+        if (data.length > 0) {
+          res.send(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+})
 
 module.exports = router;
