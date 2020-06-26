@@ -1,3 +1,4 @@
+
 .NavBar--Home {
     padding-left: 10px;
     padding-right: 10px;
@@ -184,3 +185,12 @@
 .Bug{
     background-color: rgba(171, 183, 66);
 }
+@keyframes modalFade {
+    from {transform: translateY(-50%);opacity: 0;}
+    to {transform: translateY(0);opacity: 1;}
+  }
+  
+  .modal {
+    animation-name: modalFade;
+    animation-duration: .3s;
+  }
