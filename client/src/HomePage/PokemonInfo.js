@@ -58,13 +58,12 @@ class PokemonInfo extends Component {
         PokemonStat.push(
             <div className="Pokemon-Stat">
                 
-                <div className="d-flex">
+                {/* <div className="d-flex">
                     <div className="text-left Stats--Attack">Attack </div>
                     <div className="flex-grow-1 Stats--Bar--Attack">
                         <ProgressBar now={this.state.pokeInfo.base.Attack / 2} label={`${this.state.pokeInfo.base.Attack / 2}`}></ProgressBar>
                     </div>
-                </div>
-                 
+                </div> 
                 <div className="d-flex">
                     <div className="text-left Stats--Defense">Defense </div>
                     <div className="flex-grow-1 justify-content-end Stats--Bar--Defense">
@@ -85,6 +84,29 @@ class PokemonInfo extends Component {
                         <ProgressBar now={this.state.pokeInfo.base.Speed / 2} label={`${this.state.pokeInfo.base.Speed / 2}`}></ProgressBar>
                     </div>
                 </div>
+                */}
+                <div className="d-flex">
+                    <Col xs={3}>Attack </Col>
+                    <Col xs={9} >
+                        <ProgressBar now={this.state.pokeInfo.base.Attack / 2} label={`${this.state.pokeInfo.base.Attack / 2}`}></ProgressBar>
+                    </Col>
+                </div>
+
+                <div className="d-flex">
+                    <Col xs={3} className="">Defense </Col>
+                    <Col xs={9} >
+                        <ProgressBar now={this.state.pokeInfo.base.Defense / 2} label={`${this.state.pokeInfo.base.Defense / 2}`}></ProgressBar>
+                    </Col>
+                </div>
+
+                <div className="d-flex">
+                    <Col xs={3}>HP </Col>
+                    <Col xs={9} >
+                        <ProgressBar now={this.state.pokeInfo.base.HP / 2} label={`${this.state.pokeInfo.base.HP / 2}`}></ProgressBar>
+                    </Col>
+                </div>
+                 
+                
             </div>         
         )
 
