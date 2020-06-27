@@ -48,7 +48,7 @@ class PokemonInfo extends Component {
         for (let i = 0; i < this.state.pokeInfo.type.length ; i++){
             PokemonType.push(
                 <Col>
-                    <div className={this.state.pokeInfo.type[i] + "--Type"} >{this.state.pokeInfo.type[i]}</div>
+                    <div className={this.state.pokeInfo.type[i] + "--Type"}>{this.state.pokeInfo.type[i]}</div>
                 </Col>
             )
         }
