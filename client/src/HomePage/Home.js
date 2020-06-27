@@ -20,7 +20,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const types = ['Fire', 'Water', 'Grass', 'Eletric', 'Psychic', 'Steel', 'Normal',
+        const types = ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Steel', 'Normal',
                             'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
                             'Rock', 'Dragon', 'Fighting', 'Bug'];
         
