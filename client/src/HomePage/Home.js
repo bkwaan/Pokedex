@@ -185,7 +185,7 @@ class Home extends Component {
                     </div>
                     <div className="TypeListContainer">
                         {this.state.types.map((typeName) => (
-                            <div id="TypeContainer" className={typeName}>{typeName}</div>
+                            <btn id="TypeContainer" className={typeName}>{typeName}</btn>
                         ))}
                     </div>
                     {/* <ListGroup>
