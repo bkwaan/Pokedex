@@ -8,7 +8,10 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            types: [],
+            types: ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Steel', 'Normal',
+            'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
+            'Rock', 'Dragon', 'Fighting', 'Bug'],
+            typeSelected: "",
             pokemons: [],
             drawerOpen: false,
             pokemonInfo: {
@@ -20,19 +23,16 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const types = ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Steel', 'Normal',
-                            'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
-                            'Rock', 'Dragon', 'Fighting', 'Bug'];
-        
-        this.setState( {types: types});
+        this.GetAllPokemon();
+    }
 
+    GetAllPokemon = () => {
         fetch('http://localhost:5000/api/Pokemon/', {
             method: 'GET'
         })
         .then((res) => res.json())
         .then((data) => {
             // console.log(data);
-            data.shift();
             this.setState({ pokemons: data });
         })
         .catch((error) => {
@@ -96,6 +96,38 @@ class Home extends Component {
 
     }
 
+    TypeFilter = (typeName) => {
+        if (typeName.typeName !== this.state.typeSelected) {
+            console.log("different type");
+            this.setState({typeSelected: typeName.typeName});
+            fetch('http://localhost:5000/api/Pokemon/typeFilter/' + typeName.typeName, {
+                method: 'GET'
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                this.setState({ pokemons: data });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+        this.HideTypeList();
+    }
+
+    ResetFilter = () => {
+        this.GetAllPokemon();
+        this.setState({typeSelected: ""});
+    }
+
+    DisplayIcon = () => {
+        document.getElementById("closeIcon-typeSelected--Home").style.display = "inline-block";
+    }
+
+    HideIcon = () => {
+        document.getElementById("closeIcon-typeSelected--Home").style.display = "none";
+    }
+
     render() {
         let testingPokemonList = [];
         // for (let i = 1; i < this.state.pokemons.length; i++) {
@@ -151,9 +183,15 @@ class Home extends Component {
                     </Row>
 
                     <Container>
+                        {this.state.typeSelected !== "" ?
                         <Row>
-                            <Col>All</Col>
-                        </Row>
+                            <Col>
+                                <div className={"typeSelected--Home " + this.state.typeSelected} onMouseEnter={() => this.DisplayIcon()} onMouseLeave={() => this.HideIcon()}>
+                                    <p>{this.state.typeSelected}</p>
+                                    <img src="./images/closeBtn.svg" id="closeIcon-typeSelected--Home" onClick={() => this.ResetFilter()}/>
+                                </div>
+                            </Col>
+                        </Row> : null}
                         <Row>
                             {testingPokemonList}
                             {this.state.pokemons.map((pokemon) => {
@@ -185,7 +223,7 @@ class Home extends Component {
                     </div>
                     <div className="TypeListContainer">
                         {this.state.types.map((typeName) => (
-                            <btn id="TypeContainer" className={typeName}>{typeName}</btn>
+                            <btn id="TypeContainer" className={typeName} onClick={()=>this.TypeFilter({typeName})}>{typeName}</btn>
                         ))}
                     </div>
                     {/* <ListGroup>

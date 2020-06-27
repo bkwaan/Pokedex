@@ -21,6 +21,34 @@
     background-color: #cdcdcd;
 }
 
+.typeSelected--Home {
+    width: 125px;
+    padding: 5px;
+    border-radius: 15px;
+    display: flex;
+    margin: 10px 0;
+    
+}
+
+.typeSelected--Home > p {
+    text-align: center;
+    margin: 0;
+    width: 80%;
+    padding-left: 20%;
+    margin-right: 5%;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#closeIcon-typeSelected--Home {
+    display: none;
+    width: 10px;
+}
+
+#closeIcon-typeSelected--Home:hover {
+    cursor: pointer;
+}
+
 
 /* Pokemon info */
 .Pokemon--Home {
