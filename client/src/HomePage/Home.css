@@ -65,6 +65,7 @@
     margin: 2px;
 }
 
+<<<<<<< HEAD
 /* Type List */
 .TypeList--Home {
     background-color: #ffffff;
@@ -185,6 +186,210 @@
 .Bug{
     background-color: rgba(171, 183, 66);
 }
+=======
+<<<<<<< HEAD
+
+.Picture--PokeInfo{
+    width:50%;
+    display:block;
+    margin:auto;
+}
+
+.Index--PokeInfo{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title{
+    margin: 0 auto;
+}
+
+
+/* Pokemon Type -- PokemonInfo.js */
+
+.Poke--Type{
+    margin-top: 2%;
+}
+
+.Flying--Type{
+    text-align: center;
+    color:white;
+    background-color:violet;
+    font-weight: 600;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fire--Type{
+    text-align: center;
+    color:white;
+    background-color:red;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Water--Type{
+    text-align: center;
+    color:white;
+    background-color:blue;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Grass--Type{
+    text-align: center;
+    color:white;
+    background-color:Green;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Poison--Type{
+    text-align: center;
+    color:white;
+    background-color:purple;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Bug--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(209, 224, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Normal--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(156, 156, 99);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Normal--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(219, 181, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fairy--Type{
+    text-align: center;
+    color:white;
+    background-color:pink;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Ground--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(219, 181, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fighting--Type{
+    text-align: center;
+    color:white;
+    background-color:red;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Electric--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(246, 201, 19);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+/** Pokemon-Stats **/
+
+.Pokemon-Stat{
+    width:50%;
+    margin-left:25%;
+    margin-top: 2%;
+}
+
+.Stats--Attack{
+}
+
+.Stats--Defense{
+}
+
+.Stats--HP{
+}
+
+.Stats--Speed{
+}
+
+
+/** Pokemon-Stat-Bar **/
+
+.Stats--Bar{
+    line-height:20px;
+}
+
+.progress{
+    height:17px;
+    width:70%;
+    margin-top:2%;
+}
+
+.Testing-Defense{
+    background-color:green;
+}
+
+
+
+=======
+>>>>>>> bce34506b4736dfa0faef89a5d4c4f0cc85d3d7e
 @keyframes modalFade {
     from {transform: translateY(-50%);opacity: 0;}
     to {transform: translateY(0);opacity: 1;}
@@ -194,3 +399,7 @@
     animation-name: modalFade;
     animation-duration: .3s;
   }
+<<<<<<< HEAD
+=======
+>>>>>>> 56e717d6c45c80c13d5670dab68620a5c40e1276
+>>>>>>> bce34506b4736dfa0faef89a5d4c4f0cc85d3d7e
