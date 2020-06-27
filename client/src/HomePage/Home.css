@@ -1,3 +1,4 @@
+
 .NavBar--Home {
     padding-left: 10px;
     padding-right: 10px;
@@ -100,6 +101,7 @@
     margin: 2px;
 }
 
+<<<<<<< HEAD
 
 .Picture--PokeInfo{
     width:50%;
@@ -300,3 +302,14 @@
 
 
 
+=======
+@keyframes modalFade {
+    from {transform: translateY(-50%);opacity: 0;}
+    to {transform: translateY(0);opacity: 1;}
+  }
+  
+  .modal {
+    animation-name: modalFade;
+    animation-duration: .3s;
+  }
+>>>>>>> 56e717d6c45c80c13d5670dab68620a5c40e1276

@@ -108,6 +108,7 @@ class PokemonInfo extends Component {
         
 
         return(
+            <div className="modal fade-scale"> 
             <Modal size="lg" show={this.props.pokemonInfo.modalOpen} onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)} onHide={this.props.CloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -146,10 +147,10 @@ class PokemonInfo extends Component {
                     </Container>
                     
                 </Modal.Body>
-            </Modal>    
+            </Modal>
+            </div>    
         );
     }
-
 }
 
 export default PokemonInfo;
