@@ -99,3 +99,204 @@
     transition: width 0.5s;
     margin: 2px;
 }
+
+
+.Picture--PokeInfo{
+    width:50%;
+    display:block;
+    margin:auto;
+}
+
+.Index--PokeInfo{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title{
+    margin: 0 auto;
+}
+
+
+/* Pokemon Type -- PokemonInfo.js */
+
+.Poke--Type{
+    margin-top: 2%;
+}
+
+.Flying--Type{
+    text-align: center;
+    color:white;
+    background-color:violet;
+    font-weight: 600;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fire--Type{
+    text-align: center;
+    color:white;
+    background-color:red;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Water--Type{
+    text-align: center;
+    color:white;
+    background-color:blue;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Grass--Type{
+    text-align: center;
+    color:white;
+    background-color:Green;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Poison--Type{
+    text-align: center;
+    color:white;
+    background-color:purple;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Bug--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(209, 224, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+.Normal--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(156, 156, 99);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Normal--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(219, 181, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fairy--Type{
+    text-align: center;
+    color:white;
+    background-color:pink;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Ground--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(219, 181, 77);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Fighting--Type{
+    text-align: center;
+    color:white;
+    background-color:red;
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+.Electric--Type{
+    text-align: center;
+    color:white;
+    background-color:rgb(246, 201, 19);
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 18pt;
+    font-size: 18pt;
+    border-radius:10px;
+    font-variant:small-caps;
+}
+
+/** Pokemon-Stats **/
+
+.Pokemon-Stat{
+    width:50%;
+    margin-left:25%;
+    margin-top: 2%;
+}
+
+.Stats--Attack{
+}
+
+.Stats--Defense{
+}
+
+.Stats--HP{
+}
+
+.Stats--Speed{
+}
+
+
+/** Pokemon-Stat-Bar **/
+
+.Stats--Bar{
+    line-height:20px;
+}
+
+.progress{
+    height:17px;
+    width:70%;
+    margin-top:2%;
+}
+
+.Testing-Defense{
+    background-color:green;
+}
+
+
+

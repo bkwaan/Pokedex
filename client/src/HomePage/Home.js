@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
-import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
 
 
