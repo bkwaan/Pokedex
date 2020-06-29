@@ -45,7 +45,7 @@ class PokemonInfo extends Component {
         }
 
         let PokemonType =[];
-        for (let i = 0; i < this.state.pokeInfo.type.length ; i++){
+        for (let i = 0; i < this.state.pokeInfo.type.length; i++){
             PokemonType.push(
                 <Col>
                     <div className={"Type " + this.state.pokeInfo.type[i]}>{this.state.pokeInfo.type[i]}</div>

@@ -128,6 +128,19 @@ class Home extends Component {
         document.getElementById("closeIcon-typeSelected--Home").style.display = "none";
     }
 
+    searchPokemon = (pokeName) => {
+        let container = document.getElementsByClassName('row')[1];
+        let childz = container.getElementsByClassName('Pokemon--Home');
+        for(var i = 0; i < childz.length; i++) {
+            if(!childz[i].className.includes(pokeName)){
+                childz[i].style.display="none";
+            }
+        }
+    
+        
+        
+    }
+
     render() {
         let testingPokemonList = [];
         // for (let i = 1; i < this.state.pokemons.length; i++) {
@@ -205,7 +218,7 @@ class Home extends Component {
                                 }
                                 return (
                                     <Col xs={6} sm={4} md={3} lg={2} >
-                                        <div className="Pokemon--Home" onClick={() => this.OpenModal(pokemon.id, pokeID)}>
+                                        <div className={"Pokemon--Home " + pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
                                         </div>
