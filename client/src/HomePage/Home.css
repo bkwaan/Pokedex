@@ -21,6 +21,34 @@
     background-color: #cdcdcd;
 }
 
+.typeSelected--Home {
+    width: 125px;
+    padding: 5px;
+    border-radius: 15px;
+    display: flex;
+    margin: 10px 0;
+    
+}
+
+.typeSelected--Home > p {
+    text-align: center;
+    margin: 0;
+    width: 80%;
+    padding-left: 20%;
+    margin-right: 5%;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#closeIcon-typeSelected--Home {
+    display: none;
+    width: 10px;
+}
+
+#closeIcon-typeSelected--Home:hover {
+    cursor: pointer;
+}
+
 
 /* Pokemon info */
 .Pokemon--Home {
@@ -65,7 +93,6 @@
     margin: 2px;
 }
 
-/* Type List */
 .TypeList--Home {
     background-color: #ffffff;
     height: 100%;
@@ -141,7 +168,7 @@
 .Grass {
     background-color: rgba(139, 197, 96);
 }
-.Eletric {
+.Electric {
     background-color: rgba(242, 208, 84);
 }
 .Psychic{
@@ -210,20 +237,9 @@
     margin-top: 2%;
 }
 
-.Flying--Type{
+.Type{
     text-align: center;
     color:white;
-    background-color:violet;
-    font-weight: 600;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Fire--Type{
-    text-align: center;
-    color:white;
-    background-color:red;
     line-height: 40px;
     font-weight: 600;
     font-size: 18pt;
@@ -231,122 +247,6 @@
     border-radius:10px;
     font-variant:small-caps;
 }
-.Water--Type{
-    text-align: center;
-    color:white;
-    background-color:blue;
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-.Grass--Type{
-    text-align: center;
-    color:white;
-    background-color:Green;
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-.Poison--Type{
-    text-align: center;
-    color:white;
-    background-color:purple;
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-.Bug--Type{
-    text-align: center;
-    color:white;
-    background-color:rgb(209, 224, 77);
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-.Normal--Type{
-    text-align: center;
-    color:white;
-    background-color:rgb(156, 156, 99);
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Normal--Type{
-    text-align: center;
-    color:white;
-    background-color:rgb(219, 181, 77);
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Fairy--Type{
-    text-align: center;
-    color:white;
-    background-color:pink;
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Ground--Type{
-    text-align: center;
-    color:white;
-    background-color:rgb(219, 181, 77);
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Fighting--Type{
-    text-align: center;
-    color:white;
-    background-color:red;
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
-.Electric--Type{
-    text-align: center;
-    color:white;
-    background-color:rgb(246, 201, 19);
-    line-height: 40px;
-    font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
-    border-radius:10px;
-    font-variant:small-caps;
-}
-
 /** Pokemon-Stats **/
 
 .Pokemon-Stat{
