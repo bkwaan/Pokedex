@@ -128,12 +128,15 @@ class Home extends Component {
         document.getElementById("closeIcon-typeSelected--Home").style.display = "none";
     }
 
-    searchPokemon = (pokeName) => {
+    searchPokemon = (event) => {
         let container = document.getElementsByClassName('row')[1];
         let childz = container.getElementsByClassName('Pokemon--Home');
         for(var i = 0; i < childz.length; i++) {
-            if(!childz[i].className.includes(pokeName)){
-                childz[i].style.display="none";
+            if(!childz[i].className.includes(event.target.value)){
+                childz[i].parentNode.style.display="none";
+            } else {
+                childz[i].parentNode.style.display="block";
+
             }
         }
     
@@ -184,7 +187,7 @@ class Home extends Component {
                         <Col xs={6} sm={5} lg={4} xl={3}>
                             <Form.Row>
                                 <Col xs={9}>
-                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" />
+                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.searchPokemon(event)} />
 
                                 </Col>
                                 <Col xs={3}>
