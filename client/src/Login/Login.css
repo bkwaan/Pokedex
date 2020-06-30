@@ -1,0 +1,82 @@
+body {
+    background-image: url("/images/pokemonWallpaper.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.LoginFormContainer-Login{
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    top: 45%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.PokedexTextContainer-Login{
+    margin-bottom: 20px;
+}
+
+.PokedexText-Login {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    color: rgb(233, 80, 59);
+}
+.UsernameContainer-Login, .PasswordContainer-Login {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.UsernameInputField-Login, .PasswordInputField-Login {
+    border: none;
+    outline: none;
+    background: none;
+    text-align: center;
+    border-width: 2px;
+    padding: 10px 15px;
+    width: 200px;
+    height: 50px;
+    border: 2px solid;
+    border-radius: 24px;
+    border-color: rgb(48, 166, 212);
+    transition: 0.2s;
+}
+
+.UsernameInputField-Login:focus, .PasswordInputField-Login:focus {
+    width: 300px;
+}
+
+.UsernameInputField-Login:focus::placeholder, .PasswordInputField-Login:focus::placeholder {
+    color: transparent;
+}
+
+.UsernameInputField-Login::placeholder, .PasswordInputField-Login::placeholder {
+    color: rgb(58, 58, 58);
+}
+
+.LoginButtonContainer-Login {
+    /* height: 50px; */
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.LoginButton-Login {
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    border-width: 2px;
+    padding: 10px 15px;
+    width: 100px;
+    border: 2px solid;
+    border-radius: 24px;
+    border-color: rgb(72, 255, 0);
+    user-select: none; 
+}
+
+.LoginButton-Login:hover{
+    background-color: rgb(72, 255, 0);
+}
