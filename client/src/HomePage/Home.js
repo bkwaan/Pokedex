@@ -3,6 +3,9 @@ import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
+
 
 class Home extends Component {
     constructor(props) {
@@ -128,12 +131,15 @@ class Home extends Component {
         document.getElementById("closeIcon-typeSelected--Home").style.display = "none";
     }
 
-    searchPokemon = (pokeName) => {
+    searchPokemon = (event) => {
         let container = document.getElementsByClassName('row')[1];
         let childz = container.getElementsByClassName('Pokemon--Home');
         for(var i = 0; i < childz.length; i++) {
-            if(!childz[i].className.includes(pokeName)){
-                childz[i].style.display="none";
+            if(!childz[i].className.includes(event.target.value)){
+                childz[i].parentNode.style.display="none";
+            } else {
+                childz[i].parentNode.style.display="block";
+
             }
         }
     
@@ -184,7 +190,7 @@ class Home extends Component {
                         <Col xs={6} sm={5} lg={4} xl={3}>
                             <Form.Row>
                                 <Col xs={9}>
-                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" />
+                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.searchPokemon(event)} />
 
                                 </Col>
                                 <Col xs={3}>
@@ -218,10 +224,12 @@ class Home extends Component {
                                 }
                                 return (
                                     <Col xs={6} sm={4} md={3} lg={2} >
+                                        <Fade left>
                                         <div className={"Pokemon--Home " + pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
                                         </div>
+                                        </Fade>
                                     </Col>)
                             })}
                         </Row>
@@ -245,8 +253,9 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
-
+                <Rotate>
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
+                </Rotate>
 
                 {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>
