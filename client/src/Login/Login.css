@@ -1,15 +1,23 @@
-body {
+
+.BackgroundImageContainer-Login {
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    /* background: url('/images/pokemonWallpaper.jpg'); */
     background-image: url("/images/pokemonWallpaper.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    background-position: center center;
 }
 
 .LoginFormContainer-Login{
     width: 400px;
     height: auto;
     padding: 10px;
-    top: 45%;
+    top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -58,12 +66,11 @@ body {
     color: rgb(58, 58, 58);
 }
 
-.LoginButtonContainer-Login {
-    /* height: 50px; */
+.LoginButtonContainer-Login, .SignupButtonContainer-Login{
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
-.LoginButton-Login {
+.LoginButton-Login, .SignupButton-Login {
     outline: none;
     border: none;
     background: none;
@@ -73,10 +80,20 @@ body {
     width: 100px;
     border: 2px solid;
     border-radius: 24px;
-    border-color: rgb(72, 255, 0);
     user-select: none; 
+}
+.LoginButton-Login {
+    border-color:rgb(72, 255, 0);
 }
 
 .LoginButton-Login:hover{
     background-color: rgb(72, 255, 0);
+}
+
+.SignupButton-Login {
+    border-color: rgb(248, 77, 47);
+}
+
+.SignupButton-Login:hover {
+    background-color: rgb(248, 77, 47);
 }

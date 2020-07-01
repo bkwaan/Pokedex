@@ -16,7 +16,7 @@ class Login extends Component {
     render (){
         return (
             <div className="Container-Login">
-                
+                <div className="BackgroundImageContainer-Login"></div>
                 <div className="LoginFormContainer-Login">
                     <div className="PokedexTextContainer-Login">
                         <h1 className="PokedexText-Login">Pokedex</h1>
@@ -31,6 +31,10 @@ class Login extends Component {
 
                     <div className="LoginButtonContainer-Login">
                         <input className="LoginButton-Login" value="Login" type="button"></input>
+                    </div>
+
+                    <div className="SignupButtonContainer-Login">
+                        <input className="SignupButton-Login" type="button" value="Sign up"></input>
                     </div>
                 </div>
 

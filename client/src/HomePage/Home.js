@@ -178,20 +178,23 @@ class Home extends Component {
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(  ) => this.HideTypeList()}>
                     <Row className="NavBar--Home">
-                        <Col xs={6} sm={7} lg={8} xl={9} >
+                        <Col xs={1} sm={1} lg={1} xl={1} >
                             <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
                         </Col>
-                        <Col xs={6} sm={5} lg={4} xl={3}>
+                        <Col xs={9} sm={9} lg={9} xl={9}>
                             <Form.Row>
-                                <Col xs={9}>
+                                <Col xs={8}>
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" />
 
                                 </Col>
-                                <Col xs={3}>
+                                <Col xs={2}>
                                     <Button variant="secondary" size="sm">Search</Button>
 
                                 </Col>
                             </Form.Row>
+                        </Col>
+                        <Col xs={2} sm={2} lg={2} xl={2}>
+                                <Button variant="outline-info" size="large" onClick={this.LoginPageRedirect}>LOGIN</Button>
                         </Col>
                     </Row>
 
