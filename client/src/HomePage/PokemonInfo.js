@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Container, Row, Col, Form , ListGroup, ListGroupItem , ProgressBar} from 'react-bootstrap'
+import Rotate from 'react-reveal/Rotate';
+
 
 class PokemonInfo extends Component {
     constructor(props) {
@@ -130,7 +132,7 @@ class PokemonInfo extends Component {
         
 
         return(
-            <div className="modal fade-scale"> 
+            <div className="modal fade-scale">
             <Modal size="lg" show={this.props.pokemonInfo.modalOpen} onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)} onHide={this.props.CloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>
