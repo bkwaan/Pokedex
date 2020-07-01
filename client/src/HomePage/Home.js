@@ -3,6 +3,9 @@ import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
+
 
 class Home extends Component {
     constructor(props) {
@@ -221,10 +224,12 @@ class Home extends Component {
                                 }
                                 return (
                                     <Col xs={6} sm={4} md={3} lg={2} >
+                                        <Fade left>
                                         <div className={"Pokemon--Home " + pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
                                         </div>
+                                        </Fade>
                                     </Col>)
                             })}
                         </Row>
@@ -248,8 +253,9 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
-
+                <Rotate>
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
+                </Rotate>
 
                 {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>
