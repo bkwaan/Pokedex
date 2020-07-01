@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
+import {Redirect} from "react-router-dom"
+import Login from "../Login/Login.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
 
@@ -18,8 +20,13 @@ class Home extends Component {
                 modalOpen: false,
                 id: "",
                 pokeID: ""
-            }
+            },
+            
         }
+    }
+    RedirectLoginPage() {
+        console.log("111");
+        return <Redirect to="/Login"/>
     }
 
     componentDidMount() {
@@ -188,13 +195,14 @@ class Home extends Component {
 
                                 </Col>
                                 <Col xs={2}>
-                                    <Button variant="secondary" size="sm">Search</Button>
+                                    <Button variant="secondary" size="sm" >Search</Button>
+                                    
 
                                 </Col>
                             </Form.Row>
                         </Col>
                         <Col xs={2} sm={2} lg={2} xl={2}>
-                                <Button variant="outline-info" size="large" onClick={this.LoginPageRedirect}>LOGIN</Button>
+                                <Button variant="outline-info" size="large" onClick={this.RedirectLoginPage}>LOGIN</Button>
                         </Col>
                     </Row>
 
