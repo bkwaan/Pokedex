@@ -253,9 +253,7 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
-                <Rotate>
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
-                </Rotate>
 
                 {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>
