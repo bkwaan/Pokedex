@@ -29,7 +29,6 @@ class Home extends Component {
         }
     }
     RedirectLoginPage() {
-        console.log("111");
         this.setState({redirectTOLogin: true});
     }
 
@@ -140,14 +139,10 @@ class Home extends Component {
     }
 
     searchPokemon = (event) => {
-        let pokeName = event.target.value;
-        let firstLetter = pokeName.substring(0,1);
-        firstLetter = firstLetter.toUpperCase();
-        pokeName = firstLetter + pokeName.substring(1,pokeName.length);
         let container = document.getElementsByClassName('row')[1];
         let childz = container.getElementsByClassName('Pokemon--Home');
         for(var i = 0; i < childz.length; i++) {
-            if(!childz[i].className.includes(pokeName)){
+            if(!childz[i].className.includes(event.target.value)){
                 childz[i].parentNode.style.display="none";
             } else {
                 childz[i].parentNode.style.display="block";
@@ -164,36 +159,6 @@ class Home extends Component {
         if (this.state.redirectTOLogin){
             return <Redirect to="/Login"/>
         }
-        // for (let i = 1; i < this.state.pokemons.length; i++) {
-        //     if (i <= 9) {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("00" + i)}>
-        //                     <img src={"/images/00" + i + ".png"} className="pokemonThumbnail--Home" /> :
-        //                 <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     } else if (i <= 99) {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("0" + i)}>
-        //                     <img src={"/images/0" + i + ".png"} className="pokemonThumbnail--Home" />
-        //                     <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     } else {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal(i)}>
-        //                     <img src={"/images/" + i + ".png"} className="pokemonThumbnail--Home" />
-        //                     <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     }
-        // }
 
         return (
             <div className="Container--Home" >
@@ -272,7 +237,9 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
+                <Rotate>
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
+                </Rotate>
 
                 {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>

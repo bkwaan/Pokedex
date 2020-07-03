@@ -17,7 +17,7 @@ class Login extends Component {
         return (
             <div className="Container-Login">
                 <div className="BackgroundImageContainer-Login"></div>
-                <div className="LoginFormContainer-Login">
+                <form className="LoginFormContainer-Login" action="">
                     <div className="PokedexTextContainer-Login">
                         <h1 className="PokedexText-Login">Pokedex</h1>
                     </div>
@@ -30,13 +30,13 @@ class Login extends Component {
                     </div>
 
                     <div className="LoginButtonContainer-Login">
-                        <input className="LoginButton-Login" value="Login" type="button"></input>
+                        <input className="LoginButton-Login" value="Login" type="submit"></input>
                     </div>
 
                     <div className="SignupButtonContainer-Login">
                         <input className="SignupButton-Login" type="button" value="Sign up"></input>
                     </div>
-                </div>
+                </form>
 
             </div>
         )
