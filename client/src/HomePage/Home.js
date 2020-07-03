@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
+import {Redirect} from "react-router-dom"
+import Login from "../Login/Login.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
 import Fade from 'react-reveal/Fade';
@@ -21,8 +23,14 @@ class Home extends Component {
                 modalOpen: false,
                 id: "",
                 pokeID: ""
-            }
+            },
+            redirectTOLogin: false
+            
         }
+    }
+    RedirectLoginPage() {
+        console.log("111");
+        this.setState({redirectTOLogin: true});
     }
 
     componentDidMount() {
@@ -153,6 +161,9 @@ class Home extends Component {
 
     render() {
         let testingPokemonList = [];
+        if (this.state.redirectTOLogin){
+            return <Redirect to="/Login"/>
+        }
         // for (let i = 1; i < this.state.pokemons.length; i++) {
         //     if (i <= 9) {
         //         testingPokemonList.push(
@@ -188,20 +199,24 @@ class Home extends Component {
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(  ) => this.HideTypeList()}>
                     <Row className="NavBar--Home">
-                        <Col xs={6} sm={7} lg={8} xl={9} >
+                        <Col xs={1} sm={1} lg={1} xl={1} >
                             <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
                         </Col>
-                        <Col xs={6} sm={5} lg={4} xl={3}>
+                        <Col xs={9} sm={9} lg={9} xl={9}>
                             <Form.Row>
                                 <Col xs={9}>
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.searchPokemon(event)} />
 
                                 </Col>
-                                <Col xs={3}>
-                                    <Button variant="secondary" size="sm">Search</Button>
+                                <Col xs={2}>
+                                    <Button variant="secondary" size="sm" >Search</Button>
+                                    
 
                                 </Col>
                             </Form.Row>
+                        </Col>
+                        <Col xs={2} sm={2} lg={2} xl={2}>
+                                <Button variant="outline-info" size="large" onClick={()=> this.RedirectLoginPage()}>LOGIN</Button>
                         </Col>
                     </Row>
 
