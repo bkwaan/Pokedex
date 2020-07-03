@@ -12,7 +12,9 @@ router.post("/Signup", (req, res) => {
   Users.find({ email: email })
     .then((data) => {
       if (data.length > 0) {
-        res.json({ success: false, message: "Email already exists" });
+        res.json({ 
+          success: false, 
+          message: "Email already exists" });
       }
     })
     .catch((err) => {
@@ -28,7 +30,9 @@ router.post("/Signup", (req, res) => {
   user
     .save()
     .then((data) => {
-      res.send({ success: true, message: "User saved" });
+      res.send({ 
+        success: true, 
+        message: "User saved" });
     })
     .catch((err) => {
       res.send(err);
@@ -41,7 +45,9 @@ router.post("/Login", (req, res) => {
     .then((data) => {
       if (data.length > 0) {
         if (bcrypt.compareSync(password, data[0].password)) {
-          res.json({ success: true, message: "Logged in" });
+          res.json({ 
+            success: true, 
+            message: "Logged in" });
         } else {
           res.json({
             status: 404,
