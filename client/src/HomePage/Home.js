@@ -24,12 +24,13 @@ class Home extends Component {
                 id: "",
                 pokeID: ""
             },
+            redirectTOLogin: false
             
         }
     }
     RedirectLoginPage() {
         console.log("111");
-        return <Redirect to="/Login"/>
+        this.setState({redirectTOLogin: true});
     }
 
     componentDidMount() {
@@ -156,6 +157,9 @@ class Home extends Component {
 
     render() {
         let testingPokemonList = [];
+        if (this.state.redirectTOLogin){
+            return <Redirect to="/Login"/>
+        }
         // for (let i = 1; i < this.state.pokemons.length; i++) {
         //     if (i <= 9) {
         //         testingPokemonList.push(
@@ -208,7 +212,7 @@ class Home extends Component {
                             </Form.Row>
                         </Col>
                         <Col xs={2} sm={2} lg={2} xl={2}>
-                                <Button variant="outline-info" size="large" onClick={this.RedirectLoginPage}>LOGIN</Button>
+                                <Button variant="outline-info" size="large" onClick={()=> this.RedirectLoginPage()}>LOGIN</Button>
                         </Col>
                     </Row>
 

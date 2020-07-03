@@ -31,9 +31,10 @@ class App extends Component {
 
   render() {
     return (
+      // <Home/>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={Home}/>
+          <Route exact path="/" component={Home}/>
           <Route path="/Login" component={Login}/>
         </Switch>
       </BrowserRouter>
