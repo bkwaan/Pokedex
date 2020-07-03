@@ -12,7 +12,7 @@ router.post("/Signup", (req, res) => {
   Users.find({ email: email })
     .then((data) => {
       if (data.length > 0) {
-        res.json({ 
+        res.send({ 
           success: false, 
           message: "Email already exists" });
       }
@@ -40,23 +40,26 @@ router.post("/Signup", (req, res) => {
 });
 
 router.post("/Login", (req, res) => {
-  var { email, password } = req.body;
-  Users.find({ email: email })
+  var { Username, Password } = req.body;
+  console.log(Username)
+  console.log(Password)
+  Users.find({ email: Username })
     .then((data) => {
       if (data.length > 0) {
-        if (bcrypt.compareSync(password, data[0].password)) {
-          res.json({ 
+        if (bcrypt.compareSync(Password, data[0].password)) {
+          console.log("LOGGED IN BABY");
+          res.send({ 
             success: true, 
             message: "Logged in" });
         } else {
-          res.json({
+          res.send({
             status: 404,
             success: false,
             message: "Incorrect Password",
           });
         }
       } else {
-        res.json({
+        res.send({
           status: 404,
           success: false,
           message: "Email is not registered",
