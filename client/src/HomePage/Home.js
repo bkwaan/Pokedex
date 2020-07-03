@@ -140,10 +140,14 @@ class Home extends Component {
     }
 
     searchPokemon = (event) => {
+        let pokeName = event.target.value;
+        let firstLetter = pokeName.substring(0,1);
+        firstLetter = firstLetter.toUpperCase();
+        pokeName = firstLetter + pokeName.substring(1,pokeName.length);
         let container = document.getElementsByClassName('row')[1];
         let childz = container.getElementsByClassName('Pokemon--Home');
         for(var i = 0; i < childz.length; i++) {
-            if(!childz[i].className.includes(event.target.value)){
+            if(!childz[i].className.includes(pokeName)){
                 childz[i].parentNode.style.display="none";
             } else {
                 childz[i].parentNode.style.display="block";
@@ -268,9 +272,7 @@ class Home extends Component {
                         ))}
                     </ListGroup> */}
                 </div>
-                <Rotate>
                 <PokemonInfo pokemonInfo={this.state.pokemonInfo} CloseModal={() => this.CloseModal()} />
-                </Rotate>
 
                 {/* <button onClick={() => this.TestRequest()}> testing</button> */}
             </div>
