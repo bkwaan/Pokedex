@@ -14,7 +14,7 @@ class Home extends Component {
             types: ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Steel', 'Normal',
             'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
             'Rock', 'Dragon', 'Fighting', 'Bug'],
-            typeSelected: "",
+            typeSelected: [],
             pokemons: [],
             drawerOpen: false,
             pokemonInfo: {
@@ -35,7 +35,7 @@ class Home extends Component {
         })
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data);
+            console.log(data);
             this.setState({ pokemons: data });
         })
         .catch((error) => {
@@ -100,35 +100,102 @@ class Home extends Component {
     }
 
     TypeFilter = (typeName) => {
-        if (typeName.typeName !== this.state.typeSelected) {
-            console.log("different type");
-            this.setState({typeSelected: typeName.typeName});
-            fetch('http://localhost:5000/api/Pokemon/typeFilter/' + typeName.typeName, {
-                method: 'GET'
+        let typeAlreadySelected = false;
+        const newTypeSelected = this.state.typeSelected;
+        console.log(newTypeSelected.length);
+        if (this.state.typeSelected.length > 0 && this.state.typeSelected.length <= 2) {
+            this.state.typeSelected.map((type) => {
+                if (type === typeName.typeName) {
+                    typeAlreadySelected = true;
+                }
             })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                this.setState({ pokemons: data });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        } 
+        if (!typeAlreadySelected) {
+            if (newTypeSelected.length === 2) {
+                newTypeSelected.shift();
+            } 
+            newTypeSelected.push(typeName.typeName);
+
         }
+        this.setState({typeSelected: newTypeSelected}, console.log(this.state));
+        //console.log(newTypeSelected);
+        // if (typeName.typeName !== this.state.typeSelected) {
+        //     console.log("different type");
+        //     this.setState({typeSelected: typeName.typeName});
+        //     // fetch('http://localhost:5000/api/Pokemon/typeFilter/' + typeName.typeName, {
+        //     //     method: 'GET'
+        //     // })
+        //     // .then((res) => res.json())
+        //     // .then((data) => {
+        //     //     console.log(data);
+        //     //     this.setState({ pokemons: data });
+        //     // })
+        //     // .catch((error) => {
+        //     //     console.log(error);
+        //     // });
+        //     
+        // }
+        console.log(this.state.typeSelected.length);
+        this.FilterPoke();
         this.HideTypeList();
+        
+    }
+
+    FilterPoke = () => {
+        const container = document.getElementsByClassName('row')[1];
+        const pokemons = container.getElementsByClassName('Pokemon--Home');
+        
+        for (let i = 0; i < pokemons.length; i++) {
+            let match = false;
+            const types = pokemons[i].getElementsByClassName("typeList--Pokemons")[0];
+            if (this.state.typeSelected.length <= types.length) {
+                this.state.typeSelected.map((typeName) => {
+                    for (let x = 0; x < types.length; x++) {
+                        if(types[x] === typeName) {
+                            if(x < 1){
+                                match = true;
+                            } else {
+                                match = match && true;
+                            }
+                        }
+                    }
+                });         
+            } 
+            if (!match) {
+                 pokemons[i].parentNode.style.display = "none";
+            } else {
+                pokemons[i].parentNode.style.display = "block";
+            }
+        }
     }
 
     ResetFilter = () => {
-        this.GetAllPokemon();
-        this.setState({typeSelected: ""});
+        const container = document.getElementsByClassName('row')[1];
+        const pokemons = container.getElementsByClassName('Pokemon--Home');
+
+        for (let i = 0; i < pokemons.length; i++) {
+            pokemons[i].parentNode.style.display = "block";
+        }
     }
 
-    DisplayIcon = () => {
-        document.getElementById("closeIcon-typeSelected--Home").style.display = "inline-block";
+    RemoveSelectedType = (i) => {
+        const newSelectedType = this.state.typeSelected;
+        newSelectedType.splice(i, 1);
+        this.setState({typeSelected: newSelectedType});
+        if (this.state.typeSelected.length > 0) {
+            this.FilterPoke();
+        } else {
+            this.ResetFilter();
+        }
     }
 
-    HideIcon = () => {
-        document.getElementById("closeIcon-typeSelected--Home").style.display = "none";
+
+    DisplayIcon = (i) => {
+        document.getElementsByClassName("closeIcon-typeSelected--Home")[i].style.display = "inline-block";
+    }
+
+    HideIcon = (i) => {
+        document.getElementsByClassName("closeIcon-typeSelected--Home")[i].style.display = "none";
     }
 
     searchPokemon = (event) => {
@@ -149,36 +216,6 @@ class Home extends Component {
 
     render() {
         let testingPokemonList = [];
-        // for (let i = 1; i < this.state.pokemons.length; i++) {
-        //     if (i <= 9) {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("00" + i)}>
-        //                     <img src={"/images/00" + i + ".png"} className="pokemonThumbnail--Home" /> :
-        //                 <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     } else if (i <= 99) {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal("0" + i)}>
-        //                     <img src={"/images/0" + i + ".png"} className="pokemonThumbnail--Home" />
-        //                     <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     } else {
-        //         testingPokemonList.push(
-        //             <Col xs={6} sm={4} md={3} lg={2} >
-        //                 <div className="Pokemon--Home" onClick={() => this.OpenModal(i)}>
-        //                     <img src={"/images/" + i + ".png"} className="pokemonThumbnail--Home" />
-        //                     <p>Cubone</p>
-        //                 </div>
-        //             </Col>
-        //         )
-        //     }
-        // }
 
         return (
             <div className="Container--Home" >
@@ -202,15 +239,16 @@ class Home extends Component {
                     </Row>
 
                     <Container>
-                        {this.state.typeSelected !== "" ?
-                        <Row>
-                            <Col>
-                                <div className={"typeSelected--Home " + this.state.typeSelected} onMouseEnter={() => this.DisplayIcon()} onMouseLeave={() => this.HideIcon()}>
-                                    <p>{this.state.typeSelected}</p>
-                                    <img src="./images/closeBtn.svg" id="closeIcon-typeSelected--Home" onClick={() => this.ResetFilter()}/>
+                        {this.state.typeSelected.length > 0 ?
+                        <div className="typeSelected--TypeFilter">
+                            {this.state.typeSelected.map((type, i) => (
+                                <div className={"typeSelected--Home " + type} onMouseEnter={() => this.DisplayIcon(i)} onMouseLeave={() => this.HideIcon(i)}>
+                                    <p>{type}</p>
+                                    <img src="./images/closeBtn.svg" className={"closeIcon-typeSelected--Home"} onClick={() => this.RemoveSelectedType(i)}/>
                                 </div>
-                            </Col>
-                        </Row> : null}
+                            ))}
+
+                        </div> : null}
                         <Row>
                             {testingPokemonList}
                             {this.state.pokemons.map((pokemon) => {
@@ -228,6 +266,9 @@ class Home extends Component {
                                         <div className={"Pokemon--Home " + pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
+                                            <ul className="typeList--Pokemons">
+                                                {pokemon.type.map((data) => (<li>{data}</li>))}
+                                            </ul>
                                         </div>
                                         </Fade>
                                     </Col>)

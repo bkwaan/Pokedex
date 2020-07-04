@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   //     }
   // }).project;
   // res.send({'fata' : 'hi'});
-  Pokemons.find({}, { _id: 0, id: 1, name: 1})
+  Pokemons.find({}, { _id: 0, id: 1, name: 1, type: 1})
     .sort({ id: 1 })
     .then((data) => {
       //console.log(data);
