@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
+import {Redirect} from "react-router-dom"
+import Login from "../Login/Login.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
 import Fade from 'react-reveal/Fade';
@@ -21,8 +23,13 @@ class Home extends Component {
                 modalOpen: false,
                 id: "",
                 pokeID: ""
-            }
+            },
+            redirectTOLogin: false
+            
         }
+    }
+    RedirectLoginPage() {
+        this.setState({redirectTOLogin: true});
     }
 
     componentDidMount() {
@@ -146,26 +153,34 @@ class Home extends Component {
         const pokemons = container.getElementsByClassName('Pokemon--Home');
         
         for (let i = 0; i < pokemons.length; i++) {
-            let match = false;
+            let match = true;
             const types = pokemons[i].getElementsByClassName("typeList--Pokemons")[0];
-            if (this.state.typeSelected.length <= types.length) {
-                this.state.typeSelected.map((typeName) => {
-                    for (let x = 0; x < types.length; x++) {
-                        if(types[x] === typeName) {
-                            if(x < 1){
-                                match = true;
-                            } else {
-                                match = match && true;
-                            }
+            const typeList = types.getElementsByTagName("li");
+            if (this.state.typeSelected.length <= typeList.length) {
+                let matches = [];
+                this.state.typeSelected.map((typeName, y) => {
+                    matches.push(false);
+                    for (let x = 0; x < typeList.length; x++) {
+                        if (typeList[x].textContent === typeName) {
+                            matches[y] = true;
+                            break;  
                         }
                     }
-                });         
-            } 
-            if (!match) {
-                 pokemons[i].parentNode.style.display = "none";
+                   
+                });
+                for (let x = 0; x < matches.length; x++) {
+                    match = match && matches[x];
+                }   
             } else {
+                match = false;
+            }          
+            
+            if (!match) {
+                pokemons[i].parentNode.style.display = "none";
+           } else {
                 pokemons[i].parentNode.style.display = "block";
-            }
+           }   
+           
         }
     }
 
@@ -216,25 +231,32 @@ class Home extends Component {
 
     render() {
         let testingPokemonList = [];
+        if (this.state.redirectTOLogin){
+            return <Redirect to="/Login"/>
+        }
 
         return (
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(  ) => this.HideTypeList()}>
                     <Row className="NavBar--Home">
-                        <Col xs={6} sm={7} lg={8} xl={9} >
+                        <Col xs={1} sm={1} lg={1} xl={1} >
                             <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
                         </Col>
-                        <Col xs={6} sm={5} lg={4} xl={3}>
+                        <Col xs={9} sm={9} lg={9} xl={9}>
                             <Form.Row>
                                 <Col xs={9}>
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.searchPokemon(event)} />
 
                                 </Col>
-                                <Col xs={3}>
-                                    <Button variant="secondary" size="sm">Search</Button>
+                                <Col xs={2}>
+                                    <Button variant="secondary" size="sm" >Search</Button>
+                                    
 
                                 </Col>
                             </Form.Row>
+                        </Col>
+                        <Col xs={2} sm={2} lg={2} xl={2}>
+                                <Button variant="outline-info" size="large" onClick={()=> this.RedirectLoginPage()}>LOGIN</Button>
                         </Col>
                     </Row>
 
