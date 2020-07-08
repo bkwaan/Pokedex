@@ -4,19 +4,9 @@ const Pokemons = require("../models/kantoregion");
 
 // Get all pokemons
 router.get("/", (req, res) => {
-  // Pokemons.find({}, function(err, docs) {
-  //     if (!err) {
-  //         console.log(docs);
-  //     }
-  //     else {
-  //         throw err;
-  //     }
-  // }).project;
-  // res.send({'fata' : 'hi'});
-  Pokemons.find({}, { _id: 0, id: 1, name: 1})
+  Pokemons.find({}, { _id: 0, id: 1, name: 1, type: 1})
     .sort({ id: 1 })
     .then((data) => {
-      //console.log(data);
       res.send(data);
     })
     .catch((err) => {

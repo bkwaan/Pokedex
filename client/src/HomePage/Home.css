@@ -40,12 +40,12 @@
     color: #FFFFFF;
 }
 
-#closeIcon-typeSelected--Home {
+.closeIcon-typeSelected--Home {
     display: none;
     width: 10px;
 }
 
-#closeIcon-typeSelected--Home:hover {
+.closeIcon-typeSelected--Home:hover {
     cursor: pointer;
 }
 
@@ -75,6 +75,15 @@
 
 .Pokemon--Home > p {
     margin: 0;
+}
+
+.typeList--Pokemons {
+    display: none;
+
+}
+
+.typeSelected--TypeFilter {
+    display: flex;
 }
 
 
@@ -284,13 +293,9 @@
     background-color:green;
 }
 
+  @media screen and (max-width: 600px) {
+    .closeIcon-typeSelected--Home {
+        display: inline-block;
+    }
+  }
 
-@keyframes modalFade {
-    from {transform: translateY(-50%);opacity: 0;}
-    to {transform: translateY(0);opacity: 1;}
-  }
-  
-  .modal {
-    animation-name: modalFade;
-    animation-duration: .3s;
-  }
