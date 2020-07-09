@@ -151,7 +151,6 @@ class Home extends Component {
     FilterPoke = () => {
         const container = document.getElementsByClassName('row')[1];
         const pokemons = container.getElementsByClassName('Pokemon--Home');
-        
         for (let i = 0; i < pokemons.length; i++) {
             let match = true;
             const types = pokemons[i].getElementsByClassName("typeList--Pokemons")[0];
