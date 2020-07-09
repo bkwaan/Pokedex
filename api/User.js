@@ -5,38 +5,40 @@ const bcrypt = require("bcrypt");
 const rounds = 10;
 
 router.post("/Signup", (req, res) => {
-  var { username, email, password } = req.body;
+  var { Username, Email, Password } = req.body;
   let salt = bcrypt.genSaltSync(rounds);
-  password = bcrypt.hashSync(password, salt);
+  Password = bcrypt.hashSync(Password, salt);
 
-  Users.find({ email: email })
+  Users.find({ email: Email })
     .then((data) => {
       if (data.length > 0) {
         res.send({ 
           success: false, 
           message: "Email already exists" });
+      } else {
+        var user = new Users({
+          Username,
+          Email,
+          Password,
+        });
+      
+        user
+          .save()
+          .then((data) => {
+            res.send({ 
+              success: true, 
+              message: "User saved" });
+          })
+          .catch((err) => {
+            res.send(err);
+          });
       }
     })
     .catch((err) => {
       res.send(err);
     });
 
-  var user = new Users({
-    username,
-    email,
-    password,
-  });
-
-  user
-    .save()
-    .then((data) => {
-      res.send({ 
-        success: true, 
-        message: "User saved" });
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+ 
 });
 
 router.post("/Login", (req, res) => {
