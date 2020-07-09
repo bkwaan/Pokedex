@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./SignUp.css";
+import { Link, BrowserRouter, Redirect } from "react-router-dom";
 
 class SignUp extends Component{
     constructor(props){
@@ -11,11 +12,17 @@ class SignUp extends Component{
                 Email: "",
             },
             SignUpSuccess: "",
-            Error: ""
+            Error: "",
+            //redirectTOLogin: false
         }
-       
+        
     };
     render () {
+        // if (this.state.redirectTOLogin) {
+        //     return (
+        //         <Redirect to="/Login"/>
+        //     );
+        // }
         return (
             <div className = "Container-SignUp">
                 <div className = "BackgroundImageContainer-SignUp"></div>
@@ -26,7 +33,8 @@ class SignUp extends Component{
                     <div className = "FormRightContainer-SignUp">
                         <div className = "LoginContainer-SignUp">
                             <label className = "AlreadySignUpLabel-SignUp">Already have an account? </label>
-                            <a className = "LoginLink-SignUp" href="/Login"> LOGIN</a>
+                           
+                                <Link className = "LoginLink-SignUp" to={"/Login"}> LOGIN</Link>
                         </div>
                         <form className = "InfoContainer-SignUp" onSubmit="">
                             <h4 className = "SignUpTitle-SignUp">SIGN UP NOW</h4>

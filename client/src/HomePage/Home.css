@@ -297,7 +297,7 @@
     margin-bottom: 2rem;
     padding: 1rem;  
   }
-  .comment-form-fields {
+  /* .comment-form-fields {
     margin-bottom: 0.25rem;
     input, textarea {
       border: none;
@@ -344,4 +344,4 @@
       color: $nc-blue;
       font-weight: bold;
     }
-  }
+  } */

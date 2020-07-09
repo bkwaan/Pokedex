@@ -77,13 +77,13 @@ class Login extends Component {
             ></input>
           </div>
 
-          {/* <div className="SignupButtonContainer-Login">
+          <div className="SignupButtonContainer-Login">
             <input
               className="SignupButton-Login"
               type="button"
               value="Sign up"
-            ></input> */}
-          {/* </div> */}
+            ></input>
+          </div>
         </form>
       </div>
     );

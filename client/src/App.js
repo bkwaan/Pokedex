@@ -32,14 +32,15 @@ class App extends Component {
 
   render() {
     return (
-      // <Home/>
-      // <BrowserRouter>
-      //   <Switch>
-      //     <Route exact path="/" component={Home}/>
-      //     <Route path="/Login" component={Login}/>
-      //   </Switch>
-      // </BrowserRouter>
-      <SignUp/>
+      //<Home/>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/Login" component={Login}/>
+          <Route path="/SignUp" component={SignUp}/>
+        </Switch>
+      </BrowserRouter>
+      // <SignUp/>
     )
   }
   
