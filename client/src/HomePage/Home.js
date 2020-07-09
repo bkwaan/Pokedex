@@ -17,6 +17,9 @@ class Home extends Component {
             'Fairy', 'Dark', 'Flying', 'Ghost', 'Poison', 'Ice', 'Ground', 
             'Rock', 'Dragon', 'Fighting', 'Bug'],
             typeSelected: [],
+            search: {
+                searchWord: ""
+            },
             pokemons: [],
             drawerOpen: false,
             pokemonInfo: {
@@ -150,7 +153,21 @@ class Home extends Component {
 
     FilterPoke = () => {
         const container = document.getElementsByClassName('row')[1];
+<<<<<<< HEAD
         const pokemons = container.getElementsByClassName('Pokemon--Home');
+=======
+        let pokemons;
+        if (this.state.search.searchWord === ""){
+            pokemons = container.getElementsByClassName("Pokemon--Home")
+        } else {
+            pokemons = container.getElementsByClassName('Pokemon--Home withSearch');
+        }
+        
+        if (pokemons.length < 1) {
+            return;
+        }
+
+>>>>>>> 65246e8ee9c4d898b1efccea48faed4f4b7dd6f2
         for (let i = 0; i < pokemons.length; i++) {
             let match = true;
             const types = pokemons[i].getElementsByClassName("typeList--Pokemons")[0];
@@ -176,8 +193,10 @@ class Home extends Component {
             
             if (!match) {
                 pokemons[i].parentNode.style.display = "none";
+                pokemons[i].classList.remove("withFilter");
            } else {
                 pokemons[i].parentNode.style.display = "block";
+                pokemons[i].classList.add("withFilter");
            }   
            
         }
@@ -185,10 +204,21 @@ class Home extends Component {
 
     ResetFilter = () => {
         const container = document.getElementsByClassName('row')[1];
-        const pokemons = container.getElementsByClassName('Pokemon--Home');
+        let pokemons;
+        if (this.state.search.searchWord === ""){
+            pokemons = container.getElementsByClassName("Pokemon--Home")
+        } else {
+            pokemons = container.getElementsByClassName('Pokemon--Home withSearch');
+        }
+        
 
         for (let i = 0; i < pokemons.length; i++) {
+            pokemons[i].classList.remove("withFilter");
             pokemons[i].parentNode.style.display = "block";
+        }
+
+        if(this.state.search.searchWord !== "") {
+            this.searchPokemon();
         }
     }
 
@@ -212,15 +242,41 @@ class Home extends Component {
         document.getElementsByClassName("closeIcon-typeSelected--Home")[i].style.display = "none";
     }
 
-    searchPokemon = (event) => {
+    getSearchKeyWord = (event) => {
+        const {search} = this.state;
+        search["searchWord"] = event.target.value;
+        this.setState({search}, console.log(this.state));
+        this.searchPokemon();
+    }
+    
+    searchPokemon = () => {
         let container = document.getElementsByClassName('row')[1];
-        let childz = container.getElementsByClassName('Pokemon--Home');
+        let childz;
+        
+        console.log("state: "+ this.state.typeSelected.length);
+
+        if (this.state.typeSelected.length > 0){
+            childz = container.getElementsByClassName('Pokemon--Home withFilter');
+
+        } else {
+            childz = container.getElementsByClassName("Pokemon--Home");
+        }
+        
+        if (childz.length < 1) {
+            return;
+        }
+
         for(var i = 0; i < childz.length; i++) {
-            if(!childz[i].className.includes(event.target.value)){
+            if(!childz[i].id.includes(this.state.search.searchWord)){
                 childz[i].parentNode.style.display="none";
+                childz[i].classList.remove("withSearch");
             } else {
                 childz[i].parentNode.style.display="block";
-
+                if (this.state.search.searchWord === "") {
+                    childz[i].classList.remove("withSearch");
+                } else {
+                    childz[i].classList.add("withSearch");
+                }  
             }
         }
     
@@ -244,7 +300,7 @@ class Home extends Component {
                         <Col xs={9} sm={9} lg={9} xl={9}>
                             <Form.Row>
                                 <Col xs={9}>
-                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.searchPokemon(event)} />
+                                    <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.getSearchKeyWord(event)} />
 
                                 </Col>
                                 <Col xs={2}>
@@ -284,7 +340,7 @@ class Home extends Component {
                                 return (
                                     <Col xs={6} sm={4} md={3} lg={2} >
                                         <Fade left>
-                                        <div className={"Pokemon--Home " + pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
+                                        <div className="Pokemon--Home" id = {pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
                                             <ul className="typeList--Pokemons">
