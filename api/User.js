@@ -50,7 +50,8 @@ router.post("/Login", (req, res) => {
           console.log("LOGGED IN BABY");
           res.send({ 
             success: true, 
-            message: "Logged in" });
+            message: "Logged in" 
+          });
         } else {
           res.send({
             status: 404,
