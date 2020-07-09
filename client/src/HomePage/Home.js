@@ -275,6 +275,10 @@ class Home extends Component {
                 }  
             }
         }
+        
+        if (this.state.typeSelected.length > 0){
+            this.FilterPoke();
+        }
     
         
         
