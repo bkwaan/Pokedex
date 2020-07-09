@@ -10,6 +10,9 @@ import {
   ProgressBar,
 } from "react-bootstrap";
 import Fade from 'react-reveal/Fade';
+import CommentBox from "../Comment/CommentBox";
+import Comment from "../Comment/Comment";
+import ReactDOM from 'react-dom';
 
 class PokemonInfo extends Component {
   constructor(props) {
@@ -65,39 +68,22 @@ class PokemonInfo extends Component {
 
     PokemonStat.push(
       <div className="Pokemon-Stat">
-        {/* <div className="d-flex">
-                    <div className="text-left Stats--Attack">Attack </div>
-                    <div className="flex-grow-1 Stats--Bar--Attack">
-                        <ProgressBar now={this.state.pokeInfo.base.Attack / 2} label={`${this.state.pokeInfo.base.Attack / 2}`}></ProgressBar>
-                    </div>
-                </div> 
-                <div className="d-flex">
-                    <div className="text-left Stats--Defense">Defense </div>
-                    <div className="flex-grow-1 justify-content-end Stats--Bar--Defense">
-                        <ProgressBar className="Testing-Defense" now={this.state.pokeInfo.base.Defense / 2} label={`${this.state.pokeInfo.base.Defense / 2}`}></ProgressBar>
-                    </div>
-                </div>
-                        
-                <div className="d-flex">
-                    <div className="text-left Stats--HP">HP </div>
-                    <div className="align-self-end p-2 flex-grow-1 Stats--Bar--HP">
-                        <ProgressBar now={this.state.pokeInfo.base.HP / 2} label={`${this.state.pokeInfo.base.HP / 2}`}></ProgressBar>
-                    </div>
-                </div>
-                
-                <div className="d-flex">
-                    <div className="text-left Stats--Speed">Speed </div>
-                    <div className="p-2 flex-grow-1 Stats--Bar--Speed">
-                        <ProgressBar now={this.state.pokeInfo.base.Speed / 2} label={`${this.state.pokeInfo.base.Speed / 2}`}></ProgressBar>
-                    </div>
-                </div>
-                */}
         <div className="d-flex">
-          <Col xs={3}>Attack </Col>
+          <Col xs={3}>Attack</Col>
           <Col xs={9}>
             <ProgressBar
               now={this.state.pokeInfo.base.Attack / 2}
               label={`${this.state.pokeInfo.base.Attack / 2}`}
+            ></ProgressBar>
+          </Col>
+        </div>
+
+        <div className="d-flex">
+          <Col xs={3}>HP </Col>
+          <Col xs={9}>
+            <ProgressBar
+              now={this.state.pokeInfo.base.HP / 2}
+              label={`${this.state.pokeInfo.base.HP / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -115,11 +101,11 @@ class PokemonInfo extends Component {
         </div>
 
         <div className="d-flex">
-          <Col xs={3}>HP </Col>
+          <Col xs={3}>Speed </Col>
           <Col xs={9}>
             <ProgressBar
-              now={this.state.pokeInfo.base.HP / 2}
-              label={`${this.state.pokeInfo.base.HP / 2}`}
+              now={this.state.pokeInfo.base.Speed / 2}
+              label={`${this.state.pokeInfo.base.Speed / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -150,7 +136,13 @@ class PokemonInfo extends Component {
             onHide={this.props.CloseModal}
           >
             <Modal.Header closeButton>
-              <Modal.Title>#{this.props.pokemonInfo.pokeID}</Modal.Title>
+              <Modal.Title>
+              <ListGroup className="Name--PokeInfo">
+                      <ListGroup.Item>
+                      #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
+                      </ListGroup.Item>
+              </ListGroup>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Container className="Picture--Name--PokeInfo">
@@ -167,7 +159,8 @@ class PokemonInfo extends Component {
                     </div>
                   </Col>
                   <Col>
-                    <ListGroup className="Name--PokeInfo">
+                    {PokemonStat}
+                    {/* <ListGroup className="Name--PokeInfo">
                       <ListGroup.Item>
                         {this.state.pokeInfo.name.english}
                       </ListGroup.Item>
@@ -180,15 +173,18 @@ class PokemonInfo extends Component {
                       <ListGroup.Item>
                         {this.state.pokeInfo.name.japanese}
                       </ListGroup.Item>
-                    </ListGroup>
+                    </ListGroup> */}
                   </Col>
                 </Row>
                 {/*Type of Pokemon */}
                 <Row className="Poke--Type">{PokemonType}</Row>
 
-                {/*Stats of Pokemon */}
+                {/*Comment Section */}
+                <CommentBox>
+                  <div id="main"></div>
+                </CommentBox>
+                
 
-                {PokemonStat}
               </Container>
             </Modal.Body>
           </Modal>
