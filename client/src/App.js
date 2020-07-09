@@ -3,6 +3,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./HomePage/Home.js"
 import Login from "./Login/Login.js"
+import SignUp from "./SignUp/SignUp.js"
 import logo from './logo.svg';
 import './App.css';
 
@@ -32,12 +33,13 @@ class App extends Component {
   render() {
     return (
       // <Home/>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/Login" component={Login}/>
-        </Switch>
-      </BrowserRouter>
+      // <BrowserRouter>
+      //   <Switch>
+      //     <Route exact path="/" component={Home}/>
+      //     <Route path="/Login" component={Login}/>
+      //   </Switch>
+      // </BrowserRouter>
+      <SignUp/>
     )
   }
   

@@ -1,0 +1,143 @@
+.BackgroundImageContainer-SignUp {
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-image: url("/images/SignUpPageImage.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    filter: opacity(80%) blur(2px);
+
+}
+ .FormContainer-SignUp {
+    border: none;
+    box-shadow: 0px 0px 20px 0.3em rgba(10, 10, 10, 0.5);
+    display: flex;
+    width: fit-content;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    margin: auto;
+}
+
+.FormLeftContainer-SignUp {
+    width: 50%;
+    height: auto;
+}
+.Image-SignUp {
+    content: url("/images/pikachu.jpg");
+    /* background-size: cover; */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    max-width: 100%;
+    max-height: 100%;
+}
+.FormRightContainer-SignUp {
+    padding: 3px;
+    width: 50%;
+}
+.LoginContainer-SignUp {
+    text-align: right;
+    height: 25px;
+    line-height: 25px;
+    font-family: initial;
+    width: 100%;
+    margin: 0 0 0 0;
+}
+.AlreadySignUpLabel-SignUp{
+    margin: 0 0 0 0;
+    font-style: italic;
+    color: Lightgray;
+}
+.LoginLink-SignUp {
+    margin: 0 10px 0 0;
+}
+
+.InfoContainer-SignUp {
+    padding: 30px;
+}
+.SignUpTitle-SignUp {
+    text-align: left;
+    margin: 0 0 0 0;
+    height: 25px;
+    line-height: 20px;
+}
+.SignUpText-SignUp {
+    margin: 0 0 0 0;
+    font-style: italic;
+    color: Darkgray;
+    height: 20px;
+    line-height: 10px;
+}
+.UsernameContainer-SignUp,
+.EmailContainer-SignUp,
+.PasswordContainer-SignUp,
+.ConfirmPasswordContainer-SignUp {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.UsernameInput-SignUp,
+.EmailInput-SignUp,
+.PasswordInput-SignUp,
+.ConfirmPasswordInput-SignUp {
+    border: 0;
+    outline: 0;
+    /* background: transparent; */
+    border-bottom: 1px solid black;
+    width: 80%;
+    
+}
+
+.UsernameInput-SignUp:focus,
+.EmailInput-SignUp:focus,
+.PasswordInput-SignUp:focus,
+.ConfirmPasswordInput-SignUp:focus {
+    transition: 0.1s;
+    border-color: skyblue;
+    border-width: 3px;
+}
+
+.TermsCheckbox-SignUp {
+    margin-right: 5px;
+}
+
+.TermsCheckboxContainer-SignUp {
+    margin-bottom: 20px;
+}
+
+.SignUpButton-SignUp {
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    border-width: 2px;
+    padding: 10px 15px;
+    width: 100px;
+    border: 2px solid;
+    border-radius: 24px;
+    user-select: none; 
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 700px) { 
+
+    .Image-SignUp {
+        content: none;
+    }
+
+    .FormLeftContainer-SignUp {
+        width: 0%;
+        height: 0%;
+    };
+    .FormRightContainer-SignUp {
+        width: 100%;
+    }
+}
