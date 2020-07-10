@@ -68,14 +68,14 @@ router.post("/addLike", (req, res) => {
     });
 });
 
-
 // Deleting a comment
-
 router.post("/delete", (req, res) => {
   let id = req.body.id;
   let pokeName = req.body.pokeName;
   Comment.updateOne(
-    {pokeName: pokeName}, {"$pull" : {"comments": {"_id": id }}})
+    { pokeName: pokeName },
+    { $pull: { comments: { _id: id } } }
+  )
     .then((data) => {
       res.send({
         success: true,
@@ -87,5 +87,25 @@ router.post("/delete", (req, res) => {
     });
 });
 
-
+// Editing a post
+router.post("/editPost", (req, res) => {
+  let id = req.body.id;
+  let pokeName = req.body.pokeName;
+  let post = req.body.post;
+  Comment.updateOne(
+    { pokeName: pokeName, "comments._id": id },
+    {
+      "comments.$.post": post,
+    }
+  )
+    .then((data) => {
+      res.send({
+        success: true,
+        message: "Comment updated",
+      });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
 module.exports = router;
