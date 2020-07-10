@@ -6,10 +6,11 @@ const Comment = require("../models/comment");
 router.post("/add", (req, res) => {
   var pokeName = req.body.pokeName;
   var comments = req.body.comments;
+  var likes = req.body.likes;
   Comment.find({ pokeName: pokeName })
     .then((data) => {
       if (data.length > 0) {
-        Comment.update(
+        Comment.updateOne(
           { pokeName: pokeName },
           {
             $push: {
@@ -26,6 +27,7 @@ router.post("/add", (req, res) => {
         var newComment = new Comment({
           pokeName,
           comments,
+          likes,
         });
 
         newComment
@@ -40,6 +42,25 @@ router.post("/add", (req, res) => {
             res.send(err);
           });
       }
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+// Adding a like to a comment
+router.post("/addLike", (req, res) => {
+  let id = req.body.id;
+  let pokeName = req.body.pokeName;
+  Comment.updateOne(
+    { pokeName: pokeName, "comments._id": id },
+    { $inc: { "comments.$.likes": 1 } }
+  )
+    .then((data) => {
+      res.send({
+        success: true,
+        message: "Likes updated",
+      });
     })
     .catch((err) => {
       res.send(err);
