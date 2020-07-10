@@ -57,6 +57,7 @@ router.post("/addLike", (req, res) => {
     { $inc: { "comments.$.likes": 1 } }
   )
     .then((data) => {
+      console.log(data);
       res.send({
         success: true,
         message: "Likes updated",
@@ -66,5 +67,25 @@ router.post("/addLike", (req, res) => {
       res.send(err);
     });
 });
+
+
+// Deleting a comment
+
+router.post("/delete", (req, res) => {
+  let id = req.body.id;
+  let pokeName = req.body.pokeName;
+  Comment.updateOne(
+    {pokeName: pokeName}, {"$pull" : {"comments": {"_id": id }}})
+    .then((data) => {
+      res.send({
+        success: true,
+        message: "Comment deleted",
+      });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 
 module.exports = router;
