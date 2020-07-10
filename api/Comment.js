@@ -68,6 +68,26 @@ router.post("/addLike", (req, res) => {
     });
 });
 
+// Adding a like to a comment
+router.post("/dislike", (req, res) => {
+  let id = req.body.id;
+  let pokeName = req.body.pokeName;
+  Comment.updateOne(
+    { pokeName: pokeName, "comments._id": id },
+    { $inc: { "comments.$.likes": -1 } }
+  )
+    .then((data) => {
+      console.log(data);
+      res.send({
+        success: true,
+        message: "Comment disliked",
+      });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 // Deleting a comment
 router.post("/delete", (req, res) => {
   let id = req.body.id;
