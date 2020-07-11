@@ -68,7 +68,7 @@ router.post("/addLike", (req, res) => {
     });
 });
 
-// Adding a like to a comment
+// Adding a dislike to a comment
 router.post("/dislike", (req, res) => {
   let id = req.body.id;
   let pokeName = req.body.pokeName;
