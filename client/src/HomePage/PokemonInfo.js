@@ -25,6 +25,7 @@ class PokemonInfo extends Component {
         base: [],
         type: [],
       },
+      comments: []
     };
   }
 
@@ -36,11 +37,23 @@ class PokemonInfo extends Component {
       .then((data) => {
         console.log(data);
         this.setState({ pokeInfo: data });
+        console.log(this.state.pokeInfo.name.english);
+        fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
+          method: "GET",
+        }).then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.exist) {
+              console.log(data.comments);
+              this.setState({comments: data.comments}, () => console.log(this.state));
+            }
+          });
       })
       .catch((error) => {
         console.log(error);
       });
     //this.setState({pokeInfo: info});
+
   };
 
   GetPokeStat = () => {
@@ -128,39 +141,39 @@ class PokemonInfo extends Component {
     // }
 
     return (
-        <Fade left>
-          <Modal
-            size="lg"
-            show={this.props.pokemonInfo.modalOpen}
-            onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
-            onHide={this.props.CloseModal}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>
+      <Fade left>
+        <Modal
+          size="lg"
+          show={this.props.pokemonInfo.modalOpen}
+          onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
+          onHide={this.props.CloseModal}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
               <ListGroup className="Name--PokeInfo">
-                      <ListGroup.Item>
-                      #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
-                      </ListGroup.Item>
+                <ListGroup.Item>
+                  #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
+                </ListGroup.Item>
               </ListGroup>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Container className="Picture--Name--PokeInfo">
-                {/*Picture and Name of Pokemon */}
-                <Row>
-                  <Col>
-                    <div className="Picture-Poke">
-                      <img
-                        className="Picture--PokeInfo"
-                        src={
-                          "/images/" + this.props.pokemonInfo.pokeID + ".png"
-                        }
-                      />
-                    </div>
-                  </Col>
-                  <Col>
-                    {PokemonStat}
-                    {/* <ListGroup className="Name--PokeInfo">
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Container className="Picture--Name--PokeInfo">
+              {/*Picture and Name of Pokemon */}
+              <Row>
+                <Col>
+                  <div className="Picture-Poke">
+                    <img
+                      className="Picture--PokeInfo"
+                      src={
+                        "/images/" + this.props.pokemonInfo.pokeID + ".png"
+                      }
+                    />
+                  </div>
+                </Col>
+                <Col>
+                  {PokemonStat}
+                  {/* <ListGroup className="Name--PokeInfo">
                       <ListGroup.Item>
                         {this.state.pokeInfo.name.english}
                       </ListGroup.Item>
@@ -174,21 +187,21 @@ class PokemonInfo extends Component {
                         {this.state.pokeInfo.name.japanese}
                       </ListGroup.Item>
                     </ListGroup> */}
-                  </Col>
-                </Row>
-                {/*Type of Pokemon */}
-                <Row className="Poke--Type">{PokemonType}</Row>
+                </Col>
+              </Row>
+              {/*Type of Pokemon */}
+              <Row className="Poke--Type">{PokemonType}</Row>
 
-                {/*Comment Section */}
-                <CommentBox>
-                  <div id="main"></div>
-                </CommentBox>
-                
+              {/*Comment Section */}
+              <CommentBox comments={this.state.comments}/>
+              {/* <div id="main"></div>
+                </CommentBox> */}
 
-              </Container>
-            </Modal.Body>
-          </Modal>
-          </Fade>
+
+            </Container>
+          </Modal.Body>
+        </Modal>
+      </Fade>
 
     );
   }

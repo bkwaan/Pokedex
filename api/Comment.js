@@ -2,7 +2,24 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
 
-//Posting a comment
+//Getting the comments
+router.get("/:name", (req, res) => {
+  let name = req.params.name;
+  console.log(name);
+  Comment.find({ "pokeName": name })
+    .then((data) => {
+      if (data.length > 0) {
+        console.log(data);
+        res.send({ exist: true, comments: data[0].comments});
+      } else {
+        res.send({ exist: false });
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+})
+
+//Posting a comment 
 router.post("/add", (req, res) => {
   var pokeName = req.body.pokeName;
   var comments = req.body.comments;

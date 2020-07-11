@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 
 
 class CommentBox extends React.Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       
       this.state = {
         showComments: false,
@@ -48,10 +48,12 @@ class CommentBox extends React.Component {
     _addComment(author, body) {
       const comment = {
         id: this.state.comments.length + 1,
-        author,
-        body
+        userName: author,
+        post: body
       };
       this.setState({ comments: this.state.comments.concat([comment]) }); // *new array references help React stay fast, so concat works better than push here.
+      
+      //add comment function from props? which fetch to add the comment to the server side and update the state on PokemonInfo as well?
     }
     
     _handleClick() {
@@ -61,12 +63,13 @@ class CommentBox extends React.Component {
     }
     
     _getComments() {    
-      return this.state.comments.map((comment) => { 
+      return this.props.comments.map((comment) => { 
         return (
           <Comment 
-            author={comment.author} 
-            body={comment.body} 
-            key={comment.id} />
+            author={comment.userName} 
+            body={comment.post} 
+            date={comment.date}
+            likes={comment.likes} />
         ); 
       });
     }
