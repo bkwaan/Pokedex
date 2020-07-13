@@ -7,6 +7,7 @@ import {
   FormLabel,
   InputGroup,
 } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Login extends Component {
       },
       LoginSucceed: "",
       Error: "",
+      RediretToSignUp: false
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -37,21 +39,30 @@ class Login extends Component {
   };
 
   handleChange(event, inputName) {
-      const {input} = this.state;
-      input[inputName] = event.target.value;
-      this.setState({input});
-      console.log(this.state);
+        const {input} = this.state;
+        input[inputName] = event.target.value;
+        this.setState({input});
+        console.log(this.state);
+  }
+
+  setRedirectToSignUp (status) {
+        this.setState({RediretToSignUp: status});
   }
 
   render() {
+        if (this.state.RediretToSignUp) {
+            return <Redirect to="/SignUp"/>
+        }
     return (
       <div className="Container-Login">
         <div className="BackgroundImageContainer-Login"></div>
+    
         <form className="LoginFormContainer-Login" onSubmit={this.handleLogin}>
-          <div className="PokedexTextContainer-Login">
-            <h1 className="PokedexText-Login">Pokedex</h1>
+        <div className="PokedexTextContainer-Login">
+            <h1 className="PokedexText-Login">LOGIN</h1>
           </div>
           <div className="UsernameContainer-Login">
+              <i className = "fa fa-user icon"></i>
             <input
               className="UsernameInputField-Login"
               placeholder="Username"
@@ -78,10 +89,12 @@ class Login extends Component {
           </div>
 
           <div className="SignupButtonContainer-Login">
+              <p className = "SignUpText-Login">Don't have an account?</p>
             <input
               className="SignupButton-Login"
               type="button"
               value="Sign up"
+              onClick = {()=>this.setRedirectToSignUp(true)}
             ></input>
           </div>
         </form>

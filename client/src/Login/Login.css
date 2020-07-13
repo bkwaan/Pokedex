@@ -6,22 +6,27 @@
     height: 100%;
     width: 100%;
     /* background: url('/images/pokemonWallpaper.jpg'); */
-    background-image: url("/images/pokemonWallpaper.jpg");
+    background-image: url("/images/LoginPageWallpaper.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-position: center center;
+    background-position: bottom right;
+    /* filter: opacity(80%) blur(2px); */
 }
 
 .LoginFormContainer-Login{
-    width: 400px;
+    width: 350px;
     height: auto;
     padding: 10px;
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.85);
+    /* background-color: rgba(0, 0, 0, 0); */
+    background: transparent;
+    border: solid;
+    border-color: white;
+    border-width: 1px;
     border-radius: 10px;
     text-align: center;
 }
@@ -33,67 +38,88 @@
 .PokedexText-Login {
     font-family: 'Times New Roman', Times, serif;
     font-weight: 400;
-    color: rgb(233, 80, 59);
+    color: white;
 }
+
 .UsernameContainer-Login, .PasswordContainer-Login {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 .UsernameInputField-Login, .PasswordInputField-Login {
     border: none;
+    border-bottom: 1px solid white;
     outline: none;
-    background: none;
+    background: transparent;
     text-align: center;
-    border-width: 2px;
-    padding: 10px 15px;
-    width: 200px;
-    height: 50px;
-    border: 2px solid;
-    border-radius: 24px;
-    border-color: rgb(48, 166, 212);
+    width: 60%;
     transition: 0.2s;
+    color: white;
 }
 
 .UsernameInputField-Login:focus, .PasswordInputField-Login:focus {
-    width: 300px;
+    width: 90%;
+    border-color: skyblue;
 }
 
 .UsernameInputField-Login:focus::placeholder, .PasswordInputField-Login:focus::placeholder {
     color: transparent;
+
 }
 
 .UsernameInputField-Login::placeholder, .PasswordInputField-Login::placeholder {
-    color: rgb(58, 58, 58);
+    color: white;
 }
 
 .LoginButtonContainer-Login, .SignupButtonContainer-Login{
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.LoginButton-Login, .SignupButton-Login {
+.SignupButtonContainer-Login {
+    display: block;
+}
+
+.LoginButton-Login {
     outline: none;
     border: none;
     background: none;
     text-align: center;
     border-width: 2px;
     padding: 10px 15px;
-    width: 100px;
-    border: 2px solid;
-    border-radius: 24px;
+    width: 40%;
+    border: 1px solid;
+    border-radius: 12px;
     user-select: none; 
+    color: white;
+
 }
 .LoginButton-Login {
-    border-color:rgb(72, 255, 0);
+    /* border-color:rgb(72, 255, 0); */
 }
 
 .LoginButton-Login:hover{
-    background-color: rgb(72, 255, 0);
+    border-color: rgb(72, 255, 0);
+    color: rgb(72, 255, 0);
 }
 
 .SignupButton-Login {
-    border-color: rgb(248, 77, 47);
+    outline: none;
+    border: none;
+    background: none;
+    border-bottom: 1px solid white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 13px;
+    color: white;
+    padding: 0;
+}
+.SignUpText-Login {
+    font-size: 13px;
+    color: white;
+    display: inline-block;
+    margin-right: 2px;
 }
 
 .SignupButton-Login:hover {
-    background-color: rgb(248, 77, 47);
+    color: dodgerblue;
+    border-color: dodgerblue;
 }
