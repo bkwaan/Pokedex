@@ -149,13 +149,10 @@ class PokemonInfo extends Component {
           onHide={this.props.CloseModal}
         >
           <Modal.Header closeButton>
-            <Modal.Title>
-              <ListGroup className="Name--PokeInfo">
-                <ListGroup.Item>
-                  #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
-                </ListGroup.Item>
-              </ListGroup>
-            </Modal.Title>
+
+            <div className={"Type " + this.state.pokeInfo.type[0]}>
+              #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
+            </div>
           </Modal.Header>
           <Modal.Body>
             <Container className="Picture--Name--PokeInfo">
@@ -196,7 +193,6 @@ class PokemonInfo extends Component {
               <CommentBox comments={this.state.comments}/>
               {/* <div id="main"></div>
                 </CommentBox> */}
-
 
             </Container>
           </Modal.Body>

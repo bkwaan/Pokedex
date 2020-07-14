@@ -301,12 +301,6 @@ class Home extends Component {
                             <Form.Row>
                                 <Col xs={9}>
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.getSearchKeyWord(event)} />
-
-                                </Col>
-                                <Col xs={2}>
-                                    <Button variant="secondary" size="sm" >Search</Button>
-                                    
-
                                 </Col>
                             </Form.Row>
                         </Col>

@@ -41,6 +41,74 @@ class CommentBox extends React.Component {
             {this._getCommentsTitle(comments.length)}
           </h4>
           {commentNodes}
+          <div className="comment-entry">
+            
+            <div className="comment-top"> 
+              <div className="comment-like">
+                  <img src="./images/heart.png" className="like-image" onClick=""></img>
+                  <div className="like-count"> 1</div>
+              </div>
+
+              <header className="comment-user">
+                <section className="comment-detail">
+                  <a className="comment-username">Jun Jeong</a>
+                  <span> : </span>
+                  <a className="comment-time">2 Minutes ago</a>
+                </section>
+              </header>
+            </div>
+
+            <div className="comment-bottom">
+              <section>
+                <div className="comment-body">
+                  <div>
+                  This Pokemon is cool
+                  </div>
+                </div>
+              </section>
+            </div>
+              
+          </div>
+
+          <div className="comment-entry">
+            
+            <div className="comment-top"> 
+              <div className="comment-like">
+                  <img src="./images/heart.png" className="like-image" onClick=""></img>
+                  <div className="like-count"> 1</div>
+              </div>
+
+              <header className="comment-user">
+                <section className="comment-detail">
+                  <a className="comment-username">Jun Jeong</a>
+                  <span> : </span>
+                  <a className="comment-time">2 Minutes ago</a>
+                </section>
+              </header>
+
+              <div className="comment-features">
+                <button className="" onClick=""> 
+                  edit comment
+                </button>
+                  
+                <button onClick="">
+                  delete comment
+                </button>
+
+              </div>
+            </div>
+
+            <div className="comment-bottom">
+              <section>
+                <div className="comment-body">
+                  <div>
+                  This Pokemon is cool
+                  </div>
+                </div>
+              </section>
+            </div>
+              
+          </div>
         </div>  
       );
     } // end render

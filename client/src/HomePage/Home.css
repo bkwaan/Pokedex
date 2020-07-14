@@ -249,12 +249,12 @@
 .Type{
     text-align: center;
     color:white;
-    line-height: 40px;
+    line-height: 50px;
     font-weight: 600;
-    font-size: 18pt;
-    font-size: 18pt;
+    font-size: 24pt;
     border-radius:10px;
     font-variant:small-caps;
+    width:100%;
 }
 
 
@@ -290,13 +290,19 @@
     max-width: 37.5rem;
     border-radius: 0.875rem;
     padding: 0.2rem 1rem 2rem;
-  }
-  .comment-form {
+    margin-top:2%;
+}
+
+.comment-form {
     background-color: #fff;
     border-radius: 0.25rem;
     margin-bottom: 2rem;
-    padding: 1rem;  
-  }
+    margin-top:2%;
+}
+
+textarea{
+    width:75%;
+}
   /* .comment-form-fields {
     margin-bottom: 0.25rem;
     input, textarea {
@@ -345,3 +351,45 @@
       font-weight: bold;
     }
   } */
+
+.comment-entry{
+    border-top: 1px solid #bed1cf;
+    position:relative;
+}
+
+.comment-top{
+    display:flex;
+    padding-top:24px;
+}
+
+.comment-like{
+    display:flex;
+    flex-direction: column;
+    margin-right:2%;
+}
+
+.like-count{
+    margin-left:20%;
+}
+
+.comment-user{
+    display:flex;
+}
+
+.comment-username{
+    font-weight:bold;
+}
+
+.comment-bottom{
+    margin-top:2%;
+    margin-bottom:4%;
+}
+  /**Modal Header**/
+
+  .modal-header{
+      border-bottom:none;
+  }
+
+  .modal-header .close{
+      padding: .8rem rem;
+  }
