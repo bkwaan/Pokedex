@@ -6,12 +6,12 @@
     height: 100%;
     width: 100%;
     /* background: url('/images/pokemonWallpaper.jpg'); */
-    background-image: url("/images/LoginPageWallpaper.jpg");
+    background-image: url("/images/LoginWallpaper.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-position: bottom right;
-    /* filter: opacity(80%) blur(2px); */
+    background-position: center center;
+    filter: opacity(80%) blur(1px);
 }
 
 .LoginFormContainer-Login{
@@ -19,13 +19,15 @@
     height: auto;
     padding: 10px;
     top: 50%;
-    left: 50%;
+    left: auto;
+    right: 8%;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -50%);
     /* background-color: rgba(0, 0, 0, 0); */
-    background: transparent;
+    background: white;
     border: solid;
-    border-color: white;
+    box-shadow: 0 10px 10px 0.2em darkgray;
+    /* border-color: white; */
     border-width: 1px;
     border-radius: 10px;
     text-align: center;
@@ -38,7 +40,7 @@
 .PokedexText-Login {
     font-family: 'Times New Roman', Times, serif;
     font-weight: 400;
-    color: white;
+    /* color: white; */
 }
 
 .UsernameContainer-Login, .PasswordContainer-Login {
@@ -47,13 +49,13 @@
 }
 .UsernameInputField-Login, .PasswordInputField-Login {
     border: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
     outline: none;
     background: transparent;
     text-align: center;
     width: 60%;
     transition: 0.2s;
-    color: white;
+    /* color: white; */
 }
 
 .UsernameInputField-Login:focus, .PasswordInputField-Login:focus {
@@ -67,7 +69,7 @@
 }
 
 .UsernameInputField-Login::placeholder, .PasswordInputField-Login::placeholder {
-    color: white;
+    /* color: white; */
 }
 
 .LoginButtonContainer-Login, .SignupButtonContainer-Login{
@@ -89,7 +91,7 @@
     border: 1px solid;
     border-radius: 12px;
     user-select: none; 
-    color: white;
+    /* color: white; */
 
 }
 .LoginButton-Login {
@@ -97,24 +99,24 @@
 }
 
 .LoginButton-Login:hover{
-    border-color: rgb(72, 255, 0);
-    color: rgb(72, 255, 0);
+    border-color: lightgreen;
+    color: lightgreen;
 }
 
 .SignupButton-Login {
     outline: none;
     border: none;
     background: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
     font-weight: bold;
     font-style: italic;
     font-size: 13px;
-    color: white;
+    /* color: white; */
     padding: 0;
 }
 .SignUpText-Login {
     font-size: 13px;
-    color: white;
+    /* color: white; */
     display: inline-block;
     margin-right: 2px;
 }
