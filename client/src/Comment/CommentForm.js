@@ -38,13 +38,16 @@ class CommentForm extends React.Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        pokeName: "Bulbasaur",
+        pokeName: this.props.pokeName,
         comments: [{ username: author, post: comments, date: newdate, likes: 0}],
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if(data.success){
+          this.props.GetComment();
+        }
       });
   }
 } // end CommentForm component

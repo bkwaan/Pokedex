@@ -36,9 +36,16 @@ class PokemonInfo extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        this.setState({ pokeInfo: data });
+        this.setState({ pokeInfo: data}, () => this.GetComment());
         console.log(this.state.pokeInfo.name.english);
-        
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+    //this.setState({pokeInfo: info});
+
+  };
+  GetComment = () => {
     fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
       method: "GET",
     }).then((res) => res.json())
@@ -47,16 +54,12 @@ class PokemonInfo extends Component {
         if (data.exist) {
           console.log(data.comments);
           this.setState({comments: data.comments}, () => console.log(this.state));
+        } else {
+          this.setState({comments:[]});
         }
       });
-  })
-      .catch((error) => {
-        console.log(error);
-      });
-    //this.setState({pokeInfo: info});
-
-  };
-
+    console.log("Get Comment is called 12:30");
+  }
   GetPokeStat = () => {
     console.log(this.state.pokeInfo.base[2]);
   };
@@ -191,7 +194,7 @@ class PokemonInfo extends Component {
               <Row className="Poke--Type">{PokemonType}</Row>
 
               {/*Comment Section */}
-              <CommentBox comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
+              <CommentBox  GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
               {/* <div id="main"></div>
                 </CommentBox> */}
 

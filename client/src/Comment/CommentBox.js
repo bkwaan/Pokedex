@@ -32,7 +32,7 @@ class CommentBox extends React.Component {
       return(
         <div className="comment-box">
           <h2>Join the Discussion!</h2>
-          <CommentForm addComment={this._addComment.bind(this)}/>
+          <CommentForm GetComment={this.props.GetComment.bind(this)} pokeName ={this.props.pokeName} addComment={this._addComment.bind(this)}/>
           <button id="comment-reveal" onClick={this._handleClick.bind(this)}>
             {buttonText}
           </button>
@@ -178,6 +178,8 @@ class CommentBox extends React.Component {
         .then((data) => {
           console.log(data);
         });
+
+      this.props.GetComment();
     }
     
     
