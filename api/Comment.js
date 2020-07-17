@@ -9,7 +9,6 @@ router.get("/:name", (req, res) => {
   Comment.find({ "pokeName": name })
     .then((data) => {
       if (data.length > 0) {
-        console.log(data);
         res.send({ exist: true, comments: data[0].comments});
       } else {
         res.send({ exist: false });
@@ -23,7 +22,6 @@ router.get("/:name", (req, res) => {
 router.post("/add", (req, res) => {
   var pokeName = req.body.pokeName;
   var comments = req.body.comments;
-  var likes = req.body.likes;
   Comment.find({ pokeName: pokeName })
     .then((data) => {
       if (data.length > 0) {
@@ -44,7 +42,6 @@ router.post("/add", (req, res) => {
         var newComment = new Comment({
           pokeName,
           comments,
-          likes,
         });
 
         newComment
