@@ -6,7 +6,7 @@ const rounds = 10;
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   secure: false,
   port: 25, //SMTP port
   auth: {
@@ -19,12 +19,13 @@ const transporter = nodemailer.createTransport({
 });
 
 router.get("/:email", (req, res) => {
-  var email = req.param.email;
+  var email = 'boscokwan23@gmail.com';
   Users.find({ Email: email }).then((data) => {
     if (data.length > 0) {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
         to: email,
+        subject: "HELLO",
         text: "TESTING",
       };
 
@@ -110,8 +111,6 @@ router.post("/Signup", (req, res) => {
 
 router.post("/Login", (req, res) => {
   var { Username, Password } = req.body;
-  console.log(Username);
-  console.log(Password);
   Users.find({ Email: Username })
     .then((data) => {
       if (data.length > 0) {
