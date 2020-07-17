@@ -294,12 +294,12 @@ class Home extends Component {
             <div className="Container--Home" >
                 <div className="main--Home" onClick={(  ) => this.HideTypeList()}>
                     <Row className="NavBar--Home">
-                        <Col xs={1} sm={1} lg={1} xl={1} >
-                            <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
+                        <Col xs={2} sm={2} lg={2} xl={2} >
+                            <img size = "sm" src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
                         </Col>
-                        <Col xs={9} sm={9} lg={9} xl={9}>
+                        <Col xs={8} sm={8} lg={8} xl={8}>
                             <Form.Row>
-                                <Col xs={9}>
+                                <Col xs={7}>
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.getSearchKeyWord(event)} />
                                 </Col>
                             </Form.Row>

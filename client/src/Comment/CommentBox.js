@@ -23,7 +23,7 @@ class CommentBox extends React.Component {
       const comments = this._getComments();
       let commentNodes;
       let buttonText = 'Show Comments';
-      
+
       if (this.state.showComments) {
         buttonText = 'Hide Comments';
         commentNodes = <div className="comment-list">{comments}</div>;
@@ -41,6 +41,8 @@ class CommentBox extends React.Component {
             {this._getCommentsTitle(comments.length)}
           </h4>
           {commentNodes}
+
+          
           <div className="comment-entry">
             
             <div className="comment-top"> 
@@ -119,6 +121,10 @@ class CommentBox extends React.Component {
         userName: author,
         post: body
       };
+
+      //Send the comment object to the server (database)
+
+
       this.setState({ comments: this.state.comments.concat([comment]) }); // *new array references help React stay fast, so concat works better than push here.
       
       //add comment function from props? which fetch to add the comment to the server side and update the state on PokemonInfo as well?
@@ -131,16 +137,49 @@ class CommentBox extends React.Component {
     }
     
     _getComments() {    
+      let commentNodes;
+      //For loop to load comment Nodes
+      
+      console.log("get Comments is getting called");
+      
       return this.props.comments.map((comment) => { 
         return (
-          <Comment 
-            author={comment.userName} 
-            body={comment.post} 
-            date={comment.date}
-            likes={comment.likes} />
+          <div className="comment">
+            <p className="comment-header">{comment.username}</p>
+            <p className="comment-body">- {comment.post}</p>
+            <div className="comment-footer">
+            <p>{this.props.pokeName}</p>
+            <p>{comment._id}</p>
+
+            <a
+            href="#"
+            className="comment-footer-delete"
+            onClick={() => this._deleteComment(this.props.pokeName, comment._id)}
+            >
+            
+            Delete Comment
+            </a>
+          </div>
+          </div>
         ); 
       });
     }
+
+    _deleteComment(pokeName, id) {
+      fetch("http://localhost:5000/api/Comment/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pokeName: pokeName,
+          id: id
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+    
     
     _getCommentsTitle(commentCount) {
       if (commentCount === 0) {

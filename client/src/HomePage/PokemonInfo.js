@@ -38,17 +38,18 @@ class PokemonInfo extends Component {
         console.log(data);
         this.setState({ pokeInfo: data });
         console.log(this.state.pokeInfo.name.english);
-        fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
-          method: "GET",
-        }).then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.exist) {
-              console.log(data.comments);
-              this.setState({comments: data.comments}, () => console.log(this.state));
-            }
-          });
-      })
+        
+    fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
+      method: "GET",
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.exist) {
+          console.log(data.comments);
+          this.setState({comments: data.comments}, () => console.log(this.state));
+        }
+      });
+  })
       .catch((error) => {
         console.log(error);
       });
@@ -148,7 +149,7 @@ class PokemonInfo extends Component {
           onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
           onHide={this.props.CloseModal}
         >
-          <Modal.Header closeButton>
+          <Modal.Header className={this.state.pokeInfo.type[0]}>
 
             <div className={"Type " + this.state.pokeInfo.type[0]}>
               #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
@@ -190,7 +191,7 @@ class PokemonInfo extends Component {
               <Row className="Poke--Type">{PokemonType}</Row>
 
               {/*Comment Section */}
-              <CommentBox comments={this.state.comments}/>
+              <CommentBox comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
               {/* <div id="main"></div>
                 </CommentBox> */}
 
