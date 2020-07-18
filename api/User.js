@@ -6,7 +6,7 @@ const rounds = 10;
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   secure: false,
   port: 25, //SMTP port
   auth: {
@@ -20,14 +20,16 @@ const transporter = nodemailer.createTransport({
 
 router.get("/:email", (req, res) => {
   var email = req.params.email;
+  var password = Math.random().toString(36).slice(-8);
   console.log(email);
+
   Users.find({ Email: email }).then((data) => {
     if (data.length > 0) {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
         to: email,
         subject: "HELLO",
-        text: "http://localhost5000/api/User/forgotPassword",
+        text: "Hello there your temporary password is " + password,
       };
 
       transporter.sendMail(emailSend, (err, info) => {
@@ -37,10 +39,23 @@ router.get("/:email", (req, res) => {
           console.log(info.response);
         }
       });
-      res.send({
-        success: true,
-        message: "Sent reset email!",
-      });
+
+      Users.updateOne(
+        { Email: email },
+        {
+          Password: password,
+          TempPassword: true
+        }
+      )
+        .then((data) => {
+          res.send({
+            success: true,
+            message: "Password Updated and email sent!",
+          });
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     } else {
       res.send({
         success: false,
@@ -51,7 +66,7 @@ router.get("/:email", (req, res) => {
 });
 
 router.post("/forgotPassword/:user", (req, res) => {
-  var email = req.params.user;
+  var email = req.params.email;
   var password = req.body.password;
   console.log(email);
   let salt = bcrypt.genSaltSync(rounds);
@@ -60,6 +75,7 @@ router.post("/forgotPassword/:user", (req, res) => {
     { Email: email },
     {
       Password: password,
+      TempPassword: false
     }
   )
     .then((data) => {
@@ -91,6 +107,7 @@ router.post("/Signup", (req, res) => {
           Username,
           Email,
           Password,
+          TempPassword: false
         });
 
         user
