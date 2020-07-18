@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./HomePage/Home.js"
 import Login from "./Login/Login.js"
 import SignUp from "./SignUp/SignUp.js"
+import ForgetPass from "./UserRecovery/ForgetPassword.js"
 import logo from './logo.svg';
 import './App.css';
 
@@ -38,6 +39,7 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route path="/Login" component={Login}/>
           <Route path="/SignUp" component={SignUp}/>
+          <Route path="ForgetPassword" component={ForgetPass}/>
         </Switch>
       </BrowserRouter>
       //<SignUp/>
