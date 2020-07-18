@@ -19,14 +19,15 @@ const transporter = nodemailer.createTransport({
 });
 
 router.get("/:email", (req, res) => {
-  var email = 'boscokwan23@gmail.com';
+  var email = req.params.email;
+  console.log(email);
   Users.find({ Email: email }).then((data) => {
     if (data.length > 0) {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
         to: email,
         subject: "HELLO",
-        text: "TESTING",
+        text: "http://localhost5000/api/User/forgotPassword",
       };
 
       transporter.sendMail(emailSend, (err, info) => {
@@ -49,9 +50,10 @@ router.get("/:email", (req, res) => {
   });
 });
 
-router.post("/forgotPassword", (req, res) => {
-  var email = req.body.email;
+router.post("/forgotPassword/:user", (req, res) => {
+  var email = req.params.user;
   var password = req.body.password;
+  console.log(email);
   let salt = bcrypt.genSaltSync(rounds);
   password = bcrypt.hashSync(password, salt);
   Users.updateOne(
