@@ -21,8 +21,8 @@ class ForgetPass extends Component {
 
     render() {
         return (
-            <Modal size="lg" show={this.props.ForgetPassModal} onHide={this.props.CloseForgetPassModal}>
-                <Modal.Header closeButton/>
+            <Modal dialogClassName="ForgetPassModal-ForgetPass" size="lg" show={this.props.ForgetPassModal} onHide={this.props.CloseForgetPassModal}>
+                <Modal.Header closeButton>
                 <div className="ModalBodyContainer-ForgetPass">
                     
                     <div className = "ForgetPassLeftContainer-ForgetPass">
@@ -36,10 +36,11 @@ class ForgetPass extends Component {
                             Enter your registered Email to receive intructions on recoverying your account
                         </p>
                         <input className="EmailInputField-ForgetPass" placeholder="Email"></input>
-                        <input className="SubmitBtn-ForgetPass" type="submit" value="Send Me The Instruction"/>
+                        <input className="SubmitBtn-ForgetPass" type="submit" value="Send me the instructions"/>
                         </form>
                     </div>
                 </div>
+                </Modal.Header>
             </Modal>
         );
     }
