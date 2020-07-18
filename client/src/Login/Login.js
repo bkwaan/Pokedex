@@ -7,7 +7,9 @@ import {
   FormLabel,
   InputGroup,
 } from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import ForgetPass from "../UserRecovery/ForgetPassword";
 
 class Login extends Component {
   constructor(props) {
@@ -19,7 +21,8 @@ class Login extends Component {
       },
       LoginSucceed: "",
       Error: "",
-      RediretToSignUp: false
+      RediretToSignUp: false,
+      ForgetPassModal: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -49,6 +52,12 @@ class Login extends Component {
         this.setState({RediretToSignUp: status});
   }
 
+  setForgetPassModal (status) {
+        this.setState({ForgetPassModal: status});
+        
+  }
+
+
   render() {
         if (this.state.RediretToSignUp) {
             return <Redirect to="/SignUp"/>
@@ -76,9 +85,11 @@ class Login extends Component {
               type="password"
               placeholder="Password"
               onChange={(event) => this.handleChange(event,"Password")}
-
             ></input>
+            <button className="ForgetPassBtn-Login" onClick={() => this.setForgetPassModal(true)}>forgot password?</button>
           </div>
+          
+            <ForgetPass ForgetPassModal={this.state.ForgetPassModal} CloseForgetPassModal={()=>this.setForgetPassModal(false)}/>
 
           <div className="LoginButtonContainer-Login">
             <input
