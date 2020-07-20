@@ -19,17 +19,15 @@ const transporter = nodemailer.createTransport({
 });
 
 router.post("/resetPassword", (req, res) => {
-  var email = req.body;
+  var Email = req.body.Email;
   var password = Math.random().toString(36).slice(-8);
-  console.log(email);
-  let salt = bcrypt.genSaltSync(rounds);
-  password = bcrypt.hashSync(password, salt);
+  console.log(Email);
 
-  Users.find({ Email: email }).then((data) => {
+  Users.find({ Email: Email }).then((data) => {
     if (data.length > 0) {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
-        to: email,
+        to: Email,
         subject: "HELLO",
         text: "Hello there your temporary password is " + password,
       };
@@ -42,8 +40,11 @@ router.post("/resetPassword", (req, res) => {
         }
       });
 
+      let salt = bcrypt.genSaltSync(rounds);
+      password = bcrypt.hashSync(password, salt);
+
       Users.updateOne(
-        { Email: email },
+        { Email: Email },
         {
           Password: password,
           TempPassword: true,
@@ -52,7 +53,7 @@ router.post("/resetPassword", (req, res) => {
         .then((data) => {
           res.send({
             success: true,
-            message: "Password Updated and email sent!",
+            message: "Password Sent, Please check your email",
           });
         })
         .catch((err) => {
