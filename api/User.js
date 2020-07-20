@@ -18,10 +18,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/:email", (req, res) => {
-  var email = req.params.email;
+router.post("/resetPassword", (req, res) => {
+  var email = req.body;
   var password = Math.random().toString(36).slice(-8);
   console.log(email);
+  let salt = bcrypt.genSaltSync(rounds);
+  password = bcrypt.hashSync(password, salt);
 
   Users.find({ Email: email }).then((data) => {
     if (data.length > 0) {
@@ -44,7 +46,7 @@ router.get("/:email", (req, res) => {
         { Email: email },
         {
           Password: password,
-          TempPassword: true
+          TempPassword: true,
         }
       )
         .then((data) => {
@@ -65,9 +67,8 @@ router.get("/:email", (req, res) => {
   });
 });
 
-router.post("/forgotPassword/:user", (req, res) => {
-  var email = req.params.email;
-  var password = req.body.password;
+router.post("/forgotPassword", (req, res) => {
+  var { email, password } = req.body;
   console.log(email);
   let salt = bcrypt.genSaltSync(rounds);
   password = bcrypt.hashSync(password, salt);
@@ -75,7 +76,7 @@ router.post("/forgotPassword/:user", (req, res) => {
     { Email: email },
     {
       Password: password,
-      TempPassword: false
+      TempPassword: false,
     }
   )
     .then((data) => {
@@ -107,7 +108,7 @@ router.post("/Signup", (req, res) => {
           Username,
           Email,
           Password,
-          TempPassword: false
+          TempPassword: false,
         });
 
         user
