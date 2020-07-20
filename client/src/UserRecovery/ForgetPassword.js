@@ -57,14 +57,6 @@ class ForgetPass extends Component {
         show={this.props.ForgetPassModal}
         onHide={this.props.CloseForgetPassModal}
       >
-        {this.state.Success ? (
-          <Toast>
-            <Toast.Body>{this.state.Message}</Toast.Body>
-          </Toast>
-        ) : (
-          " "
-        )}
-
         <Modal.Header closeButton>
           <div className="ModalBodyContainer-ForgetPass">
             <div className="ForgetPassLeftContainer-ForgetPass">
@@ -91,6 +83,13 @@ class ForgetPass extends Component {
                   placeholder="Email"
                   onChange={this.handleChange}
                 ></input>
+                {this.state.Success ? (
+                  <Toast>
+                    <Toast.Body>{this.state.Message}</Toast.Body>
+                  </Toast>
+                ) : (
+                  " "
+                )}
                 <input
                   className="SubmitBtn-ForgetPass"
                   type="submit"
