@@ -50,14 +50,6 @@ class ForgetPass extends Component {
 }
 
   render() {
-    var toast = ""
-    if(this.state.Success) {
-        toast = (
-          <Toast>
-            <Toast.Body>{this.state.Message}</Toast.Body>
-          </Toast>
-        );
-    }
     return (
       <Modal
         dialogClassName="ForgetPassModal-ForgetPass"
@@ -65,7 +57,13 @@ class ForgetPass extends Component {
         show={this.props.ForgetPassModal}
         onHide={this.props.CloseForgetPassModal}
       >
-          {toast}
+        {this.state.Success ? (
+          <Toast>
+            <Toast.Body>{this.state.Message}</Toast.Body>
+          </Toast>
+        ) : (
+          " "
+        )}
 
         <Modal.Header closeButton>
           <div className="ModalBodyContainer-ForgetPass">
