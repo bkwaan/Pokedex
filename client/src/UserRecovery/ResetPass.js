@@ -9,7 +9,8 @@ class ResetPass extends Component {
 
     render() {
         return (
-            <div className="PageContainer-ResetPass">
+            <div className="Container-ResetPass">
+                <div className="BackgroundImage-ResetPass"></div>
                 <div className="ItemsContainer-ResetPass">
                     <h5 className="PageTitle-ResetPass">Reset Your Password</h5>
                     <form className="FormContainer-ResetPass">
