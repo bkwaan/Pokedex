@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CommentForm from "./CommentForm"
 import Comment from "./Comment"
 import ReactDOM from 'react-dom';
+import {Button} from '@material-ui/core'
 
 
 
@@ -32,85 +33,15 @@ class CommentBox extends React.Component {
       return(
         <div className="comment-box">
           <h2>Join the Discussion!</h2>
-          <CommentForm GetComment={this.props.GetComment.bind(this)} pokeName ={this.props.pokeName} addComment={this._addComment.bind(this)}/>
-          <button id="comment-reveal" onClick={this._handleClick.bind(this)}>
-            {buttonText}
-          </button>
-          <h3>Comments</h3>
           <h4 className="comment-count">
             {this._getCommentsTitle(comments.length)}
           </h4>
-          {commentNodes}
-
+          <CommentForm GetComment={this.props.GetComment.bind(this)} pokeName ={this.props.pokeName} addComment={this._addComment.bind(this)}/>
+          <Button variant="contained" id="comment-reveal" onClick={this._handleClick.bind(this)}>
+              {buttonText}
+          </Button>
           
-          <div className="comment-entry">
-            
-            <div className="comment-top"> 
-              <div className="comment-like">
-                  <img src="./images/heart.png" className="like-image" onClick=""></img>
-                  <div className="like-count"> 1</div>
-              </div>
-
-              <header className="comment-user">
-                <section className="comment-detail">
-                  <a className="comment-username">Jun Jeong</a>
-                  <span> : </span>
-                  <a className="comment-time">2 Minutes ago</a>
-                </section>
-              </header>
-            </div>
-
-            <div className="comment-bottom">
-              <section>
-                <div className="comment-body">
-                  <div>
-                  This Pokemon is cool
-                  </div>
-                </div>
-              </section>
-            </div>
-              
-          </div>
-
-          <div className="comment-entry">
-            
-            <div className="comment-top"> 
-              <div className="comment-like">
-                  <img src="./images/heart.png" className="like-image" onClick=""></img>
-                  <div className="like-count"> 1</div>
-              </div>
-
-              <header className="comment-user">
-                <section className="comment-detail">
-                  <a className="comment-username">Jun Jeong</a>
-                  <span> : </span>
-                  <a className="comment-time">2 Minutes ago</a>
-                </section>
-              </header>
-
-              <div className="comment-features">
-                <button className="" onClick=""> 
-                  edit comment
-                </button>
-                  
-                <button onClick="">
-                  delete comment
-                </button>
-
-              </div>
-            </div>
-
-            <div className="comment-bottom">
-              <section>
-                <div className="comment-body">
-                  <div>
-                  This Pokemon is cool
-                  </div>
-                </div>
-              </section>
-            </div>
-              
-          </div>
+          {commentNodes}
         </div>  
       );
     } // end render
@@ -145,7 +76,46 @@ class CommentBox extends React.Component {
       return this.props.comments.map((comment) => { 
         return (
           <div className="comment">
-            <p className="comment-header">{comment.username}</p>
+          <div className="comment-entry">
+            
+            <div className="comment-top"> 
+              <div className="comment-like">
+                  <img src="./images/heart.png" className="like-image" onClick=""></img>
+                  <div className="like-count">{comment.likes}</div>
+              </div>
+
+              <header className="comment-user">
+                <section className="comment-detail">
+                  <a className="comment-username">{comment.username}</a>
+                  <span> : </span>
+                  <a className="comment-time">{comment.date}</a>
+                </section>
+              </header>
+            </div>
+
+            <div className="comment-bottom">
+              <section>
+                <div className="comment-body">
+                  <div>
+                    {comment.post}
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div className="comment-footer">
+              <section>
+                <Button href="#"
+                className="comment-footer-delete"
+                onClick={() => this._deleteComment(this.props.pokeName, comment._id)}>Delete Comment</Button>
+                <Button
+                onClick={() => this._editComment(this.props.pokeName, comment._id)}>
+                  Edit Comment
+                </Button>
+              </section>
+            </div>
+          </div>  
+            {/* <p className="comment-header">{comment.username}</p>
             <p className="comment-body">- {comment.post}</p>
             <div className="comment-footer">
             <p>{this.props.pokeName}</p>
@@ -159,7 +129,7 @@ class CommentBox extends React.Component {
             
             Delete Comment
             </a>
-          </div>
+          </div> */}
           </div>
         ); 
       });
@@ -191,6 +161,15 @@ class CommentBox extends React.Component {
       } else {
         return `${commentCount} comments`;
       }
+    }
+
+    //Like function
+    _getLikes(){
+
+    }
+
+    _editComment(pokeName, id){
+
     }
   } // end CommentBox component
 

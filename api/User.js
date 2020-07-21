@@ -6,7 +6,7 @@ const rounds = 10;
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   secure: false,
   port: 25, //SMTP port
   auth: {
@@ -18,15 +18,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/:email", (req, res) => {
-  var email = 'boscokwan23@gmail.com';
-  Users.find({ Email: email }).then((data) => {
+router.post("/resetPassword", (req, res) => {
+  var Email = req.body.Email;
+  var password = Math.random().toString(36).slice(-8);
+  console.log(Email);
+
+  Users.find({ Email: Email }).then((data) => {
     if (data.length > 0) {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
-        to: email,
+        to: Email,
         subject: "HELLO",
-        text: "TESTING",
+        text: "Hello there your temporary password is " + password,
       };
 
       transporter.sendMail(emailSend, (err, info) => {
@@ -36,10 +39,26 @@ router.get("/:email", (req, res) => {
           console.log(info.response);
         }
       });
-      res.send({
-        success: true,
-        message: "Sent reset email!",
-      });
+
+      let salt = bcrypt.genSaltSync(rounds);
+      password = bcrypt.hashSync(password, salt);
+
+      Users.updateOne(
+        { Email: Email },
+        {
+          Password: password,
+          TempPassword: true,
+        }
+      )
+        .then((data) => {
+          res.send({
+            success: true,
+            message: "Password Sent, Please check your email",
+          });
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     } else {
       res.send({
         success: false,
@@ -50,14 +69,15 @@ router.get("/:email", (req, res) => {
 });
 
 router.post("/forgotPassword", (req, res) => {
-  var email = req.body.email;
-  var password = req.body.password;
+  var { email, password } = req.body;
+  console.log(email);
   let salt = bcrypt.genSaltSync(rounds);
   password = bcrypt.hashSync(password, salt);
   Users.updateOne(
     { Email: email },
     {
       Password: password,
+      TempPassword: false,
     }
   )
     .then((data) => {
@@ -89,6 +109,7 @@ router.post("/Signup", (req, res) => {
           Username,
           Email,
           Password,
+          TempPassword: false,
         });
 
         user
