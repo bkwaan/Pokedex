@@ -11,8 +11,8 @@ class SignUp extends Component {
         Password: "",
         Email: "",
       },
-      SignUpSuccess: "",
-      Error: "",
+      SignUpSuccess: false,
+      Message: "",
     };
   }
 
@@ -33,7 +33,8 @@ class SignUp extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ SignUpSuccess: data.success });
-        this.setState({ Error: data.message });
+        this.setState({ Message: data.message });
+        console.log(this.state);
       });
   };
 

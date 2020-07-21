@@ -109,20 +109,22 @@ router.post("/Signup", (req, res) => {
           Username,
           Email,
           Password,
-          TempPassword: false,
-        });
+          TempPassword: false
+        })
 
         user
           .save()
           .then((data) => {
             res.send({
               success: true,
-              message: "User saved",
+              message: "User Registered",
             });
           })
           .catch((err) => {
             res.send(err);
           });
+
+
       }
     })
     .catch((err) => {
@@ -135,8 +137,7 @@ router.post("/Login", (req, res) => {
   Users.find({ Email: Username })
     .then((data) => {
       if (data.length > 0) {
-        if (bcrypt.compareSync(Password, data[0].password)) {
-          console.log("LOGGED IN BABY");
+        if (bcrypt.compareSync(Password, data[0].Password)) {
           res.send({
             success: true,
             message: "Logged in",

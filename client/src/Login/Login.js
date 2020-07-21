@@ -20,7 +20,7 @@ class Login extends Component {
         Password: "",
       },
       LoginSucceed: "",
-      Error: "",
+      Message: "",
       RediretToSignUp: false,
       ForgetPassModal: false,
     };
@@ -38,6 +38,7 @@ class Login extends Component {
       .then((data) => {
         this.setState({ LoginSucceed: data.success });
         this.setState({ Error: data.message });
+        console.log(this.state);
       });
   };
 

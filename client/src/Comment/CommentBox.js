@@ -146,7 +146,7 @@ class CommentBox extends React.Component {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          console.log(data.success);
         });
 
       this.props.GetComment();
@@ -164,12 +164,31 @@ class CommentBox extends React.Component {
     }
 
     //Like function
-    _getLikes(){
-
+    _getLikes(pokeName,id){
+      console.log(id);
+      fetch("http://localhost:5000/api/Comment/likes/" + id + "/" + pokeName, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.likes);
+        });
     }
 
     _editComment(pokeName, id){
-
+      fetch("http://localhost:5000/api/Comment/editPost", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id: "5f1157a82aa4667fdc55baed",
+          pokeName: "Pikachu",
+          post: "HELLO WORLDZ"
+        })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.message);
+          });
     }
   } // end CommentBox component
 

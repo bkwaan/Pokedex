@@ -86,7 +86,7 @@ class ForgetPass extends Component {
                   placeholder="Email"
                   onChange={this.handleChange}
                 ></input>
-                  <Toast onClose={() => this.handleToast()} show={this.state.Show} delay={1000} autohide>
+                  <Toast onClose={() => this.handleToast()} show={this.state.Show} delay={3000} autohide>
                     <Toast.Body>{this.state.Message}</Toast.Body>
                   </Toast>
                 <input

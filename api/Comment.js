@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
 
-//Getting the comments
+// Getting the comments
 router.get("/:name", (req, res) => {
   let name = req.params.name;
   console.log(name);
@@ -142,4 +142,21 @@ router.post("/editPost", (req, res) => {
       res.send(err);
     });
 });
+
+router.get("/likes/:id/:pokeName", (req,res) => {
+  let pokeName = req.params.pokeName;
+  let id = req.params.id;
+  Comment.find(
+    { pokeName: pokeName, "comments._id" : id}
+  ).then((data) => {
+    if(data.length > 0) {
+      res.send(data[0].comments[0]);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+});
+
+
 module.exports = router;
