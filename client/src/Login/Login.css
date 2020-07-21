@@ -73,6 +73,9 @@
 }
 
 .ForgetPassBtn-Login {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: block;
     border: none;
     outline: none;
     background:none;
@@ -84,7 +87,7 @@
 .ForgetPassBtn-Login:hover {
     border-bottom: 1px solid dodgerblue;
     color: dodgerblue;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .ForgetPassBtn-Login:active {

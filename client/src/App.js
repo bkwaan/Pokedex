@@ -5,6 +5,7 @@ import Home from "./HomePage/Home.js"
 import Login from "./Login/Login.js"
 import SignUp from "./SignUp/SignUp.js"
 import ForgetPass from "./UserRecovery/ForgetPassword.js"
+import ResetPass from "./UserRecovery/ResetPass.js"
 import logo from './logo.svg';
 import './App.css';
 
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/Login" component={Login}/>
           <Route path="/SignUp" component={SignUp}/>
           <Route path="ForgetPassword" component={ForgetPass}/>
+          <Route path="/ResetPassword" component={ResetPass}/>
         </Switch>
       </BrowserRouter>
       //<SignUp/>
