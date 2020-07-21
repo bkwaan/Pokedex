@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Button} from '@material-ui/core'
 
 class CommentForm extends React.Component {
   render() {
@@ -6,12 +7,14 @@ class CommentForm extends React.Component {
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <div className="comment-form-fields">
           <input
+            className="comment-form-name"
             placeholder="Name"
             required
             ref={(input) => (this._author = input)}
           ></input>
           <br />
           <textarea
+            className="comment-form-body"
             placeholder="Comment"
             rows="4"
             required
@@ -19,7 +22,7 @@ class CommentForm extends React.Component {
           ></textarea>
         </div>
         <div className="comment-form-actions">
-          <button type="submit">Post Comment</button>
+          <Button variant="contained" type="submit">Post Comment</Button>
         </div>
       </form>
     );
