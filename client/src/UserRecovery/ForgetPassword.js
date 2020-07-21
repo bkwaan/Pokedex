@@ -19,8 +19,10 @@ class ForgetPass extends Component {
       Email: "",
       Success: false,
       Message: "",
+      Show: false
     };
   }
+
 
   //this.props.ForgetPassModal
 
@@ -33,20 +35,21 @@ class ForgetPass extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-          console.log(data);
         this.setState({ Success: data.success });
         this.setState({ Message: data.message });
+        this.setState({ Show: true });
     });
   };
 
 
-  handleChange = (event)=> {
-      console.log("this is being called")
-    var test = event.target.value;
-    console.log(test);
 
+  handleToast = () => {
+      this.setState({ Show: false});
+  }
+
+  handleChange = (event)=> {
+    var test = event.target.value;
     this.setState({Email: test});
-    console.log(this.state.Email);
 }
 
   render() {
@@ -83,13 +86,9 @@ class ForgetPass extends Component {
                   placeholder="Email"
                   onChange={this.handleChange}
                 ></input>
-                {this.state.Success ? (
-                  <Toast>
+                  <Toast onClose={() => this.handleToast()} show={this.state.Show} delay={1000} autohide>
                     <Toast.Body>{this.state.Message}</Toast.Body>
                   </Toast>
-                ) : (
-                  " "
-                )}
                 <input
                   className="SubmitBtn-ForgetPass"
                   type="submit"
