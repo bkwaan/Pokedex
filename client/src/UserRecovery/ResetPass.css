@@ -1,8 +1,15 @@
-.PageContainer-ResetPass {
-    background-color: lightgray;
+.BackgroundImage-ResetPass {
+    top: 0px;
+    left: 0px;
     position: fixed;
-    width: 100%;
     height: 100%;
+    width: 100%;
+    background-image: url("/images/ResetPassWallpaper.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    filter: opacity(80%) blur(2px);
 }
 .ItemsContainer-ResetPass {
     background-color: white;
@@ -12,18 +19,58 @@
     transform: translate(-50%, -50%);
     display: block;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0.2em darkgray;
 }
 .PageTitle-ResetPass {
     /* text-align: center; */
 }
 
-.GreetingTextContainer-ResetPass, 
+/* .GreetingTextContainer-ResetPass, 
 .PasswordInputContainer-ResetPass, 
 .ConfirmPassInputContainer-ResetPass, 
 .SubmitBtnContainer-ResetPass {
     margin-top: 100px;
     
+} */
+
+.GreetingText-ResetPass, 
+.PasswordInput-ResetPass, 
+.ConfirmPassInput-ResetPass, 
+.SubmitBtn-ResetPass {
+    margin-top: 20px;
+}
+
+.PasswordInput-ResetPass, 
+.ConfirmPassInput-ResetPass {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    border: 1px solid dodgerblue;
+    outline: none;
+    width: 60%;
+    transition: 0.3s;
+}
+
+.PasswordInput-ResetPass:focus, 
+.ConfirmPassInput-ResetPass:focus {
+    width: 80%;
+}
+
+.PasswordInput-ResetPass:focus::placeholder, 
+.ConfirmPassInput-ResetPass:focus::placeholder {
+    color: transparent;
+}
+
+.SubmitBtn-ResetPass {
+    background-color: dodgerblue;
+    border: none;
+    width: 70%;
+    
+}
+
+.SubmitBtn-ResetPass:hover {
+    box-shadow: 0 0 5px 0.1em dodgerblue;
 }
 
 .FormContainer-ResetPass {
