@@ -71,7 +71,6 @@ router.post("/addLike", (req, res) => {
     { $inc: { "comments.$.likes": 1 } }
   )
     .then((data) => {
-      console.log(data);
       res.send({
         success: true,
         message: "Likes updated",
