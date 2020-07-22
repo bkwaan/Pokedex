@@ -138,9 +138,15 @@ router.post("/Login", (req, res) => {
     .then((data) => {
       if (data.length > 0) {
         if (bcrypt.compareSync(Password, data[0].Password)) {
+          const userInfo = {
+            id: data[0]._id,
+            userName: data[0].Username,
+            email: data[0].Email
+          }
           res.send({
             success: true,
             message: "Logged in",
+            userInfo: userInfo
           });
         } else {
           res.send({
