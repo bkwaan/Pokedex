@@ -370,3 +370,7 @@ margin-left:40%;
 .modal-content{
     border-radius:30px;
 }
+
+.form-in-comment{
+    display:none;
+}

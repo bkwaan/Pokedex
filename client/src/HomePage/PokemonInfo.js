@@ -58,11 +58,40 @@ class PokemonInfo extends Component {
           this.setState({comments:[]});
         }
       });
-    console.log("Get Comment is called 12:30");
   }
   GetPokeStat = () => {
     console.log(this.state.pokeInfo.base[2]);
   };
+
+  _sortCommentNewest(){
+    let commentSort = this.state.comments;
+    commentSort.sort(function compare(a,b){
+      var dateA = new Date(a.date);
+      var dateB = new Date(b.date);
+      return dateA - dateB;
+    })
+    this.setState({comments:commentSort});
+  }
+
+  _sortCommentOldest(){
+    let commentSort = this.state.comments;
+    commentSort.sort(function compare(a,b){
+      var dateA = new Date(a.date);
+      var dateB = new Date(b.date);
+      return dateB - dateA;
+    })
+    this.setState({comments:commentSort});
+  }
+  
+  _sortCommentBest(){
+    console.log("hello this is sortCommentBest function in PokemonInfo");
+    let commentSort = this.state.comments;
+    commentSort.sort(function compare(a,b){
+      return b.likes - a.likes ;
+    })
+    console.log(commentSort);
+    this.setState({comments:commentSort});
+  }
 
   render() {
     let StatBar = [];
@@ -194,7 +223,7 @@ class PokemonInfo extends Component {
               <Row className="Poke--Type">{PokemonType}</Row>
 
               {/*Comment Section */}
-              <CommentBox  GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
+              <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
               {/* <div id="main"></div>
                 </CommentBox> */}
 

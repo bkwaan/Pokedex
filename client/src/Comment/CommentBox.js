@@ -3,6 +3,9 @@ import CommentForm from "./CommentForm";
 import Comment from "./Comment";
 import ReactDOM from "react-dom";
 import { Button } from "@material-ui/core";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import { Select , NativeSelect} from '@material-ui/core';
 
 class CommentBox extends React.Component {
   constructor(props) {
@@ -10,6 +13,8 @@ class CommentBox extends React.Component {
 
     this.state = {
       showComments: false,
+      showLike: false,
+      editCheck: false,
       comments: [
         {
           id: 1,
@@ -38,16 +43,22 @@ class CommentBox extends React.Component {
 
     if (this.state.showComments) {
       buttonText = "Hide Comments";
+      console.log(comments);
+      console.log("hello world this");
       commentNodes = <div className="comment-list">{comments}</div>;
     }
 
+    let postCommentText="Post Comment"
+    
+
     return (
       <div className="comment-box">
-        <h2>Join the Discussion!</h2>
+        <h2 >Join the Discussion!</h2>
         <h4 className="comment-count">
           {this._getCommentsTitle(comments.length)}
         </h4>
         <CommentForm
+          formType={postCommentText}
           GetComment={this.props.GetComment.bind(this)}
           pokeName={this.props.pokeName}
           addComment={this._addComment.bind(this)}
@@ -59,6 +70,17 @@ class CommentBox extends React.Component {
         >
           {buttonText}
         </Button>
+        <br></br>
+        <div>
+          Sorted By: 
+        </div>
+
+        <Select id="select" onChange={(e) => this._sortComment(e)}>
+          <option value="best">best</option>
+          <option value="new">new</option>
+          <option value="old">old</option>
+        </Select>
+        
 
         {commentNodes}
       </div>
@@ -85,40 +107,79 @@ class CommentBox extends React.Component {
     });
   }
 
+  _handleLike(){
+    //Need to send a boolean to database and fetch it to change likes for each comment based on user id
+
+    this.setState({
+      showLike: !this.state.showLike,
+    });
+  }
+  
+
   _getComments() {
     let commentNodes;
     //For loop to load comment Nodes
 
     console.log("get Comments is getting called");
 
+    
+
     return this.props.comments.map((comment) => {
+      let notLike = <FavoriteBorderIcon></FavoriteBorderIcon>;
+      let editCommentText="Edit Comment"
+
+      
+
+      let editForm = comment.post;
+
+      if (this.state.editCheck){
+        editForm = <CommentForm formType={editCommentText}></CommentForm>
+      }
+
+      let divHide = {
+        display: 'none'
+      }
+
+
+        
       return (
         <div className="comment">
           <div className="comment-entry">
             <div className="comment-top">
-              <div className="comment-like">
-                <img
-                  src="./images/heart.png"
-                  className="like-image"
-                  onClick=""
-                ></img>
+              <div className="comment-like" id={comment._id + "-like"} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
+                <div style={divHide}>
+                  <FavoriteIcon></FavoriteIcon>
+                </div>
+                <div>
+                 <FavoriteBorderIcon></FavoriteBorderIcon>
+                </div>
                 <div className="like-count">{comment.likes}</div>
               </div>
-
+              
               <header className="comment-user">
                 <section className="comment-detail">
                   <a className="comment-username">{comment.username}</a>
                   <span> : </span>
-                  <a className="comment-time">{comment.date}</a>
+                  <a className="comment-time">{comment.date.substring(0,10)}</a>
                 </section>
               </header>
             </div>
 
             <div className="comment-bottom">
               <section>
-                <div className="comment-body">
-                  <div>{comment.post}</div>
+
+                <div className="comment-body" id={comment._id}>
+
+                  <div style={divHide}>
+                    <CommentForm formType={editCommentText}></CommentForm>
+                  </div>
+
+                  <div className="">
+                    {comment.post}
+                  </div>
+                  
                 </div>
+
               </section>
             </div>
 
@@ -133,9 +194,10 @@ class CommentBox extends React.Component {
                 >
                   Delete Comment
                 </Button>
-                <Button
+                <Button 
+                  
                   onClick={() =>
-                    this._editComment(this.props.pokeName, comment._id)
+                    this._commentHide(comment._id)
                   }
                 >
                   Edit Comment
@@ -192,6 +254,20 @@ class CommentBox extends React.Component {
 
   //Like function
   _getLikes(pokeName, id) {
+
+    let likeId = id + "-like"
+    let likeImage = document.getElementById(likeId).childNodes[0].style.display;
+
+    if(likeImage == "none"){
+      document.getElementById(likeId).childNodes[0].style.display = "";
+      document.getElementById(likeId).childNodes[1].style.display = "none";
+      console.log("c") 
+    } else if(likeImage == ""){
+      document.getElementById(likeId).childNodes[0].style.display = "none";
+      document.getElementById(likeId).childNodes[1].style.display = ""; 
+    }
+   
+
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -204,16 +280,21 @@ class CommentBox extends React.Component {
       .then((data) => {
         console.log(data.message);
       });
+      this.props.GetComment();
   }
 
-  _editComment(pokeName, id) {
+  _editComment(pokeName, id, newComment) {
+    this.setState({
+      editCheck: !this.state.editCheck,
+    });
+
     fetch("http://localhost:5000/api/Comment/editPost", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        _id: "5f1157a82aa4667fdc55baed",
-        pokeName: "Pikachu",
-        post: "HELLO WORLDZ",
+        _id: id,
+        pokeName: pokeName,
+        post: newComment,
       }),
     })
       .then((res) => res.json())
@@ -221,6 +302,31 @@ class CommentBox extends React.Component {
         console.log(data.message);
       });
   }
+
+  _commentHide(_id){
+    let commentForm = document.getElementById(_id).childNodes[0].style.display;
+    
+    if(commentForm == "none"){
+      document.getElementById(_id).childNodes[0].style.display = "";
+      document.getElementById(_id).childNodes[1].style.display = "none";
+    } else {
+      document.getElementById(_id).childNodes[0].style.display = "none";
+    document.getElementById(_id).childNodes[1].style.display = "";
+    }
+  }
+
+  _sortComment(e){
+    console.log("sort function called");
+      if(e.target.value=="old"){
+        this.props.SortByOld();
+      } else if (e.target.value=="new"){
+        this.props.SortByNew();
+      } else if (e.target.value=="best"){
+        console.log("best sort called");
+        this.props.SortByBest();
+      }
+  }
+  
 } // end CommentBox component
 
 export default CommentBox;

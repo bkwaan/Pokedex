@@ -6,13 +6,13 @@ class CommentForm extends React.Component {
     return (
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <div className="comment-form-fields">
-          <input
+          {/* <input
             className="comment-form-name"
             placeholder="Name"
             required
             ref={(input) => (this._author = input)}
           ></input>
-          <br />
+          <br /> */}
           <textarea
             className="comment-form-body"
             placeholder="Comment"
@@ -22,7 +22,7 @@ class CommentForm extends React.Component {
           ></textarea>
         </div>
         <div className="comment-form-actions">
-          <Button variant="contained" type="submit">Post Comment</Button>
+          <Button variant="contained" type="submit">{this.props.formType}</Button>
         </div>
       </form>
     );
@@ -35,7 +35,7 @@ class CommentForm extends React.Component {
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     var newdate = year + "/" + month + "/" + day;
-    let author = this._author.value;
+    let author = "bosco kwan";
     let comments = this._body.value;
     fetch("http://localhost:5000/api/Comment/add", {
       method: "POST",
