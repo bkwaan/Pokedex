@@ -42,7 +42,7 @@ class CommentForm extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         pokeName: this.props.pokeName,
-        comments: [{ username: author, post: comments, date: newdate, likes: 0}],
+        comments: [{ username: author, post: comments, date: newdate, likes: []}],
       }),
     })
       .then((res) => res.json())

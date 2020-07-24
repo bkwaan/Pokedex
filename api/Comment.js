@@ -6,19 +6,20 @@ const Comment = require("../models/comment");
 router.get("/:name", (req, res) => {
   let name = req.params.name;
   console.log(name);
-  Comment.find({ "pokeName": name })
+  Comment.find({ pokeName: name })
     .then((data) => {
       if (data.length > 0) {
-        res.send({ exist: true, comments: data[0].comments});
+        res.send({ exist: true, comments: data[0].comments });
       } else {
         res.send({ exist: false });
       }
-    }).catch((err) => {
-      console.log(err);
     })
-})
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
-//Posting a comment 
+//Posting a comment
 router.post("/add", (req, res) => {
   var pokeName = req.body.pokeName;
   var comments = req.body.comments;
@@ -64,21 +65,41 @@ router.post("/add", (req, res) => {
 
 // Adding a like to a comment
 router.post("/addLike", (req, res) => {
-  let id = req.body.id;
-  let pokeName = req.body.pokeName;
-  Comment.updateOne(
-    { pokeName: pokeName, "comments._id": id },
-    { $inc: { "comments.$.likes": 1 } }
-  )
-    .then((data) => {
+  var {id,pokeName,username} = req.body;
+  console.log(id,pokeName,username)
+  Comment.find(
+    {
+      pokeName: pokeName,
+      "comments._id": id,
+      "comments.likes.username" : username
+    }
+    ).then((data) => {
+    if (data.length > 0) {
       res.send({
-        success: true,
-        message: "Likes updated",
+        success: false,
+        message: "User has already liked the comment",
       });
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+    } else {
+      console.log("HELLO");
+      Comment.updateOne(
+        { pokeName: pokeName, "comments._id": id },
+        {
+          $push: {
+            "comments.$.likes":  {"username":username},
+          },
+        }
+      )
+        .then((data) => {
+          res.send({
+            message: "comment liked",
+            success: true,
+          });
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    }
+  });
 });
 
 // Adding a dislike to a comment
@@ -142,20 +163,18 @@ router.post("/editPost", (req, res) => {
     });
 });
 
-router.get("/likes/:id/:pokeName", (req,res) => {
+router.get("/likes/:id/:pokeName", (req, res) => {
   let pokeName = req.params.pokeName;
   let id = req.params.id;
-  Comment.find(
-    { pokeName: pokeName, "comments._id" : id}
-  ).then((data) => {
-    if(data.length > 0) {
-      res.send(data[0].comments[0]);
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  Comment.find({ pokeName: pokeName, "comments._id": id })
+    .then((data) => {
+      if (data.length > 0) {
+        res.send(data[0].comments[0]);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
-
 
 module.exports = router;
