@@ -65,15 +65,13 @@ router.post("/add", (req, res) => {
 
 // Adding a like to a comment
 router.post("/addLike", (req, res) => {
-  var {id,pokeName,username} = req.body;
-  console.log(id,pokeName,username)
-  Comment.find(
-    {
-      pokeName: pokeName,
-      "comments._id": id,
-      "comments.likes.username" : username
-    }
-    ).then((data) => {
+  var { id, pokeName, username } = req.body;
+  console.log(id, pokeName, username);
+  Comment.find({
+    pokeName: pokeName,
+    "comments._id": id,
+    "comments.likes.username": username,
+  }).then((data) => {
     if (data.length > 0) {
       res.send({
         success: false,
@@ -85,7 +83,7 @@ router.post("/addLike", (req, res) => {
         { pokeName: pokeName, "comments._id": id },
         {
           $push: {
-            "comments.$.likes":  {"username":username},
+            "comments.$.likes": { username: username },
           },
         }
       )
@@ -163,13 +161,26 @@ router.post("/editPost", (req, res) => {
     });
 });
 
-router.get("/likes/:id/:pokeName", (req, res) => {
+router.get("/likes/:id/:pokeName/:username", (req, res) => {
   let pokeName = req.params.pokeName;
   let id = req.params.id;
-  Comment.find({ pokeName: pokeName, "comments._id": id })
+  let username = req.params.username;
+  Comment.find({
+    pokeName: pokeName,
+    "comments._id": id,
+    "comments.likes.username": username,
+  })
     .then((data) => {
       if (data.length > 0) {
-        res.send(data[0].comments[0]);
+        res.send({
+          success: true,
+          message: "User has liked the comment",
+        });
+      } else {
+        res.send({
+          success: false,
+          message: "User has not liked the comment"
+        })
       }
     })
     .catch((err) => {

@@ -28,7 +28,7 @@ router.post("/resetPassword", (req, res) => {
       let emailSend = {
         from: "Pokedex <pepeincss@gmail.com>",
         to: Email,
-        subject: "HELLO",
+        subject: "Temporary Password",
         text: "Hello there your temporary password is " + password,
       };
 
@@ -109,8 +109,8 @@ router.post("/Signup", (req, res) => {
           Username,
           Email,
           Password,
-          TempPassword: false
-        })
+          TempPassword: false,
+        });
 
         user
           .save()
@@ -123,8 +123,6 @@ router.post("/Signup", (req, res) => {
           .catch((err) => {
             res.send(err);
           });
-
-
       }
     })
     .catch((err) => {
@@ -141,12 +139,12 @@ router.post("/Login", (req, res) => {
           const userInfo = {
             id: data[0]._id,
             userName: data[0].Username,
-            email: data[0].Email
-          }
+            email: data[0].Email,
+          };
           res.send({
             success: true,
             message: "Logged in",
-            userInfo: userInfo
+            userInfo: userInfo,
           });
         } else {
           res.send({
