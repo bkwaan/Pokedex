@@ -106,11 +106,19 @@ router.post("/Signup", (req, res) => {
     ],
   })
     .then((data) => {
+      console.log(data);
       if (data.length > 0) {
-        res.send({
-          success: false,
-          message: "Email or Username already exists",
-        });
+        if (data[0].Email === Email) {
+          res.send({
+            success: false,
+            message: "Email already exists",
+          });
+        } else {
+          res.send({
+            success: false,
+            message: "Username already exists",
+          });
+        }
       } else {
         var user = new Users({
           Username,
