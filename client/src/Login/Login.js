@@ -71,6 +71,11 @@ class Login extends Component {
         if (this.state.RediretToSignUp) {
             return <Redirect to="/SignUp"/>
         }
+        if (this.state.LoginSucceed) {
+            var storage = window.localStorage;
+            storage.setItem("login", "true");
+            return <Redirect to="/"></Redirect>
+        }
     return (
       <div className="Container-Login">
         <div className="BackgroundImageContainer-Login"></div>
