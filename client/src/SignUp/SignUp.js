@@ -10,6 +10,7 @@ class SignUp extends Component {
         Username: "",
         Password: "",
         Email: "",
+        ConfirmPassword: "",
       },
       SignUpSuccess: false,
       Message: "",
@@ -37,6 +38,15 @@ class SignUp extends Component {
         console.log(this.state);
       });
   };
+
+  PasswordInputValidation () {
+    const {input} = this.state;
+    const p1 = input["Password"];
+    const p2 = input["ConfirmPassword"];
+    if (p1 === p2) {
+      return true;
+    } else { return false };
+  }
 
   render() {
     return (
@@ -86,6 +96,7 @@ class SignUp extends Component {
                 <input
                   className="ConfirmPasswordInput-SignUp"
                   placeholder="Confirm Password"
+                  onChange={(event)=>this.handleChange(event,"ConfirmPassword")}
                 ></input>
               </div>
               <div className="TermsCheckboxContainer-SignUp">
