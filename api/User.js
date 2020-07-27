@@ -97,13 +97,28 @@ router.post("/Signup", (req, res) => {
   let salt = bcrypt.genSaltSync(rounds);
   Password = bcrypt.hashSync(Password, salt);
 
-  Users.find({ Email: Email })
+  Users.find({
+    $or: [
+      {
+        Email: Email,
+      },
+      { Username: Username },
+    ],
+  })
     .then((data) => {
+      console.log(data);
       if (data.length > 0) {
-        res.send({
-          success: false,
-          message: "Email already exists",
-        });
+        if (data[0].Email === Email) {
+          res.send({
+            success: false,
+            message: "Email already exists",
+          });
+        } else {
+          res.send({
+            success: false,
+            message: "Username already exists",
+          });
+        }
       } else {
         var user = new Users({
           Username,

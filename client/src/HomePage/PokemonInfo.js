@@ -45,8 +45,24 @@ class PokemonInfo extends Component {
     //this.setState({pokeInfo: info});
 
   };
-  GetComment = () => {
-    fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
+
+  // GetComment = () => {
+  //   fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
+  //     method: "GET",
+  //   }).then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data.exist) {
+  //         console.log(data.comments);
+  //         this.setState({comments: data.comments}, () => console.log(this.state));
+  //       } else {
+  //         this.setState({comments:[]});
+  //       }
+  //     });
+  // }
+
+  GetComment = (name) => {
+    fetch("http://localhost:5000/api/Comment/" + this.props.pokemonInfo.pokemon.name.english, {
       method: "GET",
     }).then((res) => res.json())
       .then((data) => {
@@ -59,8 +75,9 @@ class PokemonInfo extends Component {
         }
       });
   }
+
   GetPokeStat = () => {
-    console.log(this.state.pokeInfo.base[2]);
+    // console.log(this.state.pokeInfo.base[2]);
   };
 
   _sortCommentNewest(){
@@ -100,11 +117,11 @@ class PokemonInfo extends Component {
     }
 
     let PokemonType = [];
-    for (let i = 0; i < this.state.pokeInfo.type.length; i++) {
+    for (let i = 0; i < this.props.pokemonInfo.pokemon.type.length; i++) {
       PokemonType.push(
         <Col>
-          <div className={"Type " + this.state.pokeInfo.type[i]}>
-            {this.state.pokeInfo.type[i]}
+          <div className={"Type " + this.props.pokemonInfo.pokemon.type[i]}>
+            {this.props.pokemonInfo.pokemon.type[i]}
           </div>
         </Col>
       );
@@ -117,9 +134,13 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>Attack</Col>
           <Col xs={9}>
-            <ProgressBar
+            {/* <ProgressBar
               now={this.state.pokeInfo.base.Attack / 2}
               label={`${this.state.pokeInfo.base.Attack / 2}`}
+            ></ProgressBar> */}
+            <ProgressBar
+              now={this.props.pokemonInfo.pokemon.base.Attack / 2}
+              label={`${this.props.pokemonInfo.pokemon.base.Attack / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -127,9 +148,13 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>HP </Col>
           <Col xs={9}>
-            <ProgressBar
+            {/* <ProgressBar
               now={this.state.pokeInfo.base.HP / 2}
               label={`${this.state.pokeInfo.base.HP / 2}`}
+            ></ProgressBar> */}
+            <ProgressBar
+              now={this.props.pokemonInfo.pokemon.base.HP / 2}
+              label={`${this.props.pokemonInfo.pokemon.base.HP / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -139,9 +164,13 @@ class PokemonInfo extends Component {
             Defense{" "}
           </Col>
           <Col xs={9}>
-            <ProgressBar
+            {/* <ProgressBar
               now={this.state.pokeInfo.base.Defense / 2}
               label={`${this.state.pokeInfo.base.Defense / 2}`}
+            ></ProgressBar> */}
+            <ProgressBar
+              now={this.props.pokemonInfo.pokemon.base.Defense / 2}
+              label={`${this.props.pokemonInfo.pokemon.base.Defense / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -149,9 +178,13 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>Speed </Col>
           <Col xs={9}>
-            <ProgressBar
+            {/* <ProgressBar
               now={this.state.pokeInfo.base.Speed / 2}
               label={`${this.state.pokeInfo.base.Speed / 2}`}
+            ></ProgressBar> */}
+            <ProgressBar
+              now={this.props.pokemonInfo.pokemon.base.Speed / 2}
+              label={`${this.props.pokemonInfo.pokemon.base.Speed / 2}`}
             ></ProgressBar>
           </Col>
         </div>
@@ -178,13 +211,14 @@ class PokemonInfo extends Component {
         <Modal
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
-          onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
+          // onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
+          onShow={()=>this.GetComment()}
           onHide={this.props.CloseModal}
         >
-          <Modal.Header className={this.state.pokeInfo.type[0]}>
+          <Modal.Header className={this.props.pokemonInfo.pokemon.type[0]}>
 
-            <div className={"Type " + this.state.pokeInfo.type[0]}>
-              #{this.props.pokemonInfo.pokeID} {this.state.pokeInfo.name.english}
+            <div className={"Type " + this.props.pokemonInfo.pokemon.type[0]}>
+              #{this.props.pokemonInfo.pokeID} {this.props.pokemonInfo.pokemon.name.english}
             </div>
           </Modal.Header>
           <Modal.Body>
@@ -223,7 +257,8 @@ class PokemonInfo extends Component {
               <Row className="Poke--Type">{PokemonType}</Row>
 
               {/*Comment Section */}
-              <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/>
+              {/* <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/> */}
+              <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.props.pokemonInfo.pokemon.name.english}/>
               {/* <div id="main"></div>
                 </CommentBox> */}
 

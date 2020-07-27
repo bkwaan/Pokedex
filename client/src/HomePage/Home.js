@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./Home.css"
 import PokemonInfo from "./PokemonInfo.js"
 import {Redirect} from "react-router-dom"
+import pokemons from "./pokemon.json"
 import Login from "../Login/Login.js"
 import { Navbar, Nav, ListGroup, Container, Row, Col, Form, Button , ProgressBar } from 'react-bootstrap'
 import { header } from 'express-validator';
@@ -25,7 +26,13 @@ class Home extends Component {
             pokemonInfo: {
                 modalOpen: false,
                 id: "",
-                pokeID: ""
+                pokeID: "",
+                pokemon: {
+                    base: {},
+                    id: "",
+                    name: {},
+                    type: []
+                }
             },
             redirectTOLogin: false,
 
@@ -39,23 +46,23 @@ class Home extends Component {
         this.setState({redirectTOLogin: true});
     }
 
-    componentDidMount() {
-        this.GetAllPokemon();
-    }
+    // componentDidMount() {
+    //     this.GetAllPokemon();
+    // }
 
-    GetAllPokemon = () => {
-        fetch('http://localhost:5000/api/Pokemon/', {
-            method: 'GET'
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            this.setState({ pokemons: data });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }
+    // GetAllPokemon = () => {
+    //     fetch('http://localhost:5000/api/Pokemon/', {
+    //         method: 'GET'
+    //     })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //         console.log(data);
+    //         this.setState({ pokemons: data });
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
 
     ShowTypeList = () => {
         console.log("showTypeList event triggered!!!");
@@ -84,10 +91,18 @@ class Home extends Component {
         }
     }
 
-    OpenModal = (id, pokeID) => {
+    // OpenModal = (id, pokeID) => {
+    //     const { pokemonInfo } = this.state;
+    //     pokemonInfo["id"] = id;
+    //     pokemonInfo["pokeID"] = pokeID;
+    //     pokemonInfo["modalOpen"] = true;
+    //     this.setState({ pokemonInfo }, () => console.log(this.state));
+    // }
+
+    OpenModal = (pokeID, pokemon) => {
         const { pokemonInfo } = this.state;
-        pokemonInfo["id"] = id;
         pokemonInfo["pokeID"] = pokeID;
+        pokemonInfo["pokemon"] = pokemon;
         pokemonInfo["modalOpen"] = true;
         this.setState({ pokemonInfo }, () => console.log(this.state));
     }
@@ -327,7 +342,8 @@ class Home extends Component {
                         </div> : null}
                         <Row>
                             {testingPokemonList}
-                            {this.state.pokemons.map((pokemon) => {
+                            {/* {this.state.pokemons.map((pokemon) => { */}
+                            {pokemons.map((pokemon) => {
                                 let pokeID = ""
                                 if (pokemon.id < 10) {
                                     pokeID = "00" + pokemon.id;
@@ -339,7 +355,8 @@ class Home extends Component {
                                 return (
                                     <Col xs={6} sm={4} md={3} lg={2} >
                                         <Fade left>
-                                        <div className="Pokemon--Home" id = {pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}>
+                                        {/* <div className="Pokemon--Home" id = {pokemon.name.english} onClick={() => this.OpenModal(pokemon.id, pokeID)}> */}
+                                        <div className="Pokemon--Home" id = {pokemon.name.english} onClick={() => this.OpenModal(pokeID, pokemon)}>
                                             <img src={"/images/" + pokeID + ".png"} className="pokemonThumbnail--Home" />
                                             <p>{pokemon.name.english}</p>
                                             <ul className="typeList--Pokemons">
