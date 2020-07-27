@@ -285,7 +285,7 @@ class CommentBox extends React.Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        _id: id,
+        id: id,
         pokeName: pokeName,
         post: newComment,
       }),
@@ -293,8 +293,12 @@ class CommentBox extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        if (data.success){
+        this.props.GetComment();
+        } else {
+          console.log("fuck");
+        }
       });
-      this.props.GetComment();
   }
 
   _commentHide(_id){

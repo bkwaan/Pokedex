@@ -42,10 +42,10 @@ class CommentForm extends React.Component {
     let comments = this._body.value;
 
     if(this.props.formType == "Edit Comment"){
-      console.log("edit comment is called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      console.log(this.props.pokeName, this.props.id, this._body.value);
+      
       this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
-    }
+      
+    } else {
 
     fetch("http://localhost:5000/api/Comment/add", {
       method: "POST",
@@ -62,6 +62,7 @@ class CommentForm extends React.Component {
           this.props.GetComment();
         }
       });
+    }
   }
 } // end CommentForm component
 
