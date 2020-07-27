@@ -37,14 +37,14 @@ class Login extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ LoginSucceed: data.success });
-        // if (data.success) {
-        //   localStorage.setItem("SessionID", data.userInfo.id);
-        //   localStorage.setItem("SessionUserName", data.userInfo.userName);
-        //   localStorage.setItem("SessionEmail", data.userInfo.email);
-        //   console.log(localStorage.getItem("SessionID"));
-        //   console.log(localStorage.getItem("SessionUserName"));
-        //   console.log(localStorage.getItem("SessionEmail"));
-        // }
+        if (data.success) {
+          localStorage.setItem("SessionID", data.userInfo.id);
+          localStorage.setItem("SessionUserName", data.userInfo.userName);
+          localStorage.setItem("SessionEmail", data.userInfo.email);
+          console.log(localStorage.getItem("SessionID"));
+          console.log(localStorage.getItem("SessionUserName"));
+          console.log(localStorage.getItem("SessionEmail"));
+        }
         this.setState({ Error: data.message });
         console.log(this.state);
       });

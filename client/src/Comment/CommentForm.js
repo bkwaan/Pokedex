@@ -35,7 +35,7 @@ class CommentForm extends React.Component {
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     var newdate = year + "/" + month + "/" + day;
-    let author = "bosco kwan";
+    let author = localStorage.getItem("SessionUserName");;
     let comments = this._body.value;
     fetch("http://localhost:5000/api/Comment/add", {
       method: "POST",
