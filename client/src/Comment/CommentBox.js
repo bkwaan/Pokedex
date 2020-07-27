@@ -61,7 +61,6 @@ class CommentBox extends React.Component {
           formType={postCommentText}
           GetComment={this.props.GetComment.bind(this)}
           pokeName={this.props.pokeName}
-          addComment={this._addComment.bind(this)}
         />
         <Button
           variant="contained"
@@ -86,20 +85,6 @@ class CommentBox extends React.Component {
       </div>
     );
   } // end render
-
-  _addComment(author, body) {
-    const comment = {
-      id: this.state.comments.length + 1,
-      userName: author,
-      post: body,
-    };
-
-    //Send the comment object to the server (database)
-
-    this.setState({ comments: this.state.comments.concat([comment]) }); // *new array references help React stay fast, so concat works better than push here.
-
-    //add comment function from props? which fetch to add the comment to the server side and update the state on PokemonInfo as well?
-  }
 
   _handleClick() {
     this.setState({
@@ -159,7 +144,7 @@ class CommentBox extends React.Component {
               <header className="comment-user">
                 <section className="comment-detail">
                   <a className="comment-username">{comment.username}</a>
-                  <span> : </span>
+                   <span> : </span>
                   <a className="comment-time">{comment.date.substring(0,10)}</a>
                 </section>
               </header>
@@ -171,7 +156,12 @@ class CommentBox extends React.Component {
                 <div className="comment-body" id={comment._id}>
 
                   <div style={divHide}>
-                    <CommentForm formType={editCommentText}></CommentForm>
+                    <CommentForm formType={editCommentText}
+                        _editComment={this._editComment.bind(this)}
+                        pokeName ={this.props.pokeName}
+                        id = {comment._id}
+                        GetComment={this.props.GetComment.bind(this)}
+                    ></CommentForm>
                   </div>
 
                   <div className="">
@@ -284,6 +274,9 @@ class CommentBox extends React.Component {
   }
 
   _editComment(pokeName, id, newComment) {
+    
+
+    console.log("Comment Box Edit comment function is called!");
     this.setState({
       editCheck: !this.state.editCheck,
     });
@@ -292,7 +285,7 @@ class CommentBox extends React.Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        _id: id,
+        id: id,
         pokeName: pokeName,
         post: newComment,
       }),
@@ -300,6 +293,11 @@ class CommentBox extends React.Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        if (data.success){
+        this.props.GetComment();
+        } else {
+          console.log("fuck");
+        }
       });
   }
 
@@ -314,6 +312,7 @@ class CommentBox extends React.Component {
     document.getElementById(_id).childNodes[1].style.display = "";
     }
   }
+
 
   _sortComment(e){
     console.log("sort function called");

@@ -29,6 +29,9 @@ class CommentForm extends React.Component {
   } // end render
 
   _handleSubmit(event) {
+
+    
+
     event.preventDefault();
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; 
@@ -37,6 +40,13 @@ class CommentForm extends React.Component {
     var newdate = year + "/" + month + "/" + day;
     let author = localStorage.getItem("SessionUserName");;
     let comments = this._body.value;
+
+    if(this.props.formType == "Edit Comment"){
+      
+      this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
+      
+    } else {
+
     fetch("http://localhost:5000/api/Comment/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -52,6 +62,7 @@ class CommentForm extends React.Component {
           this.props.GetComment();
         }
       });
+    }
   }
 } // end CommentForm component
 
