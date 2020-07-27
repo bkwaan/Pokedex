@@ -257,13 +257,13 @@ class CommentBox extends React.Component {
       document.getElementById(likeId).childNodes[1].style.display = ""; 
     }
    
-
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         pokeName: pokeName,
         id: id,
+        username: "boscokwan"
       }),
     })
       .then((res) => res.json())

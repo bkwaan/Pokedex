@@ -19,14 +19,15 @@ class ResetPass extends Component {
     fetch("http://localhost:5000/api/User/forgotPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state.input),
+      body: JSON.stringify(
+        this.state.input)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ success: data.success });
-        this.setState({ message: data.message });
-        console.log(this.state);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          this.setState({ success: data.success });
+          this.setState({ message: data.message });
+          console.log(this.state);
+        })
   };
 
   handleChange = (event, inputName) => {
