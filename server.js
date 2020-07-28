@@ -12,11 +12,11 @@ connectDB();
 //MiddleWare
 app.use(express.json({ extended: false }));
 
-var PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log("Server started on port " + PORT));
 
-const api = require("./api");
+const api = require("./api/Index");
 app.use("/api", api);
 
 // Serve static assets in production

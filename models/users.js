@@ -18,9 +18,6 @@ const UserSchema = new mongoose.Schema(
     TempPassword: {
       type: Boolean,
       required: true
-    },
-    Session:{
-      type:String
     }
   },
   { collection: "Users" }
