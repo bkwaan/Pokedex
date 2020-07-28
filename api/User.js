@@ -148,7 +148,8 @@ router.post("/Signup", (req, res) => {
 });
 
 router.post("/Login", (req, res) => {
-  var { Username, Password, Session } = req.body;
+  var { Username, Password} = req.body;
+  var Session = '_' + Math.random().toString(36).substr(2, 9);
   Users.find({ Email: Username })
     .then((data) => {
       if (data.length > 0) {
@@ -161,7 +162,7 @@ router.post("/Login", (req, res) => {
               res.send(err);
             });
           const userInfo = {
-            id: data[0]._id,
+            id: Session,
             userName: data[0].Username,
             email: data[0].Email,
           };
