@@ -201,7 +201,6 @@ class CommentBox extends React.Component {
             <div className="comment-footer">
             <p>{this.props.pokeName}</p>
             <p>{comment._id}</p>
-
             <a
             href="#"
             className="comment-footer-delete"

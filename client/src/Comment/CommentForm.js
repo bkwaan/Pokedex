@@ -47,10 +47,13 @@ class CommentForm extends React.Component {
     var newdate = year + "/" + month + "/" + day;
     let author = this.state.Username;
     let comments = this._body.value;
+    let commentForm = document.getElementsByClassName("comment-form")[0].style.display;
+    console.log(commentForm);
 
     if(this.props.formType == "Edit Comment"){
       
       this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
+      
       
     } else {
 
