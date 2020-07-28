@@ -9,7 +9,8 @@ router.get("/:name", (req, res) => {
   Comment.find({ pokeName: name })
     .then((data) => {
       if (data.length > 0) {
-        res.send({ exist: true, comments: data[0].comments });
+
+        res.send({ exist: true, comments: data[0].comments, likes: data[0].comments[0].likes.length });
       } else {
         res.send({ exist: false });
       }
