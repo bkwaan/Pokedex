@@ -56,7 +56,7 @@ class SignUp extends Component {
     const {input} = this.state;
     const password = input["Password"];
     const P_ERROR = "Password must a combination of length 6 letters, numbers or both.";
-    if (re.test(password) && password.length < 6) {
+    if (re.test(password) && password.length > 5) {
       return true;
     } else {
       this.setState({Message: P_ERROR})
@@ -94,7 +94,7 @@ class SignUp extends Component {
 
   SignUpValidation = (event) => {
     event.preventDefault();
-    console.log(this.setState.message);
+    console.log(this.setState.Message);
 
     if (this.UsernameInputValidation() && this.PasswordInputValidation() && 
         this.ConfirmPasswordValidation() && this.EmailInputValidation()) {
@@ -104,6 +104,9 @@ class SignUp extends Component {
 
 
   render() {
+    if (this.state.SignUpSuccess) {
+      return <Redirect to="/Login"/>;
+    }
     return (
       <div className="Container-SignUp">
         <div className="BackgroundImageContainer-SignUp"></div>
