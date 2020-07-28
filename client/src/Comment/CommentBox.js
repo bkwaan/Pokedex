@@ -33,6 +33,7 @@ class CommentBox extends React.Component {
           body: "What is the meaning of all of this 'React' mumbo-jumbo?",
         },
       ],
+      
     };
   }
 
@@ -138,7 +139,7 @@ class CommentBox extends React.Component {
                 <div>
                  <FavoriteBorderIcon></FavoriteBorderIcon>
                 </div>
-                <div className="like-count">{comment.likes}</div>
+                {/* <div className="like-count">{comment.likes}</div> */}
               </div>
               
               <header className="comment-user">
@@ -263,7 +264,7 @@ class CommentBox extends React.Component {
       body: JSON.stringify({
         pokeName: pokeName,
         id: id,
-        username: "boscokwan"
+        username: localStorage.getItem("SessionUserName"),
       }),
     })
       .then((res) => res.json())

@@ -10,6 +10,7 @@ class SignUp extends Component {
         Username: "",
         Password: "",
         Email: "",
+        ConfirmPassword: "",
       },
       SignUpSuccess: false,
       Message: "",
@@ -38,6 +39,70 @@ class SignUp extends Component {
       });
   };
 
+  ConfirmPasswordValidation () {
+    const {input} = this.state;
+    const p1 = input["Password"];
+    const p2 = input["ConfirmPassword"];
+    const CP_ERROR = "Make Sure password and confirm password are the same.";
+     if (p1 == p2) {
+       return true;
+     } else {
+       this.setState({Message: CP_ERROR});
+       return false;
+     }
+  }
+  PasswordInputValidation () {
+    const re = /^[a-zA-Z0-9]+$/;
+    const {input} = this.state;
+    const password = input["Password"];
+    const P_ERROR = "Password must a combination of length 6 letters, numbers or both.";
+    if (re.test(password) && password.length < 6) {
+      return true;
+    } else {
+      this.setState({Message: P_ERROR})
+      return false;
+    }
+  }
+
+  EmailInputValidation () {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const {input} = this.state;
+    const email = input["Email"];
+    const E_ERROR = "Bruh, that's not an email address.";
+
+    if(re.test(email)) {
+      return true;
+    } else {
+      this.setState({Message: E_ERROR});
+      return false;
+    }
+  }
+
+  UsernameInputValidation () {
+    const re = /^[a-zA-Z0-9]+$/;
+    const {input} = this.state;
+    const username = input["Username"];
+    const U_ERROR = "Username must be combination of length 3 letters, numbers or both."
+    
+    if(re.test(username) && username.length > 2) {
+      return true;
+    } else {
+      this.setState({Message: U_ERROR});
+      return false;
+    }
+  }
+
+  SignUpValidation = (event) => {
+    event.preventDefault();
+    console.log(this.setState.message);
+
+    if (this.UsernameInputValidation() && this.PasswordInputValidation() && 
+        this.ConfirmPasswordValidation() && this.EmailInputValidation()) {
+          this.handleSignUp(event);
+        }
+  }
+
+
   render() {
     return (
       <div className="Container-SignUp">
@@ -56,7 +121,7 @@ class SignUp extends Component {
                 LOGIN
               </a>
             </div>
-            <form className="InfoContainer-SignUp" onSubmit={this.handleSignUp}>
+            <form className="InfoContainer-SignUp" onSubmit={this.SignUpValidation}>
               <h4 className="SignUpTitle-SignUp">SIGN UP NOW</h4>
               <p className="SignUpText-SignUp">
                 to share your thoughts &amp; creativities
@@ -86,6 +151,7 @@ class SignUp extends Component {
                 <input
                   className="ConfirmPasswordInput-SignUp"
                   placeholder="Confirm Password"
+                  onChange={(event)=>this.handleChange(event,"ConfirmPassword")}
                 ></input>
               </div>
               <div className="TermsCheckboxContainer-SignUp">
@@ -107,6 +173,7 @@ class SignUp extends Component {
                   type="submit"
                   value="Sign Up"
                 ></input>
+                <p className="Message-SignUp">{this.state.Message}</p>
               </div>
             </form>
           </div>

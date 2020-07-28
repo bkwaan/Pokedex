@@ -34,11 +34,15 @@ class Home extends Component {
                     type: []
                 }
             },
-            redirectTOLogin: false
-            
+            redirectTOLogin: false,
+
+            logedIn: (localStorage.getItem("login")=="true"),
+            LOGIN: "LOGIN",
+            LOGOUT: "LOGOUT"
         }
     }
     RedirectLoginPage() {
+        localStorage.setItem("login", "false");
         this.setState({redirectTOLogin: true});
     }
 
@@ -304,6 +308,7 @@ class Home extends Component {
         if (this.state.redirectTOLogin){
             return <Redirect to="/Login"/>
         }
+        console.log(this.state.logedIn);
 
         return (
             <div className="Container--Home" >
@@ -320,10 +325,10 @@ class Home extends Component {
                             </Form.Row>
                         </Col>
                         <Col xs={2} sm={2} lg={2} xl={2}>
-                                <Button variant="outline-info" size="large" onClick={()=> this.RedirectLoginPage()}>LOGIN</Button>
+        <Button variant="outline-info" size="large" onClick={()=> this.RedirectLoginPage()}>{this.state.logedIn ? this.state.LOGOUT : this.state.LOGIN}</Button>
                         </Col>
                     </Row>
-
+                    <div className="NavBarContainer-Home"></div>
                     <Container>
                         {this.state.typeSelected.length > 0 ?
                         <div className="typeSelected--TypeFilter">

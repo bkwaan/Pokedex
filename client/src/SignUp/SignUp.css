@@ -127,6 +127,10 @@
     user-select: none; 
     font-weight: bolder;
 }
+.Message-SignUp {
+    color: red;
+    margin: 3px 0 0 0;
+}
 
 @media screen and (max-width: 700px) { 
 

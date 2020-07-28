@@ -52,6 +52,7 @@ class ForgetPass extends Component {
     this.setState({Email: test});
 }
 
+
   render() {
     return (
       <Modal
