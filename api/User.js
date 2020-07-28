@@ -4,6 +4,7 @@ const Users = require("../models/users");
 const bcrypt = require("bcrypt");
 const rounds = 10;
 const nodemailer = require("nodemailer");
+const { reset } = require("nodemon");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -125,6 +126,7 @@ router.post("/Signup", (req, res) => {
           Email,
           Password,
           TempPassword: false,
+          Session: "",
         });
 
         user
@@ -146,11 +148,18 @@ router.post("/Signup", (req, res) => {
 });
 
 router.post("/Login", (req, res) => {
-  var { Username, Password } = req.body;
+  var { Username, Password, Session } = req.body;
   Users.find({ Email: Username })
     .then((data) => {
       if (data.length > 0) {
         if (bcrypt.compareSync(Password, data[0].Password)) {
+          User.updateOne({ Username: Username }, { Session: Session })
+            .then((data) => {
+              console.log("Updated");
+            })
+            .catch((err) => {
+              res.send(err);
+            });
           const userInfo = {
             id: data[0]._id,
             userName: data[0].Username,
@@ -179,6 +188,30 @@ router.post("/Login", (req, res) => {
     .catch((err) => {
       res.send(err);
     });
+});
+
+
+// Gets username based on session variable
+router.get("/Session/:name", (req, res) => {
+  var Session = req.params.session;
+  User.find({Session: Session})
+  .then((data) => {
+    if (data.length > 0) {
+      res
+        .send({
+          success: true,
+          User: data[0].Username,
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else {
+      res.sennd({
+        success: false,
+        User: ""
+      })
+    }
+  });
 });
 
 module.exports = router;
