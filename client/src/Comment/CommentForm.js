@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import {Button} from '@material-ui/core'
 
 class CommentForm extends React.Component {
+    constructor(props){
+      super(props);
+        this.state = {
+          Username: localStorage.getItem("SessionUserName"),
+        }
+      
+    }
   render() {
     return (
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
@@ -38,7 +45,7 @@ class CommentForm extends React.Component {
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     var newdate = year + "/" + month + "/" + day;
-    let author = localStorage.getItem("SessionUserName");;
+    let author = this.state.Username;
     let comments = this._body.value;
 
     if(this.props.formType == "Edit Comment"){

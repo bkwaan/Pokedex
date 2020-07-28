@@ -7,11 +7,37 @@ class ResetPass extends Component {
     this.state = {
       input: {
         email: "",
-        password: "",
+        Password: "",
+        ConfirmPassword: "",
       },
       success: false,
-      message: "",
+      Message: "",
     };
+  }
+
+  ConfirmPasswordValidation () {
+    const {input} = this.state;
+    const p1 = input["Password"];
+    const p2 = input["ConfirmPassword"];
+    const CP_ERROR = "Make Sure password and confirm password are the same.";
+     if (p1 == p2) {
+       return true;
+     } else {
+       this.setState({Message: CP_ERROR});
+       return false;
+     }
+  }
+  PasswordInputValidation () {
+    const re = /^[a-zA-Z0-9]+$/;
+    const {input} = this.state;
+    const password = input["Password"];
+    const P_ERROR = "Password must a combination of length 6 letters, numbers or both.";
+    if (re.test(password) && password.length < 6) {
+      return true;
+    } else {
+      this.setState({Message: P_ERROR})
+      return false;
+    }
   }
 
   handleReset = (event) => {
@@ -54,7 +80,7 @@ class ResetPass extends Component {
               className="PasswordInput-ResetPass"
               type="password"
               placeholder="Password"
-              onChange={(event) => this.handleChange(event, "password")}
+              onChange={(event) => this.handleChange(event, "Password")}
             />
             {/* </div> */}
             {/* <div className="ConfirmPassInputContainer-ResetPass"> */}
@@ -62,6 +88,7 @@ class ResetPass extends Component {
               className="ConfirmPassInput-ResetPass"
               type="password"
               placeholder="Confirm Password"
+              onChange={(event) => this.handleChange(event, "ConfirmPassword")}
             />
             {/* </div> */}
             {/* <div className="SubmitBtnContainer-ResetPass"> */}
@@ -71,6 +98,7 @@ class ResetPass extends Component {
               value="Reset Password"
             />
             {/* </div> */}
+    <p className="Message-ResetPass">{this.state.Message}</p>
           </form>
         </div>
       </div>
