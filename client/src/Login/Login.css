@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-position: center center;
+    background-position: left center;
     filter: opacity(80%) blur(1px);
 }
 
@@ -147,4 +147,18 @@
 .SignupButton-Login:hover {
     color: dodgerblue;
     border-color: dodgerblue;
+}
+
+@media screen and (max-width: 1600px) {
+    .BackgroundImageContainer-Login {
+        background-position: 28%, 70%;
+    }
+
+    .LoginFormContainer-Login {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%)
+
+    }
+
 }
