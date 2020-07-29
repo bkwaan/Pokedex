@@ -201,13 +201,13 @@ router.get("/Session/:name", (req, res) => {
         res.send({
           success: true,
           User: data[0].Username,
-          Message: "WORKED",
+          message: "Username has been fetched",
         });
       } else {
         res.send({
           success: false,
           User: "",
-          Mesasge: " FAILED FUCK YOU HAOJUN",
+          mesasge: "Username has not been fetched",
         });
       }
     })
@@ -215,5 +215,7 @@ router.get("/Session/:name", (req, res) => {
       res.send(err);
     });
 });
+
+
 
 module.exports = router;

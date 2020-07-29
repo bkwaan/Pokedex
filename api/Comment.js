@@ -9,8 +9,7 @@ router.get("/:name", (req, res) => {
   Comment.find({ pokeName: name })
     .then((data) => {
       if (data.length > 0) {
-
-        res.send({ exist: true, comments: data[0].comments});
+        res.send({ exist: true, comments: data[0].comments });
       } else {
         res.send({ exist: false });
       }
@@ -180,12 +179,50 @@ router.get("/likes/:id/:pokeName/:username", (req, res) => {
       } else {
         res.send({
           success: false,
-          message: "User has not liked the comment"
-        })
+          message: "User has not liked the comment",
+        });
       }
     })
     .catch((err) => {
       console.log(err);
+    });
+});
+
+// Gets all users comments
+router.get("/Comments/:username", (req, res) => {
+  var username = req.params.username;
+  Comment.find({ "comments.username": username })
+    .then((data) => {
+      if (data.length > 0) {
+        res.send({
+          success: true,
+          comments: data[0].comments,
+        });
+      } else {
+        res.send({
+          success: false,
+          message: "No comments",
+        });
+      }
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+//Gets all post users liked
+router.get("/Comments/likes/:username", (req, res) => {
+  var username = req.params.username;
+  Comment.find({ "comments.likes.username": username })
+    .then((data) => {
+      if (data.length > 0) {
+        res.send({ success: true, comments: data[0].comments });
+      } else {
+        res.send({ success: false, message: "No coments liked" });
+      }
+    })
+    .catch((err) => {
+      res.send(err);
     });
 });
 
