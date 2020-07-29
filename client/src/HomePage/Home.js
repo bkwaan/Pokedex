@@ -287,7 +287,7 @@ class Home extends Component {
         }
 
         for (var i = 0; i < childz.length; i++) {
-            if (!childz[i].id.includes(this.state.search.searchWord)) {
+            if (!childz[i].id.toLowerCase().includes(this.state.search.searchWord.toLowerCase())) {
                 childz[i].parentNode.style.display = "none";
                 childz[i].classList.remove("withSearch");
             } else {
