@@ -38,6 +38,7 @@ class PokemonInfo extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ Username: data.User });
+        console.log(this.state.Username)
       })
       .catch((err) => {
         console.log(err);
