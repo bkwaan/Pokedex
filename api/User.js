@@ -148,8 +148,8 @@ router.post("/Signup", (req, res) => {
 });
 
 router.post("/Login", (req, res) => {
-  var { Username, Password} = req.body;
-  var Session = '_' + Math.random().toString(36).substr(2, 9);
+  var { Username, Password } = req.body;
+  var Session = "_" + Math.random().toString(36).substr(2, 9);
   Users.find({ Email: Username })
     .then((data) => {
       if (data.length > 0) {
@@ -191,28 +191,29 @@ router.post("/Login", (req, res) => {
     });
 });
 
-
 // Gets username based on session variable
 router.get("/Session/:name", (req, res) => {
-  var Session = req.params.session;
-  User.find({Session: Session})
-  .then((data) => {
-    if (data.length > 0) {
-      res
-        .send({
+  var Session = req.params.name;
+  User.find({ Session: Session })
+    .then((data) => {
+      console.log(data[0].Username);
+      if (data.length > 0) {
+        res.send({
           success: true,
           User: data[0].Username,
-        })
-        .catch((err) => {
-          res.send(err);
+          Message: "WORKED",
         });
-    } else {
-      res.sennd({
-        success: false,
-        User: ""
-      })
-    }
-  });
+      } else {
+        res.send({
+          success: false,
+          User: "",
+          Mesasge: " FAILED FUCK YOU HAOJUN",
+        });
+      }
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 module.exports = router;

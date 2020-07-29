@@ -9,10 +9,10 @@ import {
   ListGroupItem,
   ProgressBar,
 } from "react-bootstrap";
-import Fade from 'react-reveal/Fade';
+import Fade from "react-reveal/Fade";
 import CommentBox from "../Comment/CommentBox";
 import Comment from "../Comment/Comment";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 class PokemonInfo extends Component {
   constructor(props) {
@@ -25,9 +25,24 @@ class PokemonInfo extends Component {
         base: [],
         type: [],
       },
-      comments: []
+      comments: [],
+      Username: "",
     };
   }
+
+  getUserName = () => {
+    const session = localStorage.getItem("SessionID");
+    fetch("http://localhost:5000/api/User/Session/" + session, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ Username: data.User });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   GetPokeInfo = (id) => {
     fetch("http://localhost:5000/api/Pokemon/" + id, {
@@ -36,14 +51,13 @@ class PokemonInfo extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        this.setState({ pokeInfo: data}, () => this.GetComment());
+        this.setState({ pokeInfo: data }, () => this.GetComment());
         console.log(this.state.pokeInfo.name.english);
-    })
+      })
       .catch((error) => {
         console.log(error);
       });
     //this.setState({pokeInfo: info});
-
   };
 
   // GetComment = () => {
@@ -62,52 +76,65 @@ class PokemonInfo extends Component {
   // }
 
   GetComment = (name) => {
-    fetch("http://localhost:5000/api/Comment/" + this.props.pokemonInfo.pokemon.name.english, {
-      method: "GET",
-    }).then((res) => res.json())
+    fetch(
+      "http://localhost:5000/api/Comment/" +
+        this.props.pokemonInfo.pokemon.name.english,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.exist) {
           console.log(data.comments);
-          this.setState({comments: data.comments}, () => console.log(this.state));
+          this.setState({ comments: data.comments }, () =>
+            console.log(this.state)
+          );
         } else {
-          this.setState({comments:[]});
+          this.setState({ comments: [] });
         }
       });
+  };
+
+  getCommentSession = () => {
+    this.getUserName();
+    console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELO")
+    this.GetComment();
   }
 
   GetPokeStat = () => {
     // console.log(this.state.pokeInfo.base[2]);
   };
 
-  _sortCommentNewest(){
+  _sortCommentNewest() {
     let commentSort = this.state.comments;
-    commentSort.sort(function compare(a,b){
+    commentSort.sort(function compare(a, b) {
       var dateA = new Date(a.date);
       var dateB = new Date(b.date);
       return dateA - dateB;
-    })
-    this.setState({comments:commentSort});
+    });
+    this.setState({ comments: commentSort });
   }
 
-  _sortCommentOldest(){
+  _sortCommentOldest() {
     let commentSort = this.state.comments;
-    commentSort.sort(function compare(a,b){
+    commentSort.sort(function compare(a, b) {
       var dateA = new Date(a.date);
       var dateB = new Date(b.date);
       return dateB - dateA;
-    })
-    this.setState({comments:commentSort});
+    });
+    this.setState({ comments: commentSort });
   }
-  
-  _sortCommentBest(){
+
+  _sortCommentBest() {
     console.log("hello this is sortCommentBest function in PokemonInfo");
     let commentSort = this.state.comments;
-    commentSort.sort(function compare(a,b){
-      return b.likes - a.likes ;
-    })
+    commentSort.sort(function compare(a, b) {
+      return b.likes - a.likes;
+    });
     console.log(commentSort);
-    this.setState({comments:commentSort});
+    this.setState({ comments: commentSort });
   }
 
   render() {
@@ -212,13 +239,13 @@ class PokemonInfo extends Component {
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
           // onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
-          onShow={()=>this.GetComment()}
+          onShow={() => this.getCommentSession() }
           onHide={this.props.CloseModal}
         >
           <Modal.Header className={this.props.pokemonInfo.pokemon.type[0]}>
-
             <div className={"Type " + this.props.pokemonInfo.pokemon.type[0]}>
-              #{this.props.pokemonInfo.pokeID} {this.props.pokemonInfo.pokemon.name.english}
+              #{this.props.pokemonInfo.pokeID}{" "}
+              {this.props.pokemonInfo.pokemon.name.english}
             </div>
           </Modal.Header>
           <Modal.Body>
@@ -229,9 +256,7 @@ class PokemonInfo extends Component {
                   <div className="Picture-Poke">
                     <img
                       className="Picture--PokeInfo"
-                      src={
-                        "/images/" + this.props.pokemonInfo.pokeID + ".png"
-                      }
+                      src={"/images/" + this.props.pokemonInfo.pokeID + ".png"}
                     />
                   </div>
                 </Col>
@@ -258,15 +283,20 @@ class PokemonInfo extends Component {
 
               {/*Comment Section */}
               {/* <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/> */}
-              <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.props.pokemonInfo.pokemon.name.english}/>
+              <CommentBox
+                SortByBest={this._sortCommentBest.bind(this)}
+                SortByOld={this._sortCommentOldest.bind(this)}
+                SortByNew={this._sortCommentNewest.bind(this)}
+                GetComment={this.GetComment.bind(this)}
+                comments={this.state.comments}
+                pokeName={this.props.pokemonInfo.pokemon.name.english}
+              />
               {/* <div id="main"></div>
                 </CommentBox> */}
-
             </Container>
           </Modal.Body>
         </Modal>
       </Fade>
-
     );
   }
 }

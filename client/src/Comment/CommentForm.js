@@ -5,10 +5,11 @@ class CommentForm extends React.Component {
     constructor(props){
       super(props);
         this.state = {
-          Username: localStorage.getItem("SessionUserName"),
+          Username: "",
         }
       
     }
+  
   render() {
     return (
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>

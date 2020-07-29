@@ -35,12 +35,13 @@ class Home extends Component {
                 }
             },
             redirectTOLogin: false,
-
             logedIn: (localStorage.getItem("login")=="true"),
             LOGIN: "LOGIN",
             LOGOUT: "LOGOUT"
         }
     }
+
+
     RedirectLoginPage() {
         localStorage.setItem("login", "false");
         this.setState({redirectTOLogin: true});
