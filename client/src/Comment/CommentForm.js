@@ -12,7 +12,7 @@ class CommentForm extends React.Component {
   
   render() {
     return (
-      <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
+      <form id = {this.props.id + "-edit-form"} className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <div className="comment-form-fields">
           {/* <input
             className="comment-form-name"
@@ -48,14 +48,11 @@ class CommentForm extends React.Component {
     var newdate = year + "/" + month + "/" + day;
     let author = this.state.Username;
     let comments = this._body.value;
-    let commentForm = document.getElementsByClassName("comment-form")[0].style.display;
-    console.log(commentForm);
+    let editForm = document.getElementById(this.props.id + "-edit-form");
 
     if(this.props.formType == "Edit Comment"){
       
       this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
-      
-      
     } else {
 
     fetch("http://localhost:5000/api/Comment/add", {

@@ -284,8 +284,6 @@ class PokemonInfo extends Component {
 
               {/*Comment Section */}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
               {/* <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/> */}
               <CommentBox
                 SortByBest={this._sortCommentBest.bind(this)}
@@ -296,10 +294,6 @@ class PokemonInfo extends Component {
                 pokeName={this.props.pokemonInfo.pokemon.name.english}
               />
 =======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
               <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.props.pokemonInfo.pokemon.name.english}/>
 >>>>>>> Stashed changes
               {/* <div id="main"></div>

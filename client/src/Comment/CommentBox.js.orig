@@ -15,6 +15,8 @@ class CommentBox extends React.Component {
       showComments: false,
       showLike: false,
       editCheck: false,
+<<<<<<< Updated upstream
+=======
       comments: [
         {
           id: 1,
@@ -33,6 +35,7 @@ class CommentBox extends React.Component {
           body: "What is the meaning of all of this 'React' mumbo-jumbo?",
         },
       ],
+>>>>>>> Stashed changes
     };
   }
 
@@ -184,7 +187,11 @@ class CommentBox extends React.Component {
                 <div>
                  <FavoriteBorderIcon></FavoriteBorderIcon>
                 </div>
+<<<<<<< Updated upstream
+                <div className="like-count">{comment.likes.length}</div>
+=======
                 <div className="like-count">{comment.likes}</div>
+>>>>>>> Stashed changes
               </div>
               
               <header className="comment-user">
