@@ -20,7 +20,8 @@ const UserSchema = new mongoose.Schema(
       required: true
     },
     Session:{
-      type:String
+      type:String,
+      required: true
     }
   },
   { collection: "Users" }

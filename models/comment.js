@@ -3,8 +3,15 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema(
   {
-    pokeName: String,
-    comments: [{username: String, post: String, date: Date, likes: [{username: String}]}],
+    pokeName: { type: String, required: true },
+    comments: [
+      {
+        username: { type: String, required: true },
+        post: { type: String, required: true },
+        date: { type: Date, required: true },
+        likes: [{ username: { type: String, required: true } }],
+      },
+    ],
   },
   { collection: "Comments" }
 );

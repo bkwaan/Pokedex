@@ -4,7 +4,7 @@ const Comment = require("../models/comment");
 
 // Getting the comments
 router.get("/:name", (req, res) => {
-  let name = req.params.name;
+  var name = req.params.name;
   console.log(name);
   Comment.find({ pokeName: name })
     .then((data) => {
@@ -21,8 +21,7 @@ router.get("/:name", (req, res) => {
 
 //Posting a comment
 router.post("/add", (req, res) => {
-  var pokeName = req.body.pokeName;
-  var comments = req.body.comments;
+  var {pokeName, comments} = req.body;
   Comment.find({ pokeName: pokeName })
     .then((data) => {
       if (data.length > 0) {
@@ -100,19 +99,17 @@ router.post("/addLike", (req, res) => {
   });
 });
 
-// Adding a dislike to a comment
-router.post("/dislike", (req, res) => {
-  let id = req.body.id;
-  let pokeName = req.body.pokeName;
-  Comment.updateOne(
-    { pokeName: pokeName, "comments._id": id },
-    { $inc: { "comments.$.likes": -1 } }
+// Unliking a comment
+router.post("/unlike", (req, res) => {
+  var { id, pokeName, username } = req.body;
+  Comment.findOneAndRemove(
+    { pokeName: pokeName, "comments._id": id, "comments.likes.username": username },
   )
     .then((data) => {
       console.log(data);
       res.send({
         success: true,
-        message: "Comment disliked",
+        message: "Comment unliked",
       });
     })
     .catch((err) => {
@@ -122,8 +119,7 @@ router.post("/dislike", (req, res) => {
 
 // Deleting a comment
 router.post("/delete", (req, res) => {
-  let id = req.body.id;
-  let pokeName = req.body.pokeName;
+  var { id, pokeName } = req.body;
   Comment.updateOne(
     { pokeName: pokeName },
     { $pull: { comments: { _id: id } } }
@@ -141,9 +137,7 @@ router.post("/delete", (req, res) => {
 
 // Editing a post
 router.post("/editPost", (req, res) => {
-  let id = req.body.id;
-  let pokeName = req.body.pokeName;
-  let post = req.body.post;
+  var { id, pokeName, post } = req.body;
   Comment.updateOne(
     { pokeName: pokeName, "comments._id": id },
     {
@@ -162,9 +156,7 @@ router.post("/editPost", (req, res) => {
 });
 
 router.get("/likes/:id/:pokeName/:username", (req, res) => {
-  let pokeName = req.params.pokeName;
-  let id = req.params.id;
-  let username = req.params.username;
+  var { pokeName, id, username } = req.params;
   Comment.find({
     pokeName: pokeName,
     "comments._id": id,
@@ -185,44 +177,6 @@ router.get("/likes/:id/:pokeName/:username", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-    });
-});
-
-// Gets all users comments
-router.get("/Comments/:username", (req, res) => {
-  var username = req.params.username;
-  Comment.find({ "comments.username": username })
-    .then((data) => {
-      if (data.length > 0) {
-        res.send({
-          success: true,
-          comments: data[0].comments,
-        });
-      } else {
-        res.send({
-          success: false,
-          message: "No comments",
-        });
-      }
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-});
-
-//Gets all post users liked
-router.get("/Comments/likes/:username", (req, res) => {
-  var username = req.params.username;
-  Comment.find({ "comments.likes.username": username })
-    .then((data) => {
-      if (data.length > 0) {
-        res.send({ success: true, comments: data[0].comments });
-      } else {
-        res.send({ success: false, message: "No coments liked" });
-      }
-    })
-    .catch((err) => {
-      res.send(err);
     });
 });
 
