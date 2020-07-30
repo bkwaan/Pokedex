@@ -149,7 +149,7 @@ router.post("/Signup", (req, res) => {
 
 router.post("/Login", (req, res) => {
   var { Username, Password } = req.body;
-  var Session = "_" + Math.random().toString(36).substr(2, 9);
+  const Session = "_" + Math.random().toString(36).substr(2, 9);
   Users.find({
     $or: [
       {
@@ -161,7 +161,17 @@ router.post("/Login", (req, res) => {
     .then((data) => {
       if (data.length > 0) {
         if (bcrypt.compareSync(Password, data[0].Password)) {
-          User.updateOne({ Username: Username }, { Session: Session })
+          User.updateOne(
+            {
+              $or: [
+                {
+                  Email: Username,
+                },
+                { Username: Username },
+              ],
+            },
+            { Session: Session }
+          )
             .then((data) => {
               console.log("Updated");
             })
