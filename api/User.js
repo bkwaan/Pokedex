@@ -150,7 +150,14 @@ router.post("/Signup", (req, res) => {
 router.post("/Login", (req, res) => {
   var { Username, Password } = req.body;
   var Session = "_" + Math.random().toString(36).substr(2, 9);
-  Users.find({ Email: Username })
+  Users.find({
+    $or: [
+      {
+        Email: Username,
+      },
+      { Username: Username },
+    ],
+  })
     .then((data) => {
       if (data.length > 0) {
         if (bcrypt.compareSync(Password, data[0].Password)) {
@@ -215,7 +222,5 @@ router.get("/Session/:name", (req, res) => {
       res.send(err);
     });
 });
-
-
 
 module.exports = router;
