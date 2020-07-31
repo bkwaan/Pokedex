@@ -94,7 +94,30 @@ class CommentBox extends React.Component {
   _getComments() {
     let commentNodes;
     //For loop to load comment Node
+
     return this.props.comments.map((comment) => {
+
+      let currentUserName = this.props.userName;
+      let commentFooter;
+
+      let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
+      console.log(comment._id + this.props.pokeName + currentUserName);
+      let likeHeart;
+
+      if (likeStatus){
+        likeHeart=
+        <div>
+            <FavoriteIcon ></FavoriteIcon>
+        </div>
+        
+      } else {
+        likeHeart=
+        <div>
+            <FavoriteBorderIcon></FavoriteBorderIcon>
+        </div>
+      }
+
+
       let notLike = <FavoriteBorderIcon></FavoriteBorderIcon>;
       let editCommentText="Edit Comment"
 
@@ -107,9 +130,6 @@ class CommentBox extends React.Component {
       let divHide = {
         display: 'none'
       }
-
-      let currentUserName = this.props.userName;
-      let commentFooter;
 
       if (comment.username == currentUserName){
         commentFooter = 
@@ -140,15 +160,14 @@ class CommentBox extends React.Component {
         commentFooter = <div></div>;
       }
       
-      console.log
-
+      
         
       return (
         <div className="comment">
           <div className="comment-entry">
             <div className="comment-top">
               <div className="comment-like" id={comment._id + "-like"} >
-                
+                {likeHeart}
                 {/* <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
                   <FavoriteIcon ></FavoriteIcon>
                 </div>
@@ -322,6 +341,28 @@ class CommentBox extends React.Component {
         this.props.SortByBest();
       }
   }
+
+  getLikeStatus = (id, pokeName, username) => {
+    fetch(
+      "http://localhost:5000/api/Comment/likes/" +
+        id +
+        "/" +
+        pokeName +
+        "/" +
+        username,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message);
+        return data.success;
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  };
   
 } // end CommentBox component
 
