@@ -38,7 +38,7 @@ class CommentForm extends React.Component {
 
   _handleSubmit(event) {
 
-    
+    console.log(this.props.userName);
 
     event.preventDefault();
     var dateObj = new Date();

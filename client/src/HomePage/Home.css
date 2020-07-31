@@ -313,6 +313,13 @@ textarea{
     width:75%;
 }
 
+.comment-list{
+    width:730px; 
+    overflow-y:scroll; 
+    position:relative;
+    height: 300px;
+}
+
 .comment-entry{
     border-top: 1px solid #bed1cf;
     position:relative;

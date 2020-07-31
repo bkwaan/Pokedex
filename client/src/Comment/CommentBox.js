@@ -41,6 +41,7 @@ class CommentBox extends React.Component {
       formType={postCommentText}
       GetComment={this.props.GetComment.bind(this)}
       pokeName={this.props.pokeName}
+      userName={this.props.userName}
       />
     }
     
@@ -63,7 +64,6 @@ class CommentBox extends React.Component {
         <div>
           Sorted By: 
         </div>
-
         <Select id="select" onChange={(e) => this._sortComment(e)}>
           <option value="best">best</option>
           <option value="new">new</option>
@@ -97,6 +97,7 @@ class CommentBox extends React.Component {
     return this.props.comments.map((comment) => {
       let notLike = <FavoriteBorderIcon></FavoriteBorderIcon>;
       let editCommentText="Edit Comment"
+
 
       
 
@@ -148,11 +149,11 @@ class CommentBox extends React.Component {
         <div className="comment">
           <div className="comment-entry">
             <div className="comment-top">
-              <div className="comment-like" id={comment._id + "-like"} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
-                <div style={divHide}>
-                  <FavoriteIcon></FavoriteIcon>
+              <div className="comment-like" id={comment._id + "-like"} >
+                <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
+                  <FavoriteIcon ></FavoriteIcon>
                 </div>
-                <div>
+                <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
                  <FavoriteBorderIcon></FavoriteBorderIcon>
                 </div>
                 <div className="like-count">{comment.likes.length}</div>
