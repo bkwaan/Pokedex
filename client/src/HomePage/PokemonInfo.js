@@ -38,7 +38,7 @@ class PokemonInfo extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ Username: data.User });
-        console.log(this.state.Username)
+        console.log(this.state.Username + "THIS IS THE USER NAME OASDKFOIAJSODFIJASODFIJ")
       })
       .catch((err) => {
         console.log(err);
@@ -240,7 +240,7 @@ class PokemonInfo extends Component {
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
           // onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
-          onShow={() => this.getCommentSession() }
+          onShow={() => this.getCommentSession()}
           onHide={this.props.CloseModal}
         >
           <Modal.Header className={this.props.pokemonInfo.pokemon.type[0]}>
@@ -291,6 +291,7 @@ class PokemonInfo extends Component {
                 GetComment={this.GetComment.bind(this)}
                 comments={this.state.comments}
                 pokeName={this.props.pokemonInfo.pokemon.name.english}
+                userName={this.state.Username}
               />
               {/* <div id="main"></div>
                 </CommentBox> */}

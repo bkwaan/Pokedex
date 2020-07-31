@@ -26,11 +26,23 @@ class CommentBox extends React.Component {
     if (this.state.showComments) {
       buttonText = "Hide Comments";
       console.log(comments);
-      console.log("hello world this");
       commentNodes = <div className="comment-list">{comments}</div>;
     }
 
     let postCommentText="Post Comment"
+    let commentForm;
+    let userName = this.state.userName;
+    
+    
+    if(!this.props.userName){
+      
+    } else {
+      commentForm=<CommentForm
+      formType={postCommentText}
+      GetComment={this.props.GetComment.bind(this)}
+      pokeName={this.props.pokeName}
+      />
+    }
     
 
     return (
@@ -39,11 +51,7 @@ class CommentBox extends React.Component {
         <h4 className="comment-count">
           {this._getCommentsTitle(comments.length)}
         </h4>
-        <CommentForm
-          formType={postCommentText}
-          GetComment={this.props.GetComment.bind(this)}
-          pokeName={this.props.pokeName}
-        />
+        {commentForm}
         <Button
           variant="contained"
           id="comment-reveal"
@@ -85,12 +93,7 @@ class CommentBox extends React.Component {
 
   _getComments() {
     let commentNodes;
-    //For loop to load comment Nodes
-
-    console.log("get Comments is getting called");
-
-    
-
+    //For loop to load comment Node
     return this.props.comments.map((comment) => {
       let notLike = <FavoriteBorderIcon></FavoriteBorderIcon>;
       let editCommentText="Edit Comment"
@@ -105,6 +108,38 @@ class CommentBox extends React.Component {
 
       let divHide = {
         display: 'none'
+      }
+
+      let currentUserName = this.props.userName;
+      let commentFooter;
+
+      if (comment.username == currentUserName){
+        commentFooter = 
+          <div className="comment-footer">
+            <section>
+              <Button
+                href="#"
+                className="comment-footer-delete"
+                onClick={() =>
+                  this._deleteComment(this.props.pokeName, comment._id)
+                }
+              >
+                Delete Comment
+              </Button>
+              <Button 
+                
+                onClick={() =>
+                  this._commentHide(comment._id)
+                }
+              >
+                Edit Comment
+              </Button>
+            </section>
+          </div>
+
+      } else {
+        console.log(comment.userName + " Comparing commment/user " + currentUserName);
+        commentFooter = <div></div>;
       }
 
 
@@ -155,27 +190,7 @@ class CommentBox extends React.Component {
               </section>
             </div>
 
-            <div className="comment-footer">
-              <section>
-                <Button
-                  href="#"
-                  className="comment-footer-delete"
-                  onClick={() =>
-                    this._deleteComment(this.props.pokeName, comment._id)
-                  }
-                >
-                  Delete Comment
-                </Button>
-                <Button 
-                  
-                  onClick={() =>
-                    this._commentHide(comment._id)
-                  }
-                >
-                  Edit Comment
-                </Button>
-              </section>
-            </div>
+            {commentFooter}
           </div>
           {/* <p className="comment-header">{comment.username}</p>
             <p className="comment-body">- {comment.post}</p>
