@@ -98,9 +98,6 @@ class CommentBox extends React.Component {
       let notLike = <FavoriteBorderIcon></FavoriteBorderIcon>;
       let editCommentText="Edit Comment"
 
-
-      
-
       let editForm = comment.post;
 
       if (this.state.editCheck){
@@ -142,7 +139,8 @@ class CommentBox extends React.Component {
         console.log(comment.userName + " Comparing commment/user " + currentUserName);
         commentFooter = <div></div>;
       }
-
+      
+      console.log
 
         
       return (
@@ -150,12 +148,13 @@ class CommentBox extends React.Component {
           <div className="comment-entry">
             <div className="comment-top">
               <div className="comment-like" id={comment._id + "-like"} >
-                <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
+                
+                {/* <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
                   <FavoriteIcon ></FavoriteIcon>
                 </div>
                 <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
                  <FavoriteBorderIcon></FavoriteBorderIcon>
-                </div>
+                </div> */}
                 <div className="like-count">{comment.likes.length}</div>
               </div>
               
@@ -322,16 +321,6 @@ class CommentBox extends React.Component {
         console.log("best sort called");
         this.props.SortByBest();
       }
-  }
-
-
-  getLikeStatus = (id,pokeName,username) => {
-    fetch("http://localhost:5000/api/Comment/likes/" + id + "/" + pokeName + "/" + username)
-    .then((data) => {
-      return data.success;
-    }).then((err) => {
-      console.log(err);
-    })
   }
   
 } // end CommentBox component
