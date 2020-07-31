@@ -9,7 +9,7 @@ const commentSchema = new Schema(
         username: { type: String, required: true },
         post: { type: String, required: true },
         date: { type: Date, required: true },
-        likes: [{ username: { type: String, required: true } }],
+        likes: [{ username: { type: String} }],
       },
     ],
   },
