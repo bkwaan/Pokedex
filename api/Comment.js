@@ -155,6 +155,7 @@ router.post("/editPost", (req, res) => {
     });
 });
 
+/*Like Comment Conditional statement */
 router.get("/likes/:id/:pokeName/:username", (req, res) => {
   var { pokeName, id, username } = req.params;
   Comment.find({
