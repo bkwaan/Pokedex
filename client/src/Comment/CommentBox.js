@@ -323,6 +323,16 @@ class CommentBox extends React.Component {
         this.props.SortByBest();
       }
   }
+
+
+  getLikeStatus = (id,pokeName,username) => {
+    fetch("http://localhost:5000/api/Comment/likes/" + id + "/" + pokeName + "/" + username)
+    .then((data) => {
+      return data.success;
+    }).then((err) => {
+      console.log(err);
+    })
+  }
   
 } // end CommentBox component
 
