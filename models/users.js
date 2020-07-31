@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     Session:{
       type:String,
-      required: true
+      default: ""
     }
   },
   { collection: "Users" }

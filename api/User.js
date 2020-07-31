@@ -126,7 +126,7 @@ router.post("/Signup", (req, res) => {
           Email,
           Password,
           TempPassword: false,
-          Session: "",
+          Session: ""
         });
 
         user
