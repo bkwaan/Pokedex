@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "Bosco Kwan, Edwin",
+  "author": "Bosco Kwan, Edwin Pun, Jun Jeong, Haojun Liao",
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
