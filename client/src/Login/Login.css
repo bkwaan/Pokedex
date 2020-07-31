@@ -1,4 +1,9 @@
 
+.Container-Login {
+    width: 100%;
+    height: 100%;
+}
+
 .BackgroundImageContainer-Login {
     top: 0px;
     left: 0px;
@@ -14,6 +19,29 @@
     filter: opacity(80%) blur(1px);
 }
 
+.HomeIconContainer-Login {
+    /* background-image: url("/images/HomeIcon.jpeg"); */
+    width: 130px;
+    height: 100px;
+    /* left: 10%; */
+    position: absolute;
+    right: 8%;
+    /* transform: translateX(-50%); */
+    /* border: 1px solid black; */
+}
+
+.HomeIcon-Login {
+    content: url("/images/HomeIcon.png");
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* filter: opacity(200%); */
+}
+
+.HomeIcon-Login:hover {
+    cursor: pointer;
+}
+
 .LoginFormContainer-Login{
     width: 350px;
     height: auto;
@@ -26,7 +54,7 @@
     /* background-color: rgba(0, 0, 0, 0); */
     background: white;
     border: solid;
-    box-shadow: 0 10px 10px 0.2em darkgray;
+    box-shadow: 0 10px 30px 3px darkgray;
     /* border-color: white; */
     border-width: 1px;
     border-radius: 10px;
@@ -149,7 +177,7 @@
     border-color: dodgerblue;
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1300px) {
     .BackgroundImageContainer-Login {
         background-position: 28%, 70%;
     }

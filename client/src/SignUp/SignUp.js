@@ -12,7 +12,9 @@ class SignUp extends Component {
         Email: "",
         ConfirmPassword: "",
       },
+      AgreedTerms: false,
       SignUpSuccess: false,
+      RedirectHomePage: false,
       Message: "",
     };
   }
@@ -92,37 +94,70 @@ class SignUp extends Component {
     }
   }
 
+  TermsAgreementValidation () {
+    const {AgreedTerms} = this.state;
+    const C_ERROR = "You must understand the common sense and manner to be one of our community."
+    if (AgreedTerms) {
+      return true;
+    } else {
+      this.setState({Message: C_ERROR});
+      return false;
+    }
+  }
+
   SignUpValidation = (event) => {
     event.preventDefault();
-    console.log(this.setState.Message);
 
     if (this.UsernameInputValidation() && this.PasswordInputValidation() && 
-        this.ConfirmPasswordValidation() && this.EmailInputValidation()) {
+        this.ConfirmPasswordValidation() && this.EmailInputValidation() &&
+        this.TermsAgreementValidation()) {
           this.handleSignUp(event);
         }
   }
+  CheckboxState = (status) => {
+      this.setState({AgreedTerms : status.target.checked}, ()=>{console.log(this.state.AgreedTerms)});
+  }
 
+  setRedirectHomePage (status) {
+
+    this.setState({RedirectHomePage: status}, () => {console.log(this.state.RedirectHomePage)});
+
+}
 
   render() {
     if (this.state.SignUpSuccess) {
       return <Redirect to="/Login"/>;
     }
+    if (this.state.RedirectHomePage) {
+      return <Redirect to="/"/>;
+      // window.location.reload(false);
+  }
     return (
       <div className="Container-SignUp">
         <div className="BackgroundImageContainer-SignUp"></div>
+
         <div className="FormContainer-SignUp">
           <div className="FormLeftContainer-SignUp">
             <img className="Image-SignUp"></img>
           </div>
           <div className="FormRightContainer-SignUp">
-            <div className="LoginContainer-SignUp">
-              <label className="AlreadySignUpLabel-SignUp">
-                Already have an account?{" "}
-              </label>
-              <a className="LoginLink-SignUp" href="/Login">
-                {" "}
-                LOGIN
-              </a>
+            <div className="FormRightNav-SignUp">
+              <div className="HomeIconContainer-SignUp">
+              <a className="HomeText-SignUp" href="/">
+                  {" "}
+                  Home
+                </a>
+                {/* <img className="HomeIcon--Home" onClick={()=> this.setRedirectHomePage(true)}></img> */}
+              </div>
+              <div className="LoginContainer-SignUp">
+                <label className="AlreadySignUpLabel-SignUp">
+                  Already have an account?{" "}
+                </label>
+                <a className="LoginLink-SignUp" href="/Login">
+                  {" "}
+                  LOGIN
+                </a>
+              </div>
             </div>
             <form className="InfoContainer-SignUp" onSubmit={this.SignUpValidation}>
               <h4 className="SignUpTitle-SignUp">SIGN UP NOW</h4>
@@ -162,6 +197,7 @@ class SignUp extends Component {
                   className="TermsCheckbox-SignUp"
                   type="checkbox"
                   name="TermsCheckbox"
+                  onChange={(event)=>this.CheckboxState(event)}
                 ></input>
                 <label
                   className="TermsCheckboxLabel-SignUp"
