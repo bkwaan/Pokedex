@@ -17,7 +17,7 @@
     box-shadow: 0px 0px 20px 0.3em rgba(10, 10, 10, 0.5);
     display: flex;
     width: 900px;
-    height: auto;
+    height: 460px;
     top: 50%;
     left: 50%;
     position: absolute;
@@ -42,12 +42,30 @@
     padding: 3px;
     width: 50%;
 }
+
+.FormRightNav-SignUp {
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+}
+
+.HomeText-SignUp {
+    margin-left: 20px;
+    
+}
+
+.HomeIconContainer-SignUp {
+    width: 20%;
+    height: auto;
+}
+
 .LoginContainer-SignUp {
     text-align: right;
     height: 25px;
     line-height: 25px;
     font-family: initial;
-    width: 100%;
+    width: 80%;
     margin: 0 0 0 0;
 }
 .AlreadySignUpLabel-SignUp{
@@ -60,7 +78,7 @@
 }
 
 .InfoContainer-SignUp {
-    padding: 20px 20px 5px 20px;
+    padding: 15px 20px 5px 20px;
 }
 .SignUpTitle-SignUp {
     text-align: left;
@@ -110,7 +128,7 @@
 }
 
 .TermsCheckboxContainer-SignUp {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     display: flex;
 }
 
@@ -130,7 +148,7 @@
 }
 .Message-SignUp {
     color: red;
-    margin: 3px 0 0 0;
+    margin: 5px 0 0 0;
 
 }
 

@@ -22,6 +22,7 @@ class Login extends Component {
       LoginSucceed: "",
       Message: "",
       RediretToSignUp: false,
+      RedirectToHome: false,
       ForgetPassModal: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
@@ -62,6 +63,10 @@ class Login extends Component {
         this.setState({RediretToSignUp: status});
   }
 
+  setRedirectToHome (status) {
+        this.setState({RedirectToHome: status});
+  }
+
   setForgetPassModal (status) {
         this.setState({ForgetPassModal: status});
         
@@ -77,10 +82,17 @@ class Login extends Component {
             storage.setItem("login", "true");
             return <Redirect to="/"></Redirect>
         }
+        if (this.state.RedirectToHome) {
+            return <Redirect to="/"></Redirect>
+        }
     return (
       <div className="Container-Login">
         <div className="BackgroundImageContainer-Login"></div>
     
+        <div className="HomeIconContainer-Login">
+          <img className="HomeIcon-Login" onClick={()=>this.setRedirectToHome(true)}></img>
+        </div>
+        
         <form className="LoginFormContainer-Login" onSubmit={this.handleLogin}>
         <div className="PokedexTextContainer-Login">
             <h1 className="PokedexText-Login">LOGIN</h1>

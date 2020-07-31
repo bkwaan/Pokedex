@@ -35,7 +35,8 @@ class Home extends Component {
                 }
             },
             redirectTOLogin: false,
-            logedIn: (localStorage.getItem("login") == "true"),
+            redirectHomePage: false,
+            logedIn: (localStorage.getItem("login")=="true"),
             LOGIN: "LOGIN",
             LOGOUT: "LOGOUT"
         }
@@ -308,11 +309,20 @@ class Home extends Component {
 
     }
 
+    setRedirectHomePage (status) {
+        this.setState({redirectHomePage: status});
+
+    }
+
     render() {
         let testingPokemonList = [];
         if (this.state.redirectTOLogin) {
             return <Redirect to="/Login" />
         }
+        // if (this.state.redirectHomePage) {
+        //     // return <Redirect to="/"/>
+        //     window.location.reload(false);
+        // }
         console.log(this.state.logedIn);
 
         return (
@@ -320,14 +330,17 @@ class Home extends Component {
                 <div className="main--Home" onClick={() => this.HideTypeList()}>
                     <Row className="NavBar--Home">
                         <Col xs={2} sm={2} lg={2} xl={2} >
-                            <img size="sm" src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
+                            <img src="./images/openMenu.svg" className="MenuIcon--Home" onClick={() => this.ShowTypeList()} />
                         </Col>
-                        <Col xs={8} sm={8} lg={8} xl={8}>
-                            <Form.Row>
-                                <Col xs={7}>
+                        {/* <Col xs={1} sm={1} lg={1} xl={1} className="HomeIconContainer--Home">
+                            <img className="HomeIcon--Home" onClick={()=> this.setRedirectHomePage(true)}/>
+                        </Col> */}
+                        <Col xs={7} sm={7} lg={7} xl={7}>
+                            {/* <Form.Row>
+                                <Col> */}
                                     <Form.Control placeholder="search" size="sm" className="mr-sm-2" onChange={(event) => this.getSearchKeyWord(event)} />
-                                </Col>
-                            </Form.Row>
+                                {/* </Col>
+                            </Form.Row> */}
                         </Col>
                         <Col xs={2} sm={2} lg={2} xl={2}>
                             {this.state.logedIn ?
