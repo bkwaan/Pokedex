@@ -110,20 +110,21 @@ class CommentBox extends React.Component {
       let currentUserName = this.props.userName;
       let commentFooter;
 
-      
+      // let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
+      let likeStatus = this.getLikeStatus(comment.likes, currentUserName);
       console.log(comment._id + this.props.pokeName + currentUserName);
       let likeHeart;
       console.log(this.state.bool);
       if (this.state.bool){
         likeHeart=
-        <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
+        <div onClick ={() => this._unLike(this.props.pokeName, comment._id)}>
             <FavoriteIcon ></FavoriteIcon>
             Blank heart
         </div>
         
       } else {
         likeHeart=
-        <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
+        <div onClick = {() => this._addLikes(this.props.pokeName, comment._id)}>
             <FavoriteBorderIcon></FavoriteBorderIcon>
             Filled heart
         </div>
@@ -271,19 +272,7 @@ class CommentBox extends React.Component {
   }
 
   //Like function
-  _getLikes(pokeName, id) {
-
-    // let likeId = id + "-like"
-    // let likeImage = document.getElementById(likeId).childNodes[0].style.display;
-
-    // if(likeImage == "none"){
-    //   document.getElementById(likeId).childNodes[0].style.display = "";
-    //   document.getElementById(likeId).childNodes[1].style.display = "none";
-    //   console.log("c") 
-    // } else if(likeImage == ""){
-    //   document.getElementById(likeId).childNodes[0].style.display = "none";
-    //   document.getElementById(likeId).childNodes[1].style.display = ""; 
-    // }
+  _addLikes(pokeName, id) {
    
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
@@ -291,14 +280,35 @@ class CommentBox extends React.Component {
       body: JSON.stringify({
         pokeName: pokeName,
         id: id,
-        username: localStorage.getItem("SessionUserName"),
+        username: this.props.userName,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        this.props.GetComment();
       });
-      this.props.GetComment();
+      
+  }
+
+  _unLike(pokeName, id) {
+    fetch("http://localhost:5000/api/Comment/unlike", {
+      method: "POST",
+      headers: {"content-Type": "application/json" },
+      body: JSON.stringify({
+        pokeName: pokeName,
+        id: id,
+        username: this.props.userName
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.message);
+      if (data.success) {
+        this.props.GetComment();
+      }
+      
+    });
   }
 
   _editComment(pokeName, id, newComment) {
@@ -354,11 +364,8 @@ class CommentBox extends React.Component {
       }
   }
 
-  getLikeStatus = () => {
-    
-    let id = "5f237bd01ff314560885c0a8";
-    let pokeName ="Bulbasaur";
-    let username = "Tedwin";
+  getLikeStatus = (id, pokeName, username) => {
+    console.log("get Like status getting call")
     fetch(
       "http://localhost:5000/api/Comment/likes/" +
         id +
@@ -372,17 +379,30 @@ class CommentBox extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        if(data.success){
-          this.setState({bool:true})
-        } else {
-          this.setState({bool:false})
-        }
+        console.log("get like status getting a respond back");
+        console.log(data.message);
+        return data.success;
       })
       .then((err) => {
         console.log(err);
         
       });
   };
+
+  getLikeStatus = (likeArray, currentUserName) => {
+    let commentLiked = false;
+    if (likeArray.length < 1 ) {
+      return false;
+    }
+    for ( let i = 0; i < likeArray.length; i++) {
+      if (currentUserName === likeArray[i].username) {
+        commentLiked = true;
+      }
+    }
+    // console.log("getLikeStatus array: ");
+    // console.log(likeArray);
+    return commentLiked;
+  }
   
 } // end CommentBox component
 
