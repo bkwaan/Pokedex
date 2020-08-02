@@ -104,8 +104,9 @@ router.post("/unlike", (req, res) => {
   var { id, pokeName, username } = req.body;
   console.log(id, pokeName, username);
   Comment.updateOne(
-    { pokeName: pokeName, "comments._id": id },
-    { $pull: { comments : {"likes.username": username } } }
+    { pokeName: pokeName, "comments._id": id }, {
+    $pull: {
+      "comments.$.likes": { username: username }}}
   )
     .then((data) => {
       console.log(data);
@@ -115,6 +116,7 @@ router.post("/unlike", (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.send(err);
     });
 });
