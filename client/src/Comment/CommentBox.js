@@ -115,18 +115,16 @@ class CommentBox extends React.Component {
       console.log(comment._id + this.props.pokeName + currentUserName);
       let likeHeart;
       console.log(this.state.bool);
-      if (this.state.bool){
+      if (likeStatus){
         likeHeart=
         <div onClick ={() => this._unLike(this.props.pokeName, comment._id)}>
             <FavoriteIcon ></FavoriteIcon>
-            Blank heart
         </div>
         
       } else {
         likeHeart=
         <div onClick = {() => this._addLikes(this.props.pokeName, comment._id)}>
             <FavoriteBorderIcon></FavoriteBorderIcon>
-            Filled heart
         </div>
       }
 
