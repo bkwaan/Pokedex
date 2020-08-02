@@ -132,7 +132,7 @@ class PokemonInfo extends Component {
     console.log("hello this is sortCommentBest function in PokemonInfo");
     let commentSort = this.state.comments;
     commentSort.sort(function compare(a, b) {
-      return b.likes - a.likes;
+      return b.likes.length - a.likes.length;
     });
     console.log(commentSort);
     this.setState({ comments: commentSort });
