@@ -164,6 +164,7 @@ router.get("/likes/:id/:pokeName/:username", (req, res) => {
     "comments.likes.username": username,
   })
     .then((data) => {
+      console.log(data.length);
       if (data.length > 0) {
         res.send({
           success: true,

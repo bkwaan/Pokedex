@@ -15,6 +15,7 @@ class CommentBox extends React.Component {
       showComments: false,
       showLike: false,
       editCheck: false,
+      bool: false,
     };
   }
 
@@ -22,6 +23,8 @@ class CommentBox extends React.Component {
     const comments = this._getComments();
     let commentNodes;
     let buttonText = "Show Comments";
+
+    console.log(this.state.bool);
 
     if (this.state.showComments) {
       buttonText = "Hide Comments";
@@ -94,26 +97,35 @@ class CommentBox extends React.Component {
   _getComments() {
     let commentNodes;
     //For loop to load comment Node
+    let likeStatus = false;
+    
 
     return this.props.comments.map((comment) => {
+      
+      let commentCount;
+
+      commentCount += 1;
+      console.log(commentCount);
 
       let currentUserName = this.props.userName;
       let commentFooter;
 
-      let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
+      
       console.log(comment._id + this.props.pokeName + currentUserName);
       let likeHeart;
-
-      if (likeStatus){
+      console.log(this.state.bool);
+      if (this.state.bool){
         likeHeart=
-        <div>
+        <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
             <FavoriteIcon ></FavoriteIcon>
+            Blank heart
         </div>
         
       } else {
         likeHeart=
-        <div>
+        <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
             <FavoriteBorderIcon></FavoriteBorderIcon>
+            Filled heart
         </div>
       }
 
@@ -261,17 +273,17 @@ class CommentBox extends React.Component {
   //Like function
   _getLikes(pokeName, id) {
 
-    let likeId = id + "-like"
-    let likeImage = document.getElementById(likeId).childNodes[0].style.display;
+    // let likeId = id + "-like"
+    // let likeImage = document.getElementById(likeId).childNodes[0].style.display;
 
-    if(likeImage == "none"){
-      document.getElementById(likeId).childNodes[0].style.display = "";
-      document.getElementById(likeId).childNodes[1].style.display = "none";
-      console.log("c") 
-    } else if(likeImage == ""){
-      document.getElementById(likeId).childNodes[0].style.display = "none";
-      document.getElementById(likeId).childNodes[1].style.display = ""; 
-    }
+    // if(likeImage == "none"){
+    //   document.getElementById(likeId).childNodes[0].style.display = "";
+    //   document.getElementById(likeId).childNodes[1].style.display = "none";
+    //   console.log("c") 
+    // } else if(likeImage == ""){
+    //   document.getElementById(likeId).childNodes[0].style.display = "none";
+    //   document.getElementById(likeId).childNodes[1].style.display = ""; 
+    // }
    
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
@@ -342,7 +354,11 @@ class CommentBox extends React.Component {
       }
   }
 
-  getLikeStatus = (id, pokeName, username) => {
+  getLikeStatus = () => {
+    
+    let id = "5f237bd01ff314560885c0a8";
+    let pokeName ="Bulbasaur";
+    let username = "Tedwin";
     fetch(
       "http://localhost:5000/api/Comment/likes/" +
         id +
@@ -356,11 +372,15 @@ class CommentBox extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.message);
-        return data.success;
+        if(data.success){
+          this.setState({bool:true})
+        } else {
+          this.setState({bool:false})
+        }
       })
       .then((err) => {
         console.log(err);
+        
       });
   };
   
