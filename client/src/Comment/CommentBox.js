@@ -101,20 +101,14 @@ class CommentBox extends React.Component {
     
 
     return this.props.comments.map((comment) => {
-      
-      let commentCount;
-
-      commentCount += 1;
-      console.log(commentCount);
-
       let currentUserName = this.props.userName;
       let commentFooter;
 
       // let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
       let likeStatus = this.getLikeStatus(comment.likes, currentUserName);
-      console.log(comment._id + this.props.pokeName + currentUserName);
+      
       let likeHeart;
-      console.log(this.state.bool);
+
       if (likeStatus){
         likeHeart=
         <div onClick ={() => this._unLike(this.props.pokeName, comment._id)}>
@@ -317,6 +311,8 @@ class CommentBox extends React.Component {
       editCheck: !this.state.editCheck,
     });
 
+    this._commentHide(id);
+
     fetch("http://localhost:5000/api/Comment/editPost", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -330,7 +326,7 @@ class CommentBox extends React.Component {
       .then((data) => {
         console.log(data.message);
         if (data.success){
-        this.props.GetComment();
+         this.props.GetComment();
         } else {
           console.log("fuck");
         }
@@ -363,7 +359,7 @@ class CommentBox extends React.Component {
   }
 
   getLikeStatus = (id, pokeName, username) => {
-    console.log("get Like status getting call")
+    
     fetch(
       "http://localhost:5000/api/Comment/likes/" +
         id +
@@ -377,8 +373,6 @@ class CommentBox extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("get like status getting a respond back");
-        console.log(data.message);
         return data.success;
       })
       .then((err) => {

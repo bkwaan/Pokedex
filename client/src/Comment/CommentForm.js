@@ -54,7 +54,7 @@ class CommentForm extends React.Component {
     if(this.props.formType == "Edit Comment"){
       
       this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
-      
+      this.props.GetComment();
       
     } else {
 
