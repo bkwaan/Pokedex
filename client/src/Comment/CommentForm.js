@@ -14,13 +14,6 @@ class CommentForm extends React.Component {
     return (
       <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
         <div className="comment-form-fields">
-          {/* <input
-            className="comment-form-name"
-            placeholder="Name"
-            required
-            ref={(input) => (this._author = input)}
-          ></input>
-          <br /> */}
           <textarea
             className="comment-form-body"
             placeholder="Comment"
@@ -37,20 +30,15 @@ class CommentForm extends React.Component {
   } // end render
 
   _handleSubmit(event) {
-
-    console.log(this.props.userName);
-
     event.preventDefault();
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; 
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    var newdate = year + "/" + month + "/" + day;
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1; 
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+    let newdate = year + "/" + month + "/" + day;
     let author = this.state.Username;
     let comments = this._body.value;
     let commentForm = document.getElementsByClassName("comment-form")[0].style.display;
-    console.log(commentForm);
-
     if(this.props.formType == "Edit Comment"){
       
       this.props._editComment(this.props.pokeName, this.props.id, this._body.value);
@@ -68,7 +56,6 @@ class CommentForm extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if(data.success){
           this.props.GetComment();
         }

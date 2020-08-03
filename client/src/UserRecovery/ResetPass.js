@@ -52,7 +52,6 @@ class ResetPass extends Component {
         .then((data) => {
           this.setState({ success: data.success });
           this.setState({ message: data.message });
-          console.log(this.state);
         })
   };
 
@@ -60,7 +59,6 @@ class ResetPass extends Component {
     const { input } = this.state;
     input[inputName] = event.target.value;
     this.setState({ input });
-    console.log(this.state);
   };
 
   render() {
@@ -70,34 +68,26 @@ class ResetPass extends Component {
         <div className="ItemsContainer-ResetPass">
           <h5 className="PageTitle-ResetPass">Reset Your Password</h5>
           <form className="FormContainer-ResetPass" onSubmit={this.handleReset}>
-            {/* <div className= "GreetingTextContainer-ResetPass"> */}
             <p className="GreetingText-ResetPass">
               Hi ________, please enter your new password
             </p>
-            {/* </div> */}
-            {/* <div className="PasswordInputContainer-ResetPass"> */}
             <input
               className="PasswordInput-ResetPass"
               type="password"
               placeholder="Password"
               onChange={(event) => this.handleChange(event, "Password")}
             />
-            {/* </div> */}
-            {/* <div className="ConfirmPassInputContainer-ResetPass"> */}
             <input
               className="ConfirmPassInput-ResetPass"
               type="password"
               placeholder="Confirm Password"
               onChange={(event) => this.handleChange(event, "ConfirmPassword")}
             />
-            {/* </div> */}
-            {/* <div className="SubmitBtnContainer-ResetPass"> */}
             <input
               className="SubmitBtn-ResetPass"
               type="submit"
               value="Reset Password"
             />
-            {/* </div> */}
     <p className="Message-ResetPass">{this.state.Message}</p>
           </form>
         </div>

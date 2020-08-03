@@ -37,70 +37,72 @@ class SignUp extends Component {
       .then((data) => {
         this.setState({ SignUpSuccess: data.success });
         this.setState({ Message: data.message });
-        console.log(this.state);
       });
   };
 
-  ConfirmPasswordValidation () {
-    const {input} = this.state;
+  ConfirmPasswordValidation() {
+    const { input } = this.state;
     const p1 = input["Password"];
     const p2 = input["ConfirmPassword"];
     const CP_ERROR = "Make Sure password and confirm password are the same.";
-     if (p1 == p2) {
-       return true;
-     } else {
-       this.setState({Message: CP_ERROR});
-       return false;
-     }
+    if (p1 == p2) {
+      return true;
+    } else {
+      this.setState({ Message: CP_ERROR });
+      return false;
+    }
   }
-  PasswordInputValidation () {
+  PasswordInputValidation() {
     const re = /^[a-zA-Z0-9]+$/;
-    const {input} = this.state;
+    const { input } = this.state;
     const password = input["Password"];
-    const P_ERROR = "Password must a combination of length 6 letters, numbers or both.";
+    const P_ERROR =
+      "Password must a combination of length 6 letters, numbers or both.";
     if (re.test(password) && password.length > 5) {
       return true;
     } else {
-      this.setState({Message: P_ERROR})
+      this.setState({ Message: P_ERROR });
       return false;
     }
   }
 
-  EmailInputValidation () {
+  EmailInputValidation() {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const {input} = this.state;
+    const { input } = this.state;
     const email = input["Email"];
     const E_ERROR = "Bruh, that's not an email address.";
 
-    if(re.test(email)) {
+    if (re.test(email)) {
       return true;
     } else {
-      this.setState({Message: E_ERROR});
+      this.setState({ Message: E_ERROR });
       return false;
     }
   }
 
-  UsernameInputValidation () {
+  UsernameInputValidation() {
     const re = /^[a-zA-Z0-9]+$/;
-    const {input} = this.state;
+    const { input } = this.state;
     const username = input["Username"];
-    const U_ERROR = "Username must be combination of length 3 letters, numbers or both."
-    
-    if(re.test(username) && username.length > 2) {
+    const U_ERROR =
+      "Username must be combination of length 3 letters, numbers or both.";
+
+    if (re.test(username) && username.length > 2) {
       return true;
     } else {
-      this.setState({Message: U_ERROR});
+      this.setState({ Message: U_ERROR });
       return false;
     }
   }
 
-  TermsAgreementValidation () {
-    const {AgreedTerms} = this.state;
-    const C_ERROR = "You must understand the common sense and manner to be one of our community."
+  TermsAgreementValidation() {
+    const { AgreedTerms } = this.state;
+    const C_ERROR =
+      "You must understand the common sense and manner to be one of our community.";
     if (AgreedTerms) {
       return true;
     } else {
-      this.setState({Message: C_ERROR});
+      this.setState({ Message: C_ERROR });
       return false;
     }
   }
@@ -108,30 +110,32 @@ class SignUp extends Component {
   SignUpValidation = (event) => {
     event.preventDefault();
 
-    if (this.UsernameInputValidation() && this.PasswordInputValidation() && 
-        this.ConfirmPasswordValidation() && this.EmailInputValidation() &&
-        this.TermsAgreementValidation()) {
-          this.handleSignUp(event);
-        }
-  }
+    if (
+      this.UsernameInputValidation() &&
+      this.PasswordInputValidation() &&
+      this.ConfirmPasswordValidation() &&
+      this.EmailInputValidation() &&
+      this.TermsAgreementValidation()
+    ) {
+      this.handleSignUp(event);
+    }
+  };
   CheckboxState = (status) => {
-      this.setState({AgreedTerms : status.target.checked}, ()=>{console.log(this.state.AgreedTerms)});
+    this.setState({ AgreedTerms: status.target.checked });
+  };
+
+  setRedirectHomePage(status) {
+    this.setState({ RedirectHomePage: status });
   }
-
-  setRedirectHomePage (status) {
-
-    this.setState({RedirectHomePage: status}, () => {console.log(this.state.RedirectHomePage)});
-
-}
 
   render() {
     if (this.state.SignUpSuccess) {
-      return <Redirect to="/Login"/>;
+      return <Redirect to="/Login" />;
     }
     if (this.state.RedirectHomePage) {
-      return <Redirect to="/"/>;
+      return <Redirect to="/" />;
       // window.location.reload(false);
-  }
+    }
     return (
       <div className="Container-SignUp">
         <div className="BackgroundImageContainer-SignUp"></div>
@@ -143,7 +147,7 @@ class SignUp extends Component {
           <div className="FormRightContainer-SignUp">
             <div className="FormRightNav-SignUp">
               <div className="HomeIconContainer-SignUp">
-              <a className="HomeText-SignUp" href="/">
+                <a className="HomeText-SignUp" href="/">
                   {" "}
                   Home
                 </a>
@@ -159,7 +163,10 @@ class SignUp extends Component {
                 </a>
               </div>
             </div>
-            <form className="InfoContainer-SignUp" onSubmit={this.SignUpValidation}>
+            <form
+              className="InfoContainer-SignUp"
+              onSubmit={this.SignUpValidation}
+            >
               <h4 className="SignUpTitle-SignUp">SIGN UP NOW</h4>
               <p className="SignUpText-SignUp">
                 to share your thoughts &amp; creativities
@@ -168,28 +175,30 @@ class SignUp extends Component {
                 <input
                   className="UsernameInput-SignUp"
                   placeholder="Username"
-                  onChange={(event)=>this.handleChange(event,"Username")}
+                  onChange={(event) => this.handleChange(event, "Username")}
                 ></input>
               </div>
               <div className="EmailContainer-SignUp">
                 <input
                   className="EmailInput-SignUp"
                   placeholder="Email"
-                  onChange={(event)=>this.handleChange(event,"Email")}
+                  onChange={(event) => this.handleChange(event, "Email")}
                 ></input>
               </div>
               <div className="PasswordContainer-SignUp">
                 <input
                   className="PasswordInput-SignUp"
                   placeholder="Password"
-                  onChange={(event)=>this.handleChange(event,"Password")}
+                  onChange={(event) => this.handleChange(event, "Password")}
                 ></input>
               </div>
               <div className="ConfirmPasswordContainer-SignUp">
                 <input
                   className="ConfirmPasswordInput-SignUp"
                   placeholder="Confirm Password"
-                  onChange={(event)=>this.handleChange(event,"ConfirmPassword")}
+                  onChange={(event) =>
+                    this.handleChange(event, "ConfirmPassword")
+                  }
                 ></input>
               </div>
               <div className="TermsCheckboxContainer-SignUp">
@@ -197,7 +206,7 @@ class SignUp extends Component {
                   className="TermsCheckbox-SignUp"
                   type="checkbox"
                   name="TermsCheckbox"
-                  onChange={(event)=>this.CheckboxState(event)}
+                  onChange={(event) => this.CheckboxState(event)}
                 ></input>
                 <label
                   className="TermsCheckboxLabel-SignUp"
