@@ -38,7 +38,6 @@ class PokemonInfo extends Component {
       .then((res) => res.json())
       .then((data) => {
         this.setState({ Username: data.User });
-        console.log(this.state.Username + "THIS IS THE USER NAME OASDKFOIAJSODFIJASODFIJ")
       })
       .catch((err) => {
         console.log(err);
@@ -51,30 +50,13 @@ class PokemonInfo extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({ pokeInfo: data }, () => this.GetComment());
-        console.log(this.state.pokeInfo.name.english);
       })
       .catch((error) => {
         console.log(error);
       });
     //this.setState({pokeInfo: info});
   };
-
-  // GetComment = () => {
-  //   fetch("http://localhost:5000/api/Comment/" + this.state.pokeInfo.name.english, {
-  //     method: "GET",
-  //   }).then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data.exist) {
-  //         console.log(data.comments);
-  //         this.setState({comments: data.comments}, () => console.log(this.state));
-  //       } else {
-  //         this.setState({comments:[]});
-  //       }
-  //     });
-  // }
 
   GetComment = (name) => {
     fetch(
@@ -86,12 +68,8 @@ class PokemonInfo extends Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.exist) {
-          console.log(data.comments);
-          this.setState({ comments: data.comments }, () =>
-            console.log(this.state)
-          );
+          this.setState({ comments: data.comments });
         } else {
           this.setState({ comments: [] });
         }
@@ -100,9 +78,8 @@ class PokemonInfo extends Component {
 
   getCommentSession = () => {
     this.getUserName();
-    console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELO")
     this.GetComment();
-  }
+  };
 
   GetPokeStat = () => {
     // console.log(this.state.pokeInfo.base[2]);
@@ -129,12 +106,10 @@ class PokemonInfo extends Component {
   }
 
   _sortCommentBest() {
-    console.log("hello this is sortCommentBest function in PokemonInfo");
     let commentSort = this.state.comments;
     commentSort.sort(function compare(a, b) {
-      return b.likes.length - a.likes.length;
+      return b.likes - a.likes;
     });
-    console.log(commentSort);
     this.setState({ comments: commentSort });
   }
 
@@ -162,10 +137,6 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>Attack</Col>
           <Col xs={9}>
-            {/* <ProgressBar
-              now={this.state.pokeInfo.base.Attack / 2}
-              label={`${this.state.pokeInfo.base.Attack / 2}`}
-            ></ProgressBar> */}
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Attack / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Attack / 2}`}
@@ -176,10 +147,6 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>HP </Col>
           <Col xs={9}>
-            {/* <ProgressBar
-              now={this.state.pokeInfo.base.HP / 2}
-              label={`${this.state.pokeInfo.base.HP / 2}`}
-            ></ProgressBar> */}
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.HP / 2}
               label={`${this.props.pokemonInfo.pokemon.base.HP / 2}`}
@@ -192,10 +159,6 @@ class PokemonInfo extends Component {
             Defense{" "}
           </Col>
           <Col xs={9}>
-            {/* <ProgressBar
-              now={this.state.pokeInfo.base.Defense / 2}
-              label={`${this.state.pokeInfo.base.Defense / 2}`}
-            ></ProgressBar> */}
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Defense / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Defense / 2}`}
@@ -206,10 +169,6 @@ class PokemonInfo extends Component {
         <div className="d-flex">
           <Col xs={3}>Speed </Col>
           <Col xs={9}>
-            {/* <ProgressBar
-              now={this.state.pokeInfo.base.Speed / 2}
-              label={`${this.state.pokeInfo.base.Speed / 2}`}
-            ></ProgressBar> */}
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Speed / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Speed / 2}`}
@@ -219,27 +178,11 @@ class PokemonInfo extends Component {
       </div>
     );
 
-    // for (let i = 0; i < 5; i++){
-    //     PokemonStat.push(
-    //         <Row>
-    //             <Col>
-    //                 <div>{this.state.pokeInfo.base[i]}</div>
-    //             </Col>
-    //             <Col>
-
-    //                  <ProgressBar now="20"></ProgressBar>
-    //             </Col>
-
-    //         </Row>
-    //     )
-    // }
-
     return (
       <Fade left>
         <Modal
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
-          // onShow={() => this.GetPokeInfo(this.props.pokemonInfo.id)}
           onShow={() => this.getCommentSession()}
           onHide={this.props.CloseModal}
         >
@@ -251,7 +194,6 @@ class PokemonInfo extends Component {
           </Modal.Header>
           <Modal.Body>
             <Container className="Picture--Name--PokeInfo">
-              {/*Picture and Name of Pokemon */}
               <Row>
                 <Col>
                   <div className="Picture-Poke">
@@ -261,29 +203,9 @@ class PokemonInfo extends Component {
                     />
                   </div>
                 </Col>
-                <Col>
-                  {PokemonStat}
-                  {/* <ListGroup className="Name--PokeInfo">
-                      <ListGroup.Item>
-                        {this.state.pokeInfo.name.english}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        {this.state.pokeInfo.name.french}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        {this.state.pokeInfo.name.chinese}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        {this.state.pokeInfo.name.japanese}
-                      </ListGroup.Item>
-                    </ListGroup> */}
-                </Col>
+                <Col>{PokemonStat}</Col>
               </Row>
-              {/*Type of Pokemon */}
               <Row className="Poke--Type">{PokemonType}</Row>
-
-              {/*Comment Section */}
-              {/* <CommentBox  SortByBest={this._sortCommentBest.bind(this)} SortByOld={this._sortCommentOldest.bind(this)} SortByNew={this._sortCommentNewest.bind(this)} GetComment={this.GetComment.bind(this)} comments={this.state.comments} pokeName={this.state.pokeInfo.name.english}/> */}
               <CommentBox
                 SortByBest={this._sortCommentBest.bind(this)}
                 SortByOld={this._sortCommentOldest.bind(this)}
@@ -293,8 +215,6 @@ class PokemonInfo extends Component {
                 pokeName={this.props.pokemonInfo.pokemon.name.english}
                 userName={this.state.Username}
               />
-              {/* <div id="main"></div>
-                </CommentBox> */}
             </Container>
           </Modal.Body>
         </Modal>

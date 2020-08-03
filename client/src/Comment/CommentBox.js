@@ -34,7 +34,6 @@ class CommentBox extends React.Component {
 
     let postCommentText="Post Comment"
     let commentForm;
-    let userName = this.state.userName;
     
     
     if(!this.props.userName){
@@ -179,12 +178,6 @@ class CommentBox extends React.Component {
             <div className="comment-top">
               <div className="comment-like" id={comment._id + "-like"} >
                 {likeHeart}
-                {/* <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
-                  <FavoriteIcon ></FavoriteIcon>
-                </div>
-                <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
-                 <FavoriteBorderIcon></FavoriteBorderIcon>
-                </div> */}
                 <div className="like-count">{comment.likes.length}</div>
               </div>
               
@@ -222,21 +215,6 @@ class CommentBox extends React.Component {
 
             {commentFooter}
           </div>
-          {/* <p className="comment-header">{comment.username}</p>
-            <p className="comment-body">- {comment.post}</p>
-            <div className="comment-footer">
-            <p>{this.props.pokeName}</p>
-            <p>{comment._id}</p>
-
-            <a
-            href="#"
-            className="comment-footer-delete"
-            onClick={() => this._deleteComment(this.props.pokeName, comment._id)}
-            >
-            
-            Delete Comment
-            </a>
-          </div> */}
         </div>
       );
     });
@@ -331,8 +309,6 @@ class CommentBox extends React.Component {
         console.log(data.message);
         if (data.success){
         this.props.GetComment();
-        } else {
-          console.log("fuck");
         }
       });
   }
@@ -377,8 +353,6 @@ class CommentBox extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("get like status getting a respond back");
-        console.log(data.message);
         return data.success;
       })
       .then((err) => {
@@ -397,8 +371,7 @@ class CommentBox extends React.Component {
         commentLiked = true;
       }
     }
-    // console.log("getLikeStatus array: ");
-    // console.log(likeArray);
+
     return commentLiked;
   }
   
