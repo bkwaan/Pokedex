@@ -342,7 +342,7 @@ class Home extends Component {
                                 {/* </Col>
                             </Form.Row> */}
                         </Col>
-                        <Col xs={2} sm={2} lg={2} xl={2}>
+                        <Col xs={3} sm={3} lg={3} xl={3} className="LogBtnContainer--Home">
                             {this.state.logedIn ?
                                 <Button variant="outline-info" size="large" onClick={() => this.Logout()}> {this.state.LOGOUT}</Button> :
                                 <Button variant="outline-info" size="large" onClick={() => this.RedirectLoginPage()}>{this.state.LOGIN}</Button>
