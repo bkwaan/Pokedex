@@ -15,6 +15,7 @@ class CommentBox extends React.Component {
       showComments: false,
       showLike: false,
       editCheck: false,
+      bool: false,
     };
   }
 
@@ -22,6 +23,8 @@ class CommentBox extends React.Component {
     const comments = this._getComments();
     let commentNodes;
     let buttonText = "Show Comments";
+
+    console.log(this.state.bool);
 
     if (this.state.showComments) {
       buttonText = "Hide Comments";
@@ -31,7 +34,6 @@ class CommentBox extends React.Component {
 
     let postCommentText="Post Comment"
     let commentForm;
-    let userName = this.state.userName;
     
     
     if(!this.props.userName){
@@ -94,25 +96,33 @@ class CommentBox extends React.Component {
   _getComments() {
     let commentNodes;
     //For loop to load comment Node
+    let likeStatus = false;
+    
 
     return this.props.comments.map((comment) => {
+      
+      let commentCount;
+
+      commentCount += 1;
+      console.log(commentCount);
 
       let currentUserName = this.props.userName;
       let commentFooter;
 
-      let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
+      // let likeStatus = this.getLikeStatus(comment._id, this.props.pokeName, currentUserName)
+      let likeStatus = this.getLikeStatus(comment.likes, currentUserName);
       console.log(comment._id + this.props.pokeName + currentUserName);
       let likeHeart;
-
+      console.log(this.state.bool);
       if (likeStatus){
         likeHeart=
-        <div>
+        <div onClick ={() => this._unLike(this.props.pokeName, comment._id)}>
             <FavoriteIcon ></FavoriteIcon>
         </div>
         
       } else {
         likeHeart=
-        <div>
+        <div onClick = {() => this._addLikes(this.props.pokeName, comment._id)}>
             <FavoriteBorderIcon></FavoriteBorderIcon>
         </div>
       }
@@ -168,12 +178,6 @@ class CommentBox extends React.Component {
             <div className="comment-top">
               <div className="comment-like" id={comment._id + "-like"} >
                 {likeHeart}
-                {/* <div style={divHide} onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
-                  <FavoriteIcon ></FavoriteIcon>
-                </div>
-                <div onClick={() => this._getLikes(this.props.pokeName, comment._id)}>
-                 <FavoriteBorderIcon></FavoriteBorderIcon>
-                </div> */}
                 <div className="like-count">{comment.likes.length}</div>
               </div>
               
@@ -211,21 +215,6 @@ class CommentBox extends React.Component {
 
             {commentFooter}
           </div>
-          {/* <p className="comment-header">{comment.username}</p>
-            <p className="comment-body">- {comment.post}</p>
-            <div className="comment-footer">
-            <p>{this.props.pokeName}</p>
-            <p>{comment._id}</p>
-
-            <a
-            href="#"
-            className="comment-footer-delete"
-            onClick={() => this._deleteComment(this.props.pokeName, comment._id)}
-            >
-            
-            Delete Comment
-            </a>
-          </div> */}
         </div>
       );
     });
@@ -259,19 +248,7 @@ class CommentBox extends React.Component {
   }
 
   //Like function
-  _getLikes(pokeName, id) {
-
-    let likeId = id + "-like"
-    let likeImage = document.getElementById(likeId).childNodes[0].style.display;
-
-    if(likeImage == "none"){
-      document.getElementById(likeId).childNodes[0].style.display = "";
-      document.getElementById(likeId).childNodes[1].style.display = "none";
-      console.log("c") 
-    } else if(likeImage == ""){
-      document.getElementById(likeId).childNodes[0].style.display = "none";
-      document.getElementById(likeId).childNodes[1].style.display = ""; 
-    }
+  _addLikes(pokeName, id) {
    
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
@@ -279,14 +256,35 @@ class CommentBox extends React.Component {
       body: JSON.stringify({
         pokeName: pokeName,
         id: id,
-        username: localStorage.getItem("SessionUserName"),
+        username: this.props.userName,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data.message);
+        this.props.GetComment();
       });
-      this.props.GetComment();
+      
+  }
+
+  _unLike(pokeName, id) {
+    fetch("http://localhost:5000/api/Comment/unlike", {
+      method: "POST",
+      headers: {"content-Type": "application/json" },
+      body: JSON.stringify({
+        pokeName: pokeName,
+        id: id,
+        username: this.props.userName
+      })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data.message);
+      if (data.success) {
+        this.props.GetComment();
+      }
+      
+    });
   }
 
   _editComment(pokeName, id, newComment) {
@@ -311,8 +309,6 @@ class CommentBox extends React.Component {
         console.log(data.message);
         if (data.success){
         this.props.GetComment();
-        } else {
-          console.log("fuck");
         }
       });
   }
@@ -343,6 +339,7 @@ class CommentBox extends React.Component {
   }
 
   getLikeStatus = (id, pokeName, username) => {
+    console.log("get Like status getting call")
     fetch(
       "http://localhost:5000/api/Comment/likes/" +
         id +
@@ -356,13 +353,27 @@ class CommentBox extends React.Component {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.message);
         return data.success;
       })
       .then((err) => {
         console.log(err);
+        
       });
   };
+
+  getLikeStatus = (likeArray, currentUserName) => {
+    let commentLiked = false;
+    if (likeArray.length < 1 ) {
+      return false;
+    }
+    for ( let i = 0; i < likeArray.length; i++) {
+      if (currentUserName === likeArray[i].username) {
+        commentLiked = true;
+      }
+    }
+
+    return commentLiked;
+  }
   
 } // end CommentBox component
 

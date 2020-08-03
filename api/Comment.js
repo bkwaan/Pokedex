@@ -21,7 +21,7 @@ router.get("/:name", (req, res) => {
 
 //Posting a comment
 router.post("/add", (req, res) => {
-  var {pokeName, comments} = req.body;
+  var { pokeName, comments } = req.body;
   Comment.find({ pokeName: pokeName })
     .then((data) => {
       if (data.length > 0) {
@@ -66,44 +66,47 @@ router.post("/add", (req, res) => {
 router.post("/addLike", (req, res) => {
   var { id, pokeName, username } = req.body;
   console.log(id, pokeName, username);
-  Comment.find({
-    pokeName: pokeName,
-    "comments._id": id,
-    "comments.likes.username": username,
-  }).then((data) => {
-    if (data.length > 0) {
-      res.send({
-        success: false,
-        message: "User has already liked the comment",
-      });
-    } else {
-      console.log("HELLO");
-      Comment.updateOne(
-        { pokeName: pokeName, "comments._id": id },
-        {
-          $push: {
-            "comments.$.likes": { username: username },
-          },
-        }
-      )
-        .then((data) => {
-          res.send({
-            message: "comment liked",
-            success: true,
-          });
-        })
-        .catch((err) => {
-          res.send(err);
-        });
+  // Comment.find({
+  //   pokeName: pokeName,
+  //   "comments._id": id,
+  //   "comments.likes.username": username,
+  // }).then((data) => {
+  //   if (data.length > 0) {
+  //     res.send({
+  //       success: false,
+  //       message: "User has already liked the comment",
+  //     });
+  //   } else {
+  //     console.log("HELLO");
+  Comment.updateOne(
+    { pokeName: pokeName, "comments._id": id },
+    {
+      $push: {
+        "comments.$.likes": { username: username },
+      },
     }
-  });
+  )
+    .then((data) => {
+      res.send({
+        message: "comment liked",
+        success: true,
+      });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+  // }
+  // });
 });
 
 // Unliking a comment
 router.post("/unlike", (req, res) => {
   var { id, pokeName, username } = req.body;
-  Comment.findOneAndRemove(
-    { pokeName: pokeName, "comments._id": id, "comments.likes.username": username },
+  console.log(id, pokeName, username);
+  Comment.updateOne(
+    { pokeName: pokeName, "comments._id": id }, {
+    $pull: {
+      "comments.$.likes": { username: username }}}
   )
     .then((data) => {
       console.log(data);
@@ -113,6 +116,7 @@ router.post("/unlike", (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.send(err);
     });
 });
@@ -158,12 +162,17 @@ router.post("/editPost", (req, res) => {
 /*Like Comment Conditional statement */
 router.get("/likes/:id/:pokeName/:username", (req, res) => {
   var { pokeName, id, username } = req.params;
+  console.log(pokeName);
+  console.log(id);
+  console.log(username);
+  console.log("------------");
   Comment.find({
     pokeName: pokeName,
     "comments._id": id,
     "comments.likes.username": username,
   })
     .then((data) => {
+      console.log(data.length);
       if (data.length > 0) {
         res.send({
           success: true,
