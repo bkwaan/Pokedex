@@ -73,7 +73,14 @@ router.post("/forgotPassword", (req, res) => {
   let salt = bcrypt.genSaltSync(rounds);
   password = bcrypt.hashSync(password, salt);
   Users.updateOne(
-    { Email: email },
+    {
+      $or: [
+        {
+          Email: email,
+        },
+        { Username: email },
+      ],
+    },
     {
       Password: password,
       TempPassword: false,
@@ -123,7 +130,7 @@ router.post("/Signup", (req, res) => {
           Email,
           Password,
           TempPassword: false,
-          Session: ""
+          Session: "",
         });
 
         user
