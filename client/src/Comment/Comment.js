@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import CommentBox from "./CommentBox";
-import ReactDOM from "react-dom";
 
 class Comment extends React.Component {
   render() {
@@ -21,7 +19,7 @@ class Comment extends React.Component {
     );
   }
   _deleteComment(pokeName, id) {
-    fetch("http://localhost:5000/api/Comment/delete", {
+    fetch("api/Comment/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,6 +29,7 @@ class Comment extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
       });
   }
 }
