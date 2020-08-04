@@ -4,15 +4,10 @@ import {
   Container,
   Row,
   Col,
-  Form,
-  ListGroup,
-  ListGroupItem,
   ProgressBar,
 } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import CommentBox from "../Comment/CommentBox";
-import Comment from "../Comment/Comment";
-import ReactDOM from "react-dom";
 import "./PokemonInfo.css";
 
 class PokemonInfo extends Component {
@@ -109,7 +104,7 @@ class PokemonInfo extends Component {
   _sortCommentBest() {
     let commentSort = this.state.comments;
     commentSort.sort(function compare(a, b) {
-      return b.likes - a.likes;
+      return b.likes.length - a.likes.length;
     });
     this.setState({ comments: commentSort });
   }

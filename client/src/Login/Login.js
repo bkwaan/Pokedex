@@ -1,13 +1,5 @@
 import React, { Component } from "react";
 import "./Login.css";
-import {
-  Form,
-  Button,
-  FormGroup,
-  FormLabel,
-  InputGroup,
-} from "react-bootstrap";
-import { Modal } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import ForgetPass from "../UserRecovery/ForgetPassword";
 import Toast from "react-bootstrap/Toast";
@@ -45,13 +37,10 @@ class Login extends Component {
         }
         this.setState({ LoginSucceed: data.success });
         if (data.success) {
-<<<<<<< HEAD
           this.setState({
             RedirectToForgotPassword: data.userInfo.tempPassword,
           });
           this.setState({ LoginSucceed: data.success });
-=======
->>>>>>> bde552e704c196019679fd69ac506b6fb0b83ca0
           localStorage.setItem("SessionID", data.userInfo.id);
         }
         this.setState({ Message: data.message });
