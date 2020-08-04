@@ -114,7 +114,7 @@ class Home extends Component {
   };
 
   TestRequest = () => {
-    fetch("http://localhost:5000/api/Pokemon/all", {
+    fetch("api/Pokemon/all", {
       method: "GET",
     })
       .then((res) => res.json())

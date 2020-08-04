@@ -46,7 +46,7 @@ class CommentForm extends React.Component {
       
     } else {
 
-    fetch("http://localhost:5000/api/Comment/add", {
+    fetch("api/Comment/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

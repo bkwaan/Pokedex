@@ -211,7 +211,7 @@ class CommentBox extends React.Component {
   }
 
   _deleteComment(pokeName, id) {
-    fetch("http://localhost:5000/api/Comment/delete", {
+    fetch("api/Comment/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -241,7 +241,7 @@ class CommentBox extends React.Component {
     
     document.getElementById("select").textContent = "";
 
-    fetch("http://localhost:5000/api/Comment/addLike", {
+    fetch("api/Comment/addLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -261,7 +261,7 @@ class CommentBox extends React.Component {
 
     document.getElementById("select").textContent = "";
     
-    fetch("http://localhost:5000/api/Comment/unlike", {
+    fetch("api/Comment/unlike", {
       method: "POST",
       headers: {"content-Type": "application/json" },
       body: JSON.stringify({
@@ -286,7 +286,7 @@ class CommentBox extends React.Component {
 
     this._commentHide(id);
 
-    fetch("http://localhost:5000/api/Comment/editPost", {
+    fetch("api/Comment/editPost", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -332,7 +332,7 @@ class CommentBox extends React.Component {
   getLikeStatus = (id, pokeName, username) => {
     
     fetch(
-      "http://localhost:5000/api/Comment/likes/" +
+      "api/Comment/likes/" +
         id +
         "/" +
         pokeName +
