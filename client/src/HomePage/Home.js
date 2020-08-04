@@ -144,22 +144,18 @@ class Home extends Component {
       newTypeSelected.push(typeName.typeName);
     }
     this.setState({ typeSelected: newTypeSelected });
-    this.FilterPoke();
+    if (this.state.search.searchWord === "") {
+      this.FilterPoke();
+    } else {
+      this.FilterThenSearch();
+    }
     this.HideTypeList();
   };
 
   FilterPoke = () => {
     const container = document.getElementsByClassName("row")[1];
     let pokemons;
-    if (this.state.search.searchWord === "") {
-      pokemons = container.getElementsByClassName("Pokemon--Home");
-    } else {
-      pokemons = container.getElementsByClassName("Pokemon--Home withSearch");
-    }
-
-    if (pokemons.length < 1) {
-      return;
-    }
+    pokemons = container.getElementsByClassName("Pokemon--Home");
 
     for (let i = 0; i < pokemons.length; i++) {
       let match = true;
@@ -217,9 +213,18 @@ class Home extends Component {
     newSelectedType.splice(i, 1);
     this.setState({ typeSelected: newSelectedType });
     if (this.state.typeSelected.length > 0) {
-      this.FilterPoke();
+      if (this.state.search.searchWord === "") {
+        this.FilterPoke();
+      } else {
+        this.FilterThenSearch();
+      }
     } else {
-      this.ResetFilter();
+      if (this.state.search.searchWord === "") {
+        this.ResetFilter();
+      } else {
+        this.searchPokemon();
+      }
+      
     }
   };
 
@@ -239,7 +244,11 @@ class Home extends Component {
     const { search } = this.state;
     search["searchWord"] = event.target.value;
     this.setState({ search });
-    this.searchPokemon();
+    if (this.state.typeSelected.length < 1) {
+      this.searchPokemon();
+    } else {
+      this.FilterThenSearch();
+    }   
   };
 
   searchPokemon = () => {
@@ -263,21 +272,16 @@ class Home extends Component {
           .includes(this.state.search.searchWord.toLowerCase())
       ) {
         childz[i].parentNode.style.display = "none";
-        childz[i].classList.remove("withSearch");
       } else {
         childz[i].parentNode.style.display = "block";
-        if (this.state.search.searchWord === "") {
-          childz[i].classList.remove("withSearch");
-        } else {
-          childz[i].classList.add("withSearch");
-        }
       }
     }
-
-    if (this.state.typeSelected.length > 0) {
-      this.FilterPoke();
-    }
   };
+
+  FilterThenSearch = () => {
+    this.FilterPoke();
+    this.searchPokemon();
+  }
 
   setRedirectHomePage(status) {
     this.setState({ redirectHomePage: status });
