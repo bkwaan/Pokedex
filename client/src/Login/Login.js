@@ -40,11 +40,18 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        if(data.userInfo.tempPassword) {
+          this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
+        }
+        this.setState({ LoginSucceed: data.success });
         if (data.success) {
+<<<<<<< HEAD
           this.setState({
             RedirectToForgotPassword: data.userInfo.tempPassword,
           });
           this.setState({ LoginSucceed: data.success });
+=======
+>>>>>>> bde552e704c196019679fd69ac506b6fb0b83ca0
           localStorage.setItem("SessionID", data.userInfo.id);
         }
         this.setState({ Message: data.message });
@@ -88,14 +95,10 @@ class Login extends Component {
     }
 
     if (this.state.RedirectToForgotPassword) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/ResetPassword",
-            state: { username: this.state.input.Username },
-          }}
-        />
-      );
+      return <Redirect to={{
+        pathname: '/ResetPassword',
+        state: { username: this.state.input.Username}
+    }} />
     }
 
     return (
@@ -162,6 +165,7 @@ class Login extends Component {
             ></input>
           </div>
         </form>
+        
         <ForgetPass
           ForgetPassModal={this.state.ForgetPassModal}
           CloseForgetPassModal={() => this.setForgetPassModal(false)}
