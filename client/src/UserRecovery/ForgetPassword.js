@@ -49,7 +49,7 @@ class ForgetPass extends Component {
         show={this.props.ForgetPassModal}
         onHide={this.props.CloseForgetPassModal}
       >
-        <Modal.Header closeButton>
+        <Modal.Header className="ModalHeader-ForgetPass">
           <div className="ModalBodyContainer-ForgetPass">
             <div className="ForgetPassLeftContainer-ForgetPass">
               <img
@@ -59,6 +59,7 @@ class ForgetPass extends Component {
             </div>
 
             <div className="ForgetPassRightContainer-ForgetPass">
+              <Modal.Header className="CloseModalIcon-ForgetPass" closeButton/>
               <h5 className="ForgetPassTitle-ForgetPass">
                 Forgot your password?
               </h5>
