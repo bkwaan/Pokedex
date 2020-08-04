@@ -22,7 +22,6 @@ const transporter = nodemailer.createTransport({
 router.post("/resetPassword", (req, res) => {
   var Email = req.body.Email;
   var password = Math.random().toString(36).slice(-8);
-  console.log(Email);
 
   Users.find({ Email: Email }).then((data) => {
     if (data.length > 0) {
@@ -71,7 +70,6 @@ router.post("/resetPassword", (req, res) => {
 
 router.post("/forgotPassword", (req, res) => {
   var { email, password } = req.body;
-  console.log(email);
   let salt = bcrypt.genSaltSync(rounds);
   password = bcrypt.hashSync(password, salt);
   Users.updateOne(
@@ -107,7 +105,6 @@ router.post("/Signup", (req, res) => {
     ],
   })
     .then((data) => {
-      console.log(data);
       if (data.length > 0) {
         if (data[0].Email === Email) {
           res.send({
@@ -182,6 +179,7 @@ router.post("/Login", (req, res) => {
             id: Session,
             userName: data[0].Username,
             email: data[0].Email,
+            tempPassword: data[0].TempPassword,
           };
           res.send({
             success: true,
@@ -213,7 +211,6 @@ router.get("/Session/:name", (req, res) => {
   var Session = req.params.name;
   User.find({ Session: Session })
     .then((data) => {
-      console.log(data[0].Username);
       if (data.length > 0) {
         res.send({
           success: true,

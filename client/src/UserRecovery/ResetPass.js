@@ -7,7 +7,7 @@ class ResetPass extends Component {
     super(props);
     this.state = {
       input: {
-        email: "",
+        email: this.props.location.state.username,
         Password: "",
         ConfirmPassword: "",
       },
@@ -46,8 +46,10 @@ class ResetPass extends Component {
     fetch("http://localhost:5000/api/User/forgotPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(
-        this.state.input)
+      body: JSON.stringify({
+        email: this.state.input.email,
+        password: this.state.input.Password
+      })
     })
         .then((res) => res.json())
         .then((data) => {
@@ -91,7 +93,7 @@ class ResetPass extends Component {
               </div>
               <form className="FormContainer-ResetPass" onSubmit={this.ResetPassValidation}>
             <p className="GreetingText-ResetPass">
-              Hi ________, please enter your new password
+              Hi {this.state.input.email}, please enter your new password
             </p>
             <input
               className="PasswordInput-ResetPass"

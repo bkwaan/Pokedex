@@ -7,7 +7,7 @@ import {
   FormLabel,
   InputGroup,
 } from "react-bootstrap";
-import {Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import ForgetPass from "../UserRecovery/ForgetPassword";
 
@@ -24,20 +24,23 @@ class Login extends Component {
       RediretToSignUp: false,
       RedirectToHome: false,
       ForgetPassModal: false,
+      RedirectToForgotPassword: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-
   handleLogin = (event) => {
     event.preventDefault();
-    fetch('http://localhost:5000/api/User/Login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("http://localhost:5000/api/User/Login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.input),
     })
       .then((res) => res.json())
       .then((data) => {
+        if(data.userInfo.tempPassword) {
+          this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
+        }
         this.setState({ LoginSucceed: data.success });
         if (data.success) {
           localStorage.setItem("SessionID", data.userInfo.id);
@@ -47,55 +50,68 @@ class Login extends Component {
   };
 
   handleChange(event, inputName) {
-        const {input} = this.state;
-        input[inputName] = event.target.value;
-        this.setState({input});
+    const { input } = this.state;
+    input[inputName] = event.target.value;
+    this.setState({ input });
   }
 
-  setRedirectToSignUp (status) {
-        this.setState({RediretToSignUp: status});
+  setRedirectToSignUp(status) {
+    this.setState({ RediretToSignUp: status });
   }
 
-  setRedirectToHome (status) {
-        this.setState({RedirectToHome: status});
+  setRedirctToForgotPass(status) {
+    this.setState({ RedirectToForgotPassword: status });
   }
 
-  setForgetPassModal (status) {
-        this.setState({ForgetPassModal: status});
-        
+  setRedirectToHome(status) {
+    this.setState({ RedirectToHome: status });
   }
 
+  setForgetPassModal(status) {
+    this.setState({ ForgetPassModal: status });
+  }
 
   render() {
-        if (this.state.RediretToSignUp) {
-            return <Redirect to="/SignUp"/>
-        }
-        if (this.state.LoginSucceed) {
-            var storage = window.localStorage;
-            storage.setItem("login", "true");
-            return <Redirect to="/"></Redirect>
-        }
-        if (this.state.RedirectToHome) {
-            return <Redirect to="/"></Redirect>
-        }
+    if (this.state.RediretToSignUp) {
+      return <Redirect to="/SignUp" />;
+    }
+    if (this.state.LoginSucceed) {
+      var storage = window.localStorage;
+      storage.setItem("login", "true");
+      return <Redirect to="/"></Redirect>;
+    }
+    if (this.state.RedirectToHome) {
+      return <Redirect to="/"></Redirect>;
+    }
+
+    if (this.state.RedirectToForgotPassword) {
+      return <Redirect to={{
+        pathname: '/ResetPassword',
+        state: { username: this.state.input.Username}
+    }} />
+    }
+
     return (
       <div className="Container-Login">
         <div className="BackgroundImageContainer-Login"></div>
-    
+
         <div className="HomeIconContainer-Login">
-          <img className="HomeIcon-Login" onClick={()=>this.setRedirectToHome(true)}></img>
+          <img
+            className="HomeIcon-Login"
+            onClick={() => this.setRedirectToHome(true)}
+          ></img>
         </div>
-        
+
         <form className="LoginFormContainer-Login" onSubmit={this.handleLogin}>
-        <div className="PokedexTextContainer-Login">
+          <div className="PokedexTextContainer-Login">
             <h1 className="PokedexText-Login">LOGIN</h1>
           </div>
           <div className="UsernameContainer-Login">
-              <i className = "fa fa-user icon"></i>
+            <i className="fa fa-user icon"></i>
             <input
               className="UsernameInputField-Login"
               placeholder="Username"
-              onChange={(event) => this.handleChange(event,"Username")}
+              onChange={(event) => this.handleChange(event, "Username")}
             ></input>
           </div>
 
@@ -104,12 +120,20 @@ class Login extends Component {
               className="PasswordInputField-Login"
               type="password"
               placeholder="Password"
-              onChange={(event) => this.handleChange(event,"Password")}
+              onChange={(event) => this.handleChange(event, "Password")}
             ></input>
-            <button className="ForgetPassBtn-Login" onClick={() => this.setForgetPassModal(true)}>forgot password?</button>
+            <button
+              className="ForgetPassBtn-Login"
+              onClick={() => this.setForgetPassModal(true)}
+            >
+              forgot password?
+            </button>
           </div>
-          
-            <ForgetPass ForgetPassModal={this.state.ForgetPassModal} CloseForgetPassModal={()=>this.setForgetPassModal(false)}/>
+
+          <ForgetPass
+            ForgetPassModal={this.state.ForgetPassModal}
+            CloseForgetPassModal={() => this.setForgetPassModal(false)}
+          />
 
           <div className="LoginButtonContainer-Login">
             <input
@@ -120,12 +144,12 @@ class Login extends Component {
           </div>
 
           <div className="SignupButtonContainer-Login">
-              <p className = "SignUpText-Login">Don't have an account?</p>
+            <p className="SignUpText-Login">Don't have an account?</p>
             <input
               className="SignupButton-Login"
               type="button"
               value="Sign up"
-              onClick = {()=>this.setRedirectToSignUp(true)}
+              onClick={() => this.setRedirectToSignUp(true)}
             ></input>
           </div>
         </form>
