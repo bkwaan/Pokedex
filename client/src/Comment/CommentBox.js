@@ -326,9 +326,9 @@ class CommentBox extends React.Component {
 
   _sortComment(e){
     console.log("sort function called");
-      if(e.target.value=="old"){
+      if(e.target.value=="new"){
         this.props.SortByOld();
-      } else if (e.target.value=="new"){
+      } else if (e.target.value=="old"){
         this.props.SortByNew();
       } else if (e.target.value=="best"){
         console.log("best sort called");
