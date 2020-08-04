@@ -1,3 +1,3 @@
 {
-    "mongoURI": "mongodb+srv://user123:pokemon23@pokedex-zmhpl.mongodb.net/Pokemon?retryWrites=true&w=majority"
+    "mongoURI": "mongodb://Pokemons:lebronnash33@ds147723.mlab.com:47723/heroku_x9mr3prh"
 }
