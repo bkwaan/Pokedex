@@ -38,11 +38,11 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.userInfo.tempPassword) {
-          this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
-        }
-        this.setState({ LoginSucceed: data.success });
         if (data.success) {
+          this.setRedirctToForgotPass({
+            RedirectToForgotPassword: data.userInfo.tempPassword,
+          });
+          this.setState({ LoginSucceed: data.success });
           localStorage.setItem("SessionID", data.userInfo.id);
         }
         this.setState({ Error: data.message });
@@ -85,10 +85,14 @@ class Login extends Component {
     }
 
     if (this.state.RedirectToForgotPassword) {
-      return <Redirect to={{
-        pathname: '/ResetPassword',
-        state: { username: this.state.input.Username}
-    }} />
+      return (
+        <Redirect
+          to={{
+            pathname: "/ResetPassword",
+            state: { username: this.state.input.Username },
+          }}
+        />
+      );
     }
 
     return (
@@ -130,11 +134,7 @@ class Login extends Component {
             </p>
           </div>
 
-          <ForgetPass
-            ForgetPassModal={this.state.ForgetPassModal}
-            CloseForgetPassModal={() => this.setForgetPassModal(false)}
-          />
-
+        
           <div className="LoginButtonContainer-Login">
             <input
               className="LoginButton-Login"
@@ -153,6 +153,11 @@ class Login extends Component {
             ></input>
           </div>
         </form>
+        <ForgetPass
+            ForgetPassModal={this.state.ForgetPassModal}
+            CloseForgetPassModal={() => this.setForgetPassModal(false)}
+          />
+
       </div>
     );
   }
