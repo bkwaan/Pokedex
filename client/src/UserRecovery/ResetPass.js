@@ -43,7 +43,7 @@ class ResetPass extends Component {
 
   handleReset = (event) => {
     event.preventDefault();
-    fetch("http://localhost:5000/api/User/forgotPassword", {
+    fetch("api/User/forgotPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
