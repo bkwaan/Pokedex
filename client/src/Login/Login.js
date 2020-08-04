@@ -30,23 +30,24 @@ class Login extends Component {
   }
 
   handleLogin = (event) => {
-    event.preventDefault();
-    fetch("http://localhost:5000/api/User/Login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state.input),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if(data.userInfo.tempPassword) {
-          this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
-        }
-        this.setState({ LoginSucceed: data.success });
-        if (data.success) {
-          localStorage.setItem("SessionID", data.userInfo.id);
-        }
-        this.setState({ Error: data.message });
-      });
+    console.log(111);
+    // event.preventDefault();
+    // fetch("http://localhost:5000/api/User/Login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(this.state.input),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if(data.userInfo.tempPassword) {
+    //       this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
+    //     }
+    //     this.setState({ LoginSucceed: data.success });
+    //     if (data.success) {
+    //       localStorage.setItem("SessionID", data.userInfo.id);
+    //     }
+    //     this.setState({ Error: data.message });
+    //   });
   };
 
   handleChange(event, inputName) {
@@ -130,11 +131,6 @@ class Login extends Component {
             </p>
           </div>
 
-          <ForgetPass
-            ForgetPassModal={this.state.ForgetPassModal}
-            CloseForgetPassModal={() => this.setForgetPassModal(false)}
-          />
-
           <div className="LoginButtonContainer-Login">
             <input
               className="LoginButton-Login"
@@ -153,6 +149,12 @@ class Login extends Component {
             ></input>
           </div>
         </form>
+        
+        <ForgetPass
+            ForgetPassModal={this.state.ForgetPassModal}
+            CloseForgetPassModal={() => this.setForgetPassModal(false)}
+          />
+          
       </div>
     );
   }
