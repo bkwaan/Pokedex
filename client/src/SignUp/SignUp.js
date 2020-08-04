@@ -23,7 +23,6 @@ class SignUp extends Component {
     const { input } = this.state;
     input[inputName] = event.target.value;
     this.setState({ input });
-    console.log(this.state);
   }
 
   handleSignUp = (event) => {

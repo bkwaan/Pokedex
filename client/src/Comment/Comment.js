@@ -31,7 +31,6 @@ class Comment extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
       });
   }
 }

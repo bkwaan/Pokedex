@@ -24,11 +24,8 @@ class CommentBox extends React.Component {
     let commentNodes;
     let buttonText = "Show Comments";
 
-    console.log(this.state.bool);
-
     if (this.state.showComments) {
       buttonText = "Hide Comments";
-      console.log(comments);
       commentNodes = <div className="comment-list">{comments}</div>;
     }
 
@@ -160,7 +157,6 @@ class CommentBox extends React.Component {
           </div>
 
       } else {
-        console.log(comment.userName + " Comparing commment/user " + currentUserName);
         commentFooter = <div></div>;
       }
       
@@ -225,7 +221,6 @@ class CommentBox extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.success);
       });
 
     this.props.GetComment();
@@ -255,7 +250,6 @@ class CommentBox extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.message);
         this.props.GetComment();
       });
       
@@ -273,7 +267,6 @@ class CommentBox extends React.Component {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.message);
       if (data.success) {
         this.props.GetComment();
       }
@@ -282,9 +275,6 @@ class CommentBox extends React.Component {
   }
 
   _editComment(pokeName, id, newComment) {
-    
-
-    console.log("Comment Box Edit comment function is called!");
     this.setState({
       editCheck: !this.state.editCheck,
     });
@@ -302,11 +292,8 @@ class CommentBox extends React.Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.message);
         if (data.success){
          this.props.GetComment();
-        } else {
-          console.log("fuck");
         }
       });
   }
@@ -325,13 +312,11 @@ class CommentBox extends React.Component {
 
 
   _sortComment(e){
-    console.log("sort function called");
       if(e.target.value=="old"){
         this.props.SortByOld();
       } else if (e.target.value=="new"){
         this.props.SortByNew();
       } else if (e.target.value=="best"){
-        console.log("best sort called");
         this.props.SortByBest();
       }
   }
@@ -354,8 +339,6 @@ class CommentBox extends React.Component {
         return data.success;
       })
       .then((err) => {
-        console.log(err);
-        
       });
   };
 

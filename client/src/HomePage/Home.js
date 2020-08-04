@@ -83,14 +83,12 @@ class Home extends Component {
   };
 
   HideTypeList = () => {
-    console.log("HideTypeList event triggered!!!");
     if (this.state.drawerOpen) {
       this.setState({ drawerOpen: false }, () => this.ToggleTypeList());
     }
   };
 
   ToggleTypeList = () => {
-    console.log("ToggleTypeList event triggered!!!");
     const typeList = document.getElementById("PokemonTypeList");
     if (this.state.drawerOpen) {
       typeList.classList.remove("TypeList-Hidden--Home");
@@ -106,33 +104,29 @@ class Home extends Component {
     pokemonInfo["pokeID"] = pokeID;
     pokemonInfo["pokemon"] = pokemon;
     pokemonInfo["modalOpen"] = true;
-    this.setState({ pokemonInfo }, () => console.log(this.state));
+    this.setState({ pokemonInfo });
   };
 
   CloseModal = () => {
     const { pokemonInfo } = this.state;
     pokemonInfo["modalOpen"] = false;
-    this.setState({ pokemonInfo }, () => console.log(this.state));
+    this.setState({ pokemonInfo });
   };
 
   TestRequest = () => {
-    console.log("TestRequest funciton called");
     fetch("http://localhost:5000/api/Pokemon/all", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
   TypeFilter = (typeName) => {
     let typeAlreadySelected = false;
     const newTypeSelected = this.state.typeSelected;
-    console.log(newTypeSelected.length);
     if (
       this.state.typeSelected.length > 0 &&
       this.state.typeSelected.length <= 2
@@ -149,7 +143,7 @@ class Home extends Component {
       }
       newTypeSelected.push(typeName.typeName);
     }
-    this.setState({ typeSelected: newTypeSelected }, console.log(this.state));
+    this.setState({ typeSelected: newTypeSelected });
     this.FilterPoke();
     this.HideTypeList();
   };
@@ -244,15 +238,13 @@ class Home extends Component {
   getSearchKeyWord = (event) => {
     const { search } = this.state;
     search["searchWord"] = event.target.value;
-    this.setState({ search }, console.log(this.state));
+    this.setState({ search });
     this.searchPokemon();
   };
 
   searchPokemon = () => {
     let container = document.getElementsByClassName("row")[1];
     let childz;
-
-    console.log("state: " + this.state.typeSelected.length);
 
     if (this.state.typeSelected.length > 0) {
       childz = container.getElementsByClassName("Pokemon--Home withFilter");
@@ -296,7 +288,6 @@ class Home extends Component {
     if (this.state.redirectTOLogin) {
       return <Redirect to="/Login" />;
     }
-    console.log(this.state.logedIn);
 
     return (
       <div className="Container--Home">
