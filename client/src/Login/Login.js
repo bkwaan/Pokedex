@@ -25,7 +25,7 @@ class Login extends Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    fetch("http://pokedex--v1.herokuapp.com/api/User/Login", {
+    fetch("http://localhost:5000/api/User/Login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.input),
