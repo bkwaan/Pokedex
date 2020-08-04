@@ -13,6 +13,7 @@ import Fade from "react-reveal/Fade";
 import CommentBox from "../Comment/CommentBox";
 import Comment from "../Comment/Comment";
 import ReactDOM from "react-dom";
+import "./PokemonInfo.css";
 
 class PokemonInfo extends Component {
   constructor(props) {
@@ -135,8 +136,8 @@ class PokemonInfo extends Component {
     PokemonStat.push(
       <div className="Pokemon-Stat">
         <div className="d-flex">
-          <Col xs={3}>Attack</Col>
-          <Col xs={9}>
+          <Col xs={4}>Attack</Col>
+          <Col xs={8}>
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Attack / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Attack / 2}`}
@@ -145,8 +146,8 @@ class PokemonInfo extends Component {
         </div>
 
         <div className="d-flex">
-          <Col xs={3}>HP </Col>
-          <Col xs={9}>
+          <Col xs={4}>HP </Col>
+          <Col xs={8}>
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.HP / 2}
               label={`${this.props.pokemonInfo.pokemon.base.HP / 2}`}
@@ -155,10 +156,10 @@ class PokemonInfo extends Component {
         </div>
 
         <div className="d-flex">
-          <Col xs={3} className="">
+          <Col xs={4} className="">
             Defense{" "}
           </Col>
-          <Col xs={9}>
+          <Col xs={8}>
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Defense / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Defense / 2}`}
@@ -167,8 +168,8 @@ class PokemonInfo extends Component {
         </div>
 
         <div className="d-flex">
-          <Col xs={3}>Speed </Col>
-          <Col xs={9}>
+          <Col xs={4}>Speed </Col>
+          <Col xs={8}>
             <ProgressBar
               now={this.props.pokemonInfo.pokemon.base.Speed / 2}
               label={`${this.props.pokemonInfo.pokemon.base.Speed / 2}`}
@@ -180,7 +181,7 @@ class PokemonInfo extends Component {
 
     return (
       <Fade left>
-        <Modal
+        <Modal className = "ModalContainer--PokeInfo"
           size="lg"
           show={this.props.pokemonInfo.modalOpen}
           onShow={() => this.getCommentSession()}
@@ -194,7 +195,7 @@ class PokemonInfo extends Component {
           </Modal.Header>
           <Modal.Body>
             <Container className="Picture--Name--PokeInfo">
-              <Row>
+              <Row className="ImageStatRowContainer--PokeInfo">
                 <Col>
                   <div className="Picture-Poke">
                     <img

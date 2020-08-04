@@ -1,0 +1,11 @@
+.ImageStatRowContainer--PokeInfo{
+    text-align: right;
+    
+}
+
+@media screen and (max-width: 993px){
+.ImageStatRowContainer--PokeInfo{
+    display: block;
+    margin-bottom: 20px;
+    }
+}
