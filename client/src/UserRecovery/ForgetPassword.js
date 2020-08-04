@@ -19,7 +19,7 @@ class ForgetPass extends Component {
 
   forgotPasswordRequest = (event) => {
     event.preventDefault();
-    fetch("http://localhost:5000/api/User/resetPassword", {
+    fetch("api/User/resetPassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state),

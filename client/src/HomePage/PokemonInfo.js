@@ -28,7 +28,7 @@ class PokemonInfo extends Component {
 
   getUserName = () => {
     const session = localStorage.getItem("SessionID");
-    fetch("http://localhost:5000/api/User/Session/" + session, {
+    fetch("api/User/Session/" + session, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -41,7 +41,7 @@ class PokemonInfo extends Component {
   };
 
   GetPokeInfo = (id) => {
-    fetch("http://localhost:5000/api/Pokemon/" + id, {
+    fetch("api/Pokemon/" + id, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -56,7 +56,7 @@ class PokemonInfo extends Component {
 
   GetComment = (name) => {
     fetch(
-      "http://localhost:5000/api/Comment/" +
+      "api/Comment/" +
         this.props.pokemonInfo.pokemon.name.english,
       {
         method: "GET",
