@@ -20,7 +20,7 @@ router.get("/:id", (req, res) => {
     .then((data) => {
       if (data.length > 0) {
         res.send(data[0]);
-      } else console.log(data);
+      } 
     })
     .catch((err) => {
       console.log(err);
@@ -44,11 +44,9 @@ router.get("/name/:name", (req, res) => {
 });
 
 router.get("/typeFilter/:type", (req, res) => {
-    console.log(req.params.type);
     Pokemons.find({type: req.params.type}, { _id: 0, id: 1, name: 1})
     .sort({ id: 1 })
     .then((data) => {
-        console.log(data);
         if (data.length > 0) {
           res.send(data);
         }
