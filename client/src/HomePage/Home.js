@@ -192,19 +192,11 @@ class Home extends Component {
   ResetFilter = () => {
     const container = document.getElementsByClassName("row")[1];
     let pokemons;
-    if (this.state.search.searchWord === "") {
-      pokemons = container.getElementsByClassName("Pokemon--Home");
-    } else {
-      pokemons = container.getElementsByClassName("Pokemon--Home withSearch");
-    }
+    pokemons = container.getElementsByClassName("Pokemon--Home");
 
     for (let i = 0; i < pokemons.length; i++) {
       pokemons[i].classList.remove("withFilter");
       pokemons[i].parentNode.style.display = "block";
-    }
-
-    if (this.state.search.searchWord !== "") {
-      this.searchPokemon();
     }
   };
 
