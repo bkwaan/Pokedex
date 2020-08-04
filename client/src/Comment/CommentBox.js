@@ -238,7 +238,9 @@ class CommentBox extends React.Component {
 
   //Like function
   _addLikes(pokeName, id) {
-   
+    
+    document.getElementById("select").textContent = "";
+
     fetch("http://localhost:5000/api/Comment/addLike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -256,6 +258,9 @@ class CommentBox extends React.Component {
   }
 
   _unLike(pokeName, id) {
+
+    document.getElementById("select").textContent = "";
+    
     fetch("http://localhost:5000/api/Comment/unlike", {
       method: "POST",
       headers: {"content-Type": "application/json" },
@@ -313,10 +318,13 @@ class CommentBox extends React.Component {
 
   _sortComment(e){
       if(e.target.value=="new"){
+        
         this.props.SortByOld();
       } else if (e.target.value=="old"){
+        
         this.props.SortByNew();
       } else if (e.target.value=="best"){
+        
         this.props.SortByBest();
       }
   }
