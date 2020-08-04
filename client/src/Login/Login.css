@@ -73,7 +73,7 @@
 
 .UsernameContainer-Login, .PasswordContainer-Login {
     margin-top: 40px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
 }
 .UsernameInputField-Login, .PasswordInputField-Login {
     border: none;
@@ -152,6 +152,12 @@
 .LoginButton-Login:hover{
     border-color: lightgreen;
     color: lightgreen;
+}
+
+.MessageToast-Login > div{
+    color: red;
+    padding: 0;
+    margin: 0;
 }
 
 .SignupButton-Login {
