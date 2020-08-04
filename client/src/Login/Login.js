@@ -32,10 +32,6 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.userInfo.tempPassword) {
-          this.setRedirctToForgotPass({RedirectToForgotPassword: data.userInfo.tempPassword});
-        }
-        this.setState({ LoginSucceed: data.success });
         if (data.success) {
           this.setState({
             RedirectToForgotPassword: data.userInfo.tempPassword,

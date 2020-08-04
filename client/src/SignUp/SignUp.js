@@ -188,6 +188,7 @@ class SignUp extends Component {
                 <input
                   className="PasswordInput-SignUp"
                   placeholder="Password"
+                  type="Password"
                   onChange={(event) => this.handleChange(event, "Password")}
                 ></input>
               </div>
@@ -195,6 +196,7 @@ class SignUp extends Component {
                 <input
                   className="ConfirmPasswordInput-SignUp"
                   placeholder="Confirm Password"
+                  type="Password"
                   onChange={(event) =>
                     this.handleChange(event, "ConfirmPassword")
                   }
