@@ -1,16 +1,8 @@
-import React, {Component} from "react";
-import {Modal,
-        Container,
-        Row,
-        Col,
-        Form,
-        ListGroup,
-    } from "react-bootstrap";
+import React, { Component } from "react";
+import { Modal } from "react-bootstrap";
 import { Model } from "mongoose";
-import "./ForgetPassword.css"
-import Toast from 'react-bootstrap/Toast'
-
-
+import "./ForgetPassword.css";
+import Toast from "react-bootstrap/Toast";
 
 class ForgetPass extends Component {
   constructor(props) {
@@ -19,10 +11,9 @@ class ForgetPass extends Component {
       Email: "",
       Success: false,
       Message: "",
-      Show: false
+      Show: false,
     };
   }
-
 
   //this.props.ForgetPassModal
 
@@ -38,20 +29,17 @@ class ForgetPass extends Component {
         this.setState({ Success: data.success });
         this.setState({ Message: data.message });
         this.setState({ Show: true });
-    });
+      });
   };
 
-
-
   handleToast = () => {
-      this.setState({ Show: false});
-  }
+    this.setState({ Show: false });
+  };
 
-  handleChange = (event)=> {
+  handleChange = (event) => {
     var test = event.target.value;
-    this.setState({Email: test});
-}
-
+    this.setState({ Email: test });
+  };
 
   render() {
     return (
@@ -87,9 +75,14 @@ class ForgetPass extends Component {
                   placeholder="Email"
                   onChange={this.handleChange}
                 ></input>
-                  <Toast onClose={() => this.handleToast()} show={this.state.Show} delay={3000} autohide>
-                    <Toast.Body>{this.state.Message}</Toast.Body>
-                  </Toast>
+                <Toast
+                  onClose={() => this.handleToast()}
+                  show={this.state.Show}
+                  delay={3000}
+                  autohide
+                >
+                  <Toast.Body>{this.state.Message}</Toast.Body>
+                </Toast>
                 <input
                   className="SubmitBtn-ForgetPass"
                   type="submit"
@@ -104,4 +97,4 @@ class ForgetPass extends Component {
   }
 }
 
-export default ForgetPass
+export default ForgetPass;

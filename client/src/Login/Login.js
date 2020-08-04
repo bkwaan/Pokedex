@@ -1,13 +1,5 @@
 import React, { Component } from "react";
 import "./Login.css";
-import {
-  Form,
-  Button,
-  FormGroup,
-  FormLabel,
-  InputGroup,
-} from "react-bootstrap";
-import { Modal } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import ForgetPass from "../UserRecovery/ForgetPassword";
 import Toast from "react-bootstrap/Toast";

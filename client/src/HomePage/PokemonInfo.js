@@ -4,15 +4,10 @@ import {
   Container,
   Row,
   Col,
-  Form,
-  ListGroup,
-  ListGroupItem,
   ProgressBar,
 } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import CommentBox from "../Comment/CommentBox";
-import Comment from "../Comment/Comment";
-import ReactDOM from "react-dom";
 import "./PokemonInfo.css";
 
 class PokemonInfo extends Component {
