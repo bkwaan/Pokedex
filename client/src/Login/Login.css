@@ -21,11 +21,11 @@
 
 .HomeIconContainer-Login {
     /* background-image: url("/images/HomeIcon.jpeg"); */
-    width: 130px;
-    height: 100px;
+    width: 145px;
+    height: 110px;
     /* left: 10%; */
+    /* right: 8%; */
     position: absolute;
-    right: 8%;
     /* transform: translateX(-50%); */
     /* border: 1px solid black; */
 }

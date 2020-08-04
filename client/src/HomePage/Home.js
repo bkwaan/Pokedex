@@ -317,7 +317,7 @@ class Home extends Component {
                 onChange={(event) => this.getSearchKeyWord(event)}
               />
             </Col>
-            <Col xs={2} sm={2} lg={2} xl={2}>
+            <Col xs={2} sm={2} lg={2} xl={2} className="LogBtnContainer--Home">
               {this.state.logedIn ? (
                 <Button
                   variant="outline-info"

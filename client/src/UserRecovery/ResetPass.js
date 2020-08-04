@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ResetPass.css";
+import { Redirect } from "react-router-dom";
 
 class ResetPass extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class ResetPass extends Component {
     const {input} = this.state;
     const password = input["Password"];
     const P_ERROR = "Password must a combination of length 6 letters, numbers or both.";
-    if (re.test(password) && password.length < 6) {
+    if (re.test(password) && password.length > 5) {
       return true;
     } else {
       this.setState({Message: P_ERROR})
@@ -61,13 +62,34 @@ class ResetPass extends Component {
     this.setState({ input });
   };
 
+  ResetPassValidation = (event) => {
+      event.preventDefault();
+      if (
+        this.PasswordInputValidation() && 
+        this.ConfirmPasswordValidation()
+        ) {
+            this.handleReset(event);
+        }
+  }
+
   render() {
+
+    if (this.state.success){
+        return <Redirect to="/"/>;
+    }
     return (
-      <div className="Container-ResetPass">
-        <div className="BackgroundImage-ResetPass"></div>
-        <div className="ItemsContainer-ResetPass">
-          <h5 className="PageTitle-ResetPass">Reset Your Password</h5>
-          <form className="FormContainer-ResetPass" onSubmit={this.handleReset}>
+        <div className="Container-SignUp">
+          <div className="BackgroundImageContainer-SignUp"></div>
+  
+          <div className="FormContainer-SignUp">
+            <div className="FormLeftContainer-SignUp">
+              <img className="Image-SignUp"></img>
+            </div>
+            <div className="FormRightContainer-SignUp">
+              <div className="LogoContainer-ResetPass">
+                <img className="Logo-ResetPass"></img>
+              </div>
+              <form className="FormContainer-ResetPass" onSubmit={this.ResetPassValidation}>
             <p className="GreetingText-ResetPass">
               Hi ________, please enter your new password
             </p>
@@ -90,9 +112,42 @@ class ResetPass extends Component {
             />
     <p className="Message-ResetPass">{this.state.Message}</p>
           </form>
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      );
+
+    // return (
+    //   <div className="Container-ResetPass">
+    //     <div className="BackgroundImage-ResetPass"></div>
+    //     <div className="ItemsContainer-ResetPass">
+    //       <h5 className="PageTitle-ResetPass">Reset Your Password</h5>
+    //       <form className="FormContainer-ResetPass" onSubmit={this.handleReset}>
+    //         <p className="GreetingText-ResetPass">
+    //           Hi ________, please enter your new password
+    //         </p>
+    //         <input
+    //           className="PasswordInput-ResetPass"
+    //           type="password"
+    //           placeholder="Password"
+    //           onChange={(event) => this.handleChange(event, "Password")}
+    //         />
+    //         <input
+    //           className="ConfirmPassInput-ResetPass"
+    //           type="password"
+    //           placeholder="Confirm Password"
+    //           onChange={(event) => this.handleChange(event, "ConfirmPassword")}
+    //         />
+    //         <input
+    //           className="SubmitBtn-ResetPass"
+    //           type="submit"
+    //           value="Reset Password"
+    //         />
+    // <p className="Message-ResetPass">{this.state.Message}</p>
+    //       </form>
+    //     </div>
+    //   </div>
+    // );
   }
 }
 

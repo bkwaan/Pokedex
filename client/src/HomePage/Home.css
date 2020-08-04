@@ -12,7 +12,7 @@
     /* box-shadow: 0 0 5px 0.2em lightgray; */
     align-items: center;;
     position: fixed;
-    z-index: 10000;
+    z-index: 1;
     box-shadow: 0px 3px 10px 0.3em lightgray;
 }
 .NavBarContainer-Home {
@@ -47,7 +47,7 @@
 .HomeIcon--Home:hover {
     cursor: pointer;
 }
-.LoginBtnContainer--Home {
+.LogBtnContainer--Home {
     text-align: center;
     
 }

@@ -1,4 +1,4 @@
-.BackgroundImage-ResetPass {
+/* .BackgroundImage-ResetPass {
     top: 0px;
     left: 0px;
     position: fixed;
@@ -21,7 +21,7 @@
     text-align: center;
     padding: 20px;
     box-shadow: 0 0 10px 0.2em darkgray;
-}
+} */
 .PageTitle-ResetPass {
     /* text-align: center; */
 }
@@ -34,7 +34,6 @@
     
 } */
 
-.GreetingText-ResetPass, 
 .PasswordInput-ResetPass, 
 .ConfirmPassInput-ResetPass, 
 .SubmitBtn-ResetPass {
@@ -43,12 +42,15 @@
 
 .PasswordInput-ResetPass, 
 .ConfirmPassInput-ResetPass {
-    margin-left: 50%;
-    transform: translateX(-50%);
+    /* margin-left: 50%; */
+    /* transform: translateX(-50%); */
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     border: 1px solid dodgerblue;
     outline: none;
     width: 60%;
+    height: 40px;
     transition: 0.3s;
 }
 
@@ -65,23 +67,47 @@
 .SubmitBtn-ResetPass {
     background-color: dodgerblue;
     border: none;
-    width: 70%;
-    
+    outline: none;
+    width: 60%;
+    height: 40px;
+    /* margin-left: 50%; */
+    /* transform: translateX(-50%); */
+    transition: 0.3s;
 }
 
 .SubmitBtn-ResetPass:hover {
     box-shadow: 0 0 5px 0.1em dodgerblue;
+    width: 80%;
 }
 
 .FormContainer-ResetPass {
-    
+    text-align: center;
+    padding: 0 10px 0 10px;
 }
-
+.Logo-ResetPass {
+    content: url("/images/HomeIcon.png");
+    width: 240px;
+    height: 170px;
+}
+.LogoContainer-ResetPass {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
 .GreetingText-ResetPass{
-
+    margin-top: 5px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 5px;
 }
 
 .PasswordInput-ResetPass, .ConfirmPassInput-ResetPass{ 
     display: block;
 
+}
+
+.Message-ResetPass {
+    color: red;
+    margin: 15px 0 0 0;
+    line-height: 20px;
 }

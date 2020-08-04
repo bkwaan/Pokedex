@@ -149,7 +149,7 @@
 .Message-SignUp {
     color: red;
     margin: 5px 0 0 0;
-
+    line-height: 20px;
 }
 
 @media screen and (max-width: 900px) { 
