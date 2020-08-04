@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import "./Login.css";
-import {
-  Form,
-  Button,
-  FormGroup,
-  FormLabel,
-  InputGroup,
-} from "react-bootstrap";
-import { Modal } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import ForgetPass from "../UserRecovery/ForgetPassword";
+import Toast from "react-bootstrap/Toast";
 
 class Login extends Component {
   constructor(props) {
@@ -25,6 +18,7 @@ class Login extends Component {
       RedirectToHome: false,
       ForgetPassModal: false,
       RedirectToForgotPassword: false,
+      Show: false,
     };
     this.handleLogin = this.handleLogin.bind(this);
   }
@@ -43,9 +37,14 @@ class Login extends Component {
         }
         this.setState({ LoginSucceed: data.success });
         if (data.success) {
+          this.setState({
+            RedirectToForgotPassword: data.userInfo.tempPassword,
+          });
+          this.setState({ LoginSucceed: data.success });
           localStorage.setItem("SessionID", data.userInfo.id);
         }
-        this.setState({ Error: data.message });
+        this.setState({ Message: data.message });
+        this.setState({ Show: true });
       });
   };
 
@@ -59,10 +58,6 @@ class Login extends Component {
     this.setState({ RediretToSignUp: status });
   }
 
-  setRedirctToForgotPass(status) {
-    this.setState({ RedirectToForgotPassword: status });
-  }
-
   setRedirectToHome(status) {
     this.setState({ RedirectToHome: status });
   }
@@ -70,6 +65,10 @@ class Login extends Component {
   setForgetPassModal(status) {
     this.setState({ ForgetPassModal: status });
   }
+
+  handleToast = () => {
+    this.setState({ Show: false});
+}
 
   render() {
     if (this.state.RediretToSignUp) {
@@ -137,7 +136,14 @@ class Login extends Component {
               type="submit"
             ></input>
           </div>
-
+          <Toast
+            onClose={() => this.handleToast()}
+            show={this.state.Show}
+            delay={3000}
+            autohide
+          >
+            <Toast.Body>{this.state.Message}</Toast.Body>
+          </Toast>
           <div className="SignupButtonContainer-Login">
             <p className="SignUpText-Login">Don't have an account?</p>
             <input
@@ -150,10 +156,9 @@ class Login extends Component {
         </form>
         
         <ForgetPass
-            ForgetPassModal={this.state.ForgetPassModal}
-            CloseForgetPassModal={() => this.setForgetPassModal(false)}
-          />
-
+          ForgetPassModal={this.state.ForgetPassModal}
+          CloseForgetPassModal={() => this.setForgetPassModal(false)}
+        />
       </div>
     );
   }

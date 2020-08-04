@@ -312,9 +312,9 @@ class CommentBox extends React.Component {
 
 
   _sortComment(e){
-      if(e.target.value=="old"){
+      if(e.target.value=="new"){
         this.props.SortByOld();
-      } else if (e.target.value=="new"){
+      } else if (e.target.value=="old"){
         this.props.SortByNew();
       } else if (e.target.value=="best"){
         this.props.SortByBest();
