@@ -107,15 +107,15 @@
     border: none;
     outline: none;
     background:none;
-    margin-bottom: 21px;
+    height: 26px;
     font-style: italic;
     color: lightgrey;
 }
 
 .ForgetPassBtn-Login:hover {
+    cursor: pointer;
     border-bottom: 1px solid dodgerblue;
     color: dodgerblue;
-    margin-bottom: 20px;
 }
 
 .ForgetPassBtn-Login:active {

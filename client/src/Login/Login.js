@@ -122,12 +122,12 @@ class Login extends Component {
               placeholder="Password"
               onChange={(event) => this.handleChange(event, "Password")}
             ></input>
-            <button
+            <p
               className="ForgetPassBtn-Login"
               onClick={() => this.setForgetPassModal(true)}
             >
               forgot password?
-            </button>
+            </p>
           </div>
 
           <ForgetPass
