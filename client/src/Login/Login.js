@@ -136,6 +136,7 @@ class Login extends Component {
             onClose={() => this.handleToast()}
             show={this.state.Show}
             delay={3000}
+            className="MessageToast-Login"
             autohide
           >
             <Toast.Body>{this.state.Message}</Toast.Body>
